@@ -1,4 +1,4 @@
-package AbstractFactoryDaoPostGre;
+package Persist;
 
 
 /**
