@@ -11,6 +11,11 @@ public class LoginView implements ActionListener {
     */
     private String nickname;
     
+    /**
+    * @generated
+    */
+    private String password;
+    
     
     
     /**
@@ -27,16 +32,24 @@ public class LoginView implements ActionListener {
         this.nickname = nickname;
     }
     
-    
-
-    //                          Operations                                  
+    /**
+    * @generated
+    */
+    public String getPassword() {
+        return this.password;
+    }
     
     /**
     * @generated
     */
-    public password() {
-        //TODO
+    public String setPassword(String password) {
+        this.password = password;
     }
+    
+    
+
+    //                          Operations                                  
+    
     /**
     * @generated
     */
