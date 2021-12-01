@@ -7,6 +7,4 @@ package Persist;
 public class UserDaoPostGre implements UserDao {
     
     
-    
-    
 }
