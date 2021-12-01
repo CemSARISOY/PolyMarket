@@ -1,6 +1,9 @@
 package UI;
 
 import javax.swing.*;
+
+import Core.LoginFacade;
+
 import java.awt.*;
 import java.awt.event.*;
 /**
@@ -14,13 +17,12 @@ public class LoginView extends JFrame implements ActionListener {
     
     private JTextField nick = new JTextField(30);
     private JTextField pass = new JTextField(20);
-
-    private JButton[] buttons;
     
    /*Variables
     */
     private String nickname;
     private String password;
+    private LoginFacade lf;
     
     
     /*Constructor
@@ -40,7 +42,7 @@ public class LoginView extends JFrame implements ActionListener {
         //NORTH 
 
         JPanel panelNorth = new JPanel();
-        JLabel jl = new JLabel("Bienvenue ! :)");
+        JLabel jl = new JLabel("Bienvenue !");
         panelNorth.add(jl);
 
         //CENTER
@@ -68,6 +70,7 @@ public class LoginView extends JFrame implements ActionListener {
         panelCenter.add(panelText);
 
         //SOUTH
+
         JPanel panelButtons =  new JPanel();
         var butts = new String[]{"Login"};
 
@@ -79,7 +82,7 @@ public class LoginView extends JFrame implements ActionListener {
                     public void actionPerformed(ActionEvent e1) {
                         nickname = nick.getText();          
                         password = pass.getText();
-                        login();   
+                        login(nickname, password);   
                     }
                 });
             }
@@ -115,13 +118,17 @@ public class LoginView extends JFrame implements ActionListener {
         return this.password;
     }
 
-    public void login() {
-
+    public void login(String nick, String pw) {
+        lf.login(nick, pw);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+    }
+
+    public LoginFacade setLoginFacade(LoginFacade lf) {
+        this.lf = lf;
+        return this.lf;
     }
 
     public static void main(String args[]) {

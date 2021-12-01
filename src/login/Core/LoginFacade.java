@@ -72,8 +72,8 @@ public class LoginFacade {
     /**
     * @generated
     */
-    public login() {
-        //TODO
+    public void login(String nick, String pw) {
+        
     }
     
 }

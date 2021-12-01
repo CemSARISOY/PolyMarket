@@ -25,7 +25,7 @@ public class User {
     
     /*Constructor
      */
-    public User(int id, String ln, String fn, String pw, String em, String nn, Date dob, LoginFacade lf) {
+    public User(int id, String ln, String fn, String pw, String em, String nn, Date dob) {
         this.id = id;
         this.lastname = ln;
         this.firstname = fn;
@@ -33,7 +33,6 @@ public class User {
         this.email = em;
         this.nickname = nn;
         this.dob = dob;
-        this.lf = lf;
     }
 
 
