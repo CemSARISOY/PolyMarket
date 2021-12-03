@@ -41,6 +41,10 @@ public class User {
     public LoginFacade getLF() {
         return this.lf;
     }
+
+    public String getPassword(){
+        return this.password;
+    }
     
     public LoginFacade setLF(LoginFacade l) {
         this.lf = l;

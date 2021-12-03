@@ -11,35 +11,30 @@ public class LoginFacade {
     private User user;
 
     public UserDao getUserDao() {
-        return new UserDaoPostGre();
+        return new UserDaoMySQL();
     }
 
-    public void setUserDao(UserDao userDao) {
-        
-    }
-
-    // public User getUser() {
-    //     return new User();
-    // }
-
-    public void setUser(User user) {
-        
+    public User getUser() {
+        return user;
     }
 
     public AbstractFactoryDao getAbstractFactoryDao() {
-        return new AbstractFactoryDaoPostGre();
+        return abstractFactoryDao;
     }
 
     public void set(AbstractFactoryDao abstractFactoryDao) {
 
     }
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public void login(String nick, String pw) {
-        
+    public User login(String nick, String pw) throws Exception{
+        if(this.abstractFactoryDao == null) abstractFactoryDao = new AbstractFactoryDaoMySQL();
+        if(this.userDao == null) userDao = abstractFactoryDao.createUserDao();
+
+        this.user = userDao.getUserByNickname(nick);
+        if(user == null) throw new Exception("User doesn't exist");
+        if(user.getPassword() != pw) throw new Exception("Password doesn't match");
+        return user;
     }
+
+    
 }
