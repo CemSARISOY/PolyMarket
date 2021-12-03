@@ -18,9 +18,9 @@ public class LoginFacade {
         
     }
 
-    public User getUser() {
-        return new User();
-    }
+    // public User getUser() {
+    //     return new User();
+    // }
 
     public void setUser(User user) {
         
@@ -34,7 +34,12 @@ public class LoginFacade {
 
     }
 
-    public void login() {
-        //TODO
+    //                          Operations                                  
+    
+    /**
+    * @generated
+    */
+    public void login(String nick, String pw) {
+        
     }
 }
