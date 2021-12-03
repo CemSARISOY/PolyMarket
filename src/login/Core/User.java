@@ -23,7 +23,7 @@ public class User {
     
     /*Constructor
      */
-    public User(int id, String ln, String fn, String pw, String em, String nn, Date dob) {
+    public User(int id, String fn, String ln, String nn, String em, String pw, Date dob) {
         this.id = id;
         this.lastname = ln;
         this.firstname = fn;
@@ -42,6 +42,10 @@ public class User {
 
     public String getPassword(){
         return this.password;
+    }
+
+    public String getNickname(){
+        return this.nickname;
     }
     
     public LoginFacade setLF(LoginFacade l) {

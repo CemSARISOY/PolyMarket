@@ -24,7 +24,7 @@ public class UserDaoMySQL implements UserDao {
     }
     
     public User getUserByNickname(String nickname) {
-        var requete = "SELECT * from users where nickname = " + nickname;
+        String requete = "SELECT * from users where nickname = \"" + nickname+"\"";
         var con = DbService.callDB();
         User user = null;
         try {

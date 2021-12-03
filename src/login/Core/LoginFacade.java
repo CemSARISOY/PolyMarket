@@ -32,7 +32,7 @@ public class LoginFacade {
 
         this.user = userDao.getUserByNickname(nick);
         if(user == null) throw new Exception("User doesn't exist");
-        if(user.getPassword() != pw) throw new Exception("Password doesn't match");
+        if(!user.getPassword().equals(pw)) throw new Exception("Password doesn't match");
         return user;
     }
 

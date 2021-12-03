@@ -4,7 +4,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
 
-//import Core.LoginFacade;
+import Core.LoginFacade;
+import Core.User;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -23,7 +24,7 @@ public class LoginView implements ActionListener {
     private static JButton button;
     private static JPasswordField Password;
 
-    // LoginFacade loginFacade = new LoginFacade();
+    LoginFacade loginFacade = new LoginFacade();
     public LoginView() {
 
         // JFrame class
@@ -42,15 +43,6 @@ public class LoginView implements ActionListener {
 
         //Panel with image 
         JPanel fpanel = new JPanel();
-        BufferedImage myPicture;
-        try {
-            myPicture = ImageIO.read(new File("path-to-file"));
-            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
-            fpanel.add(picLabel);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
         // creating a JPanel class with gradient color
         JPanel panel = new javax.swing.JPanel() {
             protected void paintComponent(Graphics g) {
@@ -106,12 +98,13 @@ public class LoginView implements ActionListener {
     // Operations
     public void actionPerformed(ActionEvent e) {
         String user = username.getText();
-        String pass = password.getText();
+        String pass = Password.getText();
 
         try {
-            // this.loginFacade.login(user,pass);
-        } catch (Exception e1) {
-            JOptionPane.showMessageDialog(null, "Username or Password mismatch ");
+            User u = this.loginFacade.login(user,pass);
+            System.out.println("Connected : " + u.getNickname());
+        } catch (Exception e1) { 
+            JOptionPane.showMessageDialog(null, e1.getMessage());
         }
     }
 
