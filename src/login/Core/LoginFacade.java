@@ -4,15 +4,9 @@ import Persist.*;
 
 public class LoginFacade {
 
-    private AbstractFactoryDao abstractFactoryDao;
+    private AbstractFactoryDao abstractFactoryDao; 
 
-    private UserDao userDao;
-
-    private User user;
-
-    public UserDao getUserDao() {
-        return new UserDaoMySQL();
-    }
+    private User user; 
 
     public User getUser() {
         return user;
@@ -27,8 +21,8 @@ public class LoginFacade {
     }
 
     public User login(String nick, String pw) throws Exception{
-        if(this.abstractFactoryDao == null) abstractFactoryDao = new AbstractFactoryDaoMySQL();
-        if(this.userDao == null) userDao = abstractFactoryDao.createUserDao();
+        if(this.abstractFactoryDao == null) abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        UserDao userDao = abstractFactoryDao.createUserDao();
 
         this.user = userDao.getUserByNickname(nick);
         if(user == null) throw new Exception("User doesn't exist");
