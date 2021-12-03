@@ -1,64 +1,38 @@
 package Core;
 
+import Persist.*; 
 
-/**
-* @generated
-*/
 public class LoginFacade {
-    
-    
-    private AbstractFactoryDao afd;
-    
-  
-    private UserDao ud;
-    
 
-    private User u;
-    
-    
-    
-    /**
-    * @generated
-    */
-    public UserDao get() {
-        return this.;
+    private AbstractFactoryDao abstractFactoryDao;
+
+    private UserDao userDao;
+
+    private User user;
+
+    public UserDao getUserDao() {
+        return new UserDaoPostGre();
     }
-    
-    /**
-    * @generated
-    */
-    public UserDao set(UserDao ) {
-        this. = ;
+
+    public void setUserDao(UserDao userDao) {
+        
     }
-    
-    /**
-    * @generated
-    */
-    public User get() {
-        return this.;
+
+    // public User getUser() {
+    //     return new User();
+    // }
+
+    public void setUser(User user) {
+        
     }
-    
-    /**
-    * @generated
-    */
-    public User set(User ) {
-        this. = ;
+
+    public AbstractFactoryDao getAbstractFactoryDao() {
+        return new AbstractFactoryDaoPostGre();
     }
-    
-    /**
-    * @generated
-    */
-    public AbstractFactoryDao get() {
-        return this.;
+
+    public void set(AbstractFactoryDao abstractFactoryDao) {
+
     }
-    
-    /**
-    * @generated
-    */
-    public AbstractFactoryDao set(AbstractFactoryDao ) {
-        this. = ;
-    }
-    
 
     //                          Operations                                  
     
@@ -68,5 +42,4 @@ public class LoginFacade {
     public void login(String nick, String pw) {
         
     }
-    
 }
