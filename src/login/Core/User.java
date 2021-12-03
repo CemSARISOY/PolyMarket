@@ -3,9 +3,7 @@ package Core;
 
 import java.util.Date;
 
-/**
-* @generated
-*/
+
 public class User {
 
     /*User infos

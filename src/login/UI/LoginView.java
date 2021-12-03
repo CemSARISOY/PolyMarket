@@ -1,139 +1,122 @@
 package UI;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.plaf.ColorUIResource;
 
-import Core.LoginFacade;
+//import Core.LoginFacade;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionListener;
+import java.io.EOFException;
+import java.io.File;
+import java.io.IOException;
+import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+
 /**
-* @generated
-*/
-public class LoginView extends JFrame implements ActionListener {
+ * @generated
+ */
+public class LoginView implements ActionListener {
+    private static JLabel password, label;
+    private static JTextField username;
+    private static JButton button;
+    private static JPasswordField Password;
 
-    /*Global view variables
-    */
-    private Container contentPane = getContentPane();
-    
-    private JTextField nick = new JTextField(30);
-    private JTextField pass = new JTextField(20);
-    
-   /*Variables
-    */
-    private String nickname;
-    private String password;
-    private LoginFacade lf;
-    
-    
-    /*Constructor
-    */
+    // LoginFacade loginFacade = new LoginFacade();
     public LoginView() {
-        super("LoginView");
-        setVisible(true);
-        pack();
-    }
 
-    /*View
-    */
-    public void lauchView() {
+        // JFrame class
+        JFrame frame = new JFrame();
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Integer realWidth = (int) Math.round(0.5 * screenSize.getWidth());
+        Integer realHeight = (int) Math.round(0.5 * screenSize.getHeight());
 
-        //INTERFACE
-        
-        //NORTH 
+        frame.setTitle("PolyMarket Login");
+        frame.setLocation(new Point(realWidth - 200, realHeight - 100));
+        frame.setSize(new Dimension(400, 200));
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setIconImage(new ImageIcon("draw.png").getImage());
 
-        JPanel panelNorth = new JPanel();
-        JLabel jl = new JLabel("Bienvenue !");
-        panelNorth.add(jl);
 
-        //CENTER
-
-        JPanel panelCenter = new JPanel();
-
-        JPanel panelForms =  new JPanel();
-        panelForms.setLayout(new BoxLayout(panelForms, BoxLayout.Y_AXIS));
-
-        JPanel panelText =  new JPanel();
-        panelText.setLayout(new BoxLayout(panelText, BoxLayout.Y_AXIS));
-
-        var fields = new String[]{"Nickname", "Mot de passe"};
-
-        for(String e : fields) {
-            var label = new JLabel(e);
-            label.setAlignmentX(JLabel.RIGHT_ALIGNMENT);
-            panelForms.add(label);
+        //Panel with image 
+        JPanel fpanel = new JPanel();
+        BufferedImage myPicture;
+        try {
+            myPicture = ImageIO.read(new File("path-to-file"));
+            JLabel picLabel = new JLabel(new ImageIcon(myPicture));
+            fpanel.add(picLabel);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-
-        panelText.add(nick);
-        panelText.add(pass);
-
-        panelCenter.add(panelForms);
-        panelCenter.add(panelText);
-
-        //SOUTH
-
-        JPanel panelButtons =  new JPanel();
-        var butts = new String[]{"Login"};
-
-        for(String e : butts) {
-            JButton but = new JButton(e);
-            if(e.equals("Login")) {
-                but.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e1) {
-                        nickname = nick.getText();          
-                        password = pass.getText();
-                        login(nickname, password);   
-                    }
-                });
+        // creating a JPanel class with gradient color
+        JPanel panel = new javax.swing.JPanel() {
+            protected void paintComponent(Graphics g) {
+                if (g instanceof Graphics2D) {
+                    final int R = 100;
+                    final int G = 100;
+                    final int B = 100;
+                    Paint p = new GradientPaint(0.0f, 0.0f, new Color(R, G, B, 0),
+                            getWidth(), getHeight(), new Color(R, G, B, 255), true);
+                    Graphics2D g2d = (Graphics2D) g;
+                    g2d.setPaint(p);
+                    g2d.fillRect(0, 0, getWidth(), getHeight());
+                } else {
+                    super.paintComponent(g);
+                }
             }
+        };
+        panel.setLayout(null);
 
-            panelButtons.add(but);
-        }
+        // Username label constructor
+        label = new JLabel("Username");
+        label.setBounds(100, 8, 100, 20);
+        panel.add(label);
 
-        //DISPLAY ON THE WINDOW
-        contentPane.add(panelNorth, BorderLayout.NORTH);
-        contentPane.add(panelCenter, BorderLayout.CENTER);
-        contentPane.add(panelButtons, BorderLayout.SOUTH);
+        // Username TextField constructor
+        username = new JTextField();
+        username.setBounds(100, 27, 193, 28);
+        panel.add(username);
+
+        // Password Label constructor
+        password = new JLabel("Password");
+        password.setBounds(100, 55, 70, 20);
+        panel.add(password);
+
+        // Password TextField
+        Password = new JPasswordField();
+        Password.setBounds(100, 75, 193, 28);
+        panel.add(Password);
+
+        // Button constructor
+        button = new JButton("Login");
+        button.setBounds(100, 110, 90, 25);
+        button.setForeground(Color.WHITE);
+        button.setBackground(Color.BLACK);
+        button.addActionListener(this);
+        panel.add(button);
+
+        // Display frame
+        frame.add(panel);
+        frame.setVisible(true);
     }
 
-
-    /*User functions
-    */
-    public String getNickname() {
-        return this.nickname;
-    }
-    
-    public String setNickname(String nickname) {
-        this.nickname = nickname;
-        return this.nickname;
-    }
-    
-    public String getPassword() {
-        return this.password;
-    }
-    
-   
-    public String setPassword(String password) {
-        this.password = password;
-        return this.password;
-    }
-
-    public void login(String nick, String pw) {
-        lf.login(nick, pw);
-    }
-
-    @Override
+    // Operations
     public void actionPerformed(ActionEvent e) {
+        String user = username.getText();
+        String pass = password.getText();
+
+        try {
+            // this.loginFacade.login(user,pass);
+        } catch (Exception e1) {
+            JOptionPane.showMessageDialog(null, "Username or Password mismatch ");
+        }
     }
 
-    public LoginFacade setLoginFacade(LoginFacade lf) {
-        this.lf = lf;
-        return this.lf;
+    public static void main(String[] args) {
+        LoginView login = new LoginView();
     }
 
-    public static void main(String args[]) {
-        LoginView lv = new LoginView();
-        lv.lauchView();
-    }
-    
 }
