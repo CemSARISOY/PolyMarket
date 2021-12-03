@@ -7,20 +7,13 @@ package Core;
 public class LoginFacade {
     
     
-    /**
-    * @generated
-    */
-    private AbstractFactoryDao ;
+    private AbstractFactoryDao afd;
     
-    /**
-    * @generated
-    */
-    private UserDao ;
+  
+    private UserDao ud;
     
-    /**
-    * @generated
-    */
-    private User ;
+
+    private User u;
     
     
     
