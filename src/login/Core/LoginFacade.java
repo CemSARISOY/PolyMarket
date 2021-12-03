@@ -1,79 +1,40 @@
-package LoginFacade;
+package Core;
 
+import Persist.*; 
 
-/**
-* @generated
-*/
 public class LoginFacade {
-    
-    
-    /**
-    * @generated
-    */
-    private AbstractFactoryDao ;
-    
-    /**
-    * @generated
-    */
-    private UserDao ;
-    
-    /**
-    * @generated
-    */
-    private User ;
-    
-    
-    
-    /**
-    * @generated
-    */
-    public UserDao get() {
-        return this.;
-    }
-    
-    /**
-    * @generated
-    */
-    public UserDao set(UserDao ) {
-        this. = ;
-    }
-    
-    /**
-    * @generated
-    */
-    public User get() {
-        return this.;
-    }
-    
-    /**
-    * @generated
-    */
-    public User set(User ) {
-        this. = ;
-    }
-    
-    /**
-    * @generated
-    */
-    public AbstractFactoryDao get() {
-        return this.;
-    }
-    
-    /**
-    * @generated
-    */
-    public AbstractFactoryDao set(AbstractFactoryDao ) {
-        this. = ;
-    }
-    
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public login() {
+    private AbstractFactoryDao abstractFactoryDao;
+
+    private UserDao userDao;
+
+    private User user;
+
+    public UserDao getUserDao() {
+        return new UserDaoPostGre();
+    }
+
+    public void setUserDao(UserDao userDao) {
+        
+    }
+
+    public User getUser() {
+        return new User();
+    }
+
+    public void setUser(User user) {
+        
+    }
+
+    public AbstractFactoryDao getAbstractFactoryDao() {
+        return new AbstractFactoryDaoPostGre();
+    }
+
+    public void set(AbstractFactoryDao abstractFactoryDao) {
+
+    }
+
+    public void login() {
         //TODO
     }
-    
 }
