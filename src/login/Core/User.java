@@ -1,13 +1,9 @@
 package Core;
 
-
 import java.util.Date;
-
 
 public class User {
 
-    /*User infos
-     */
     private int id;
     private String lastname;
     private String firstname;
@@ -18,12 +14,12 @@ public class User {
 
     /**
      * 
-     * @param id id
-     * @param fn firstname
-     * @param ln lastname
-     * @param nn nickname
-     * @param em email
-     * @param pw password
+     * @param id  id
+     * @param fn  firstname
+     * @param ln  lastname
+     * @param nn  nickname
+     * @param em  email
+     * @param pw  password
      * @param dob Date of birth
      */
     public User(int id, String fn, String ln, String nn, String em, String pw, Date dob) {
@@ -38,26 +34,32 @@ public class User {
 
     /**
      * Getter method for the password
+     * 
      * @return user's passowrd
      */
-    public String getPassword(){
+    public String getPassword() {
         return this.password;
     }
 
     /**
      * Getter method for the nickname
+     * 
      * @return user's nickname
      */
-    public String getNickname(){
+    public String getNickname() {
         return this.nickname;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
-        if(this == obj) return true;
-        if( !(obj instanceof User) ) return false;
-        User u2 = (User)obj;
-        if(this.id != u2.id || !this.lastname.equals(u2.lastname) || !this.firstname.equals(firstname) || !this.nickname.equals(u2.nickname) || !this.email.equals(u2.email) || !this.dob.equals(u2.dob) ) return false;
+        if (this == obj)
+            return true;
+        if (!(obj instanceof User))
+            return false;
+        User u2 = (User) obj;
+        if (this.id != u2.id || !this.lastname.equals(u2.lastname) || !this.firstname.equals(firstname)
+                || !this.nickname.equals(u2.nickname) || !this.email.equals(u2.email) || !this.dob.equals(u2.dob))
+            return false;
         return true;
     }
 }

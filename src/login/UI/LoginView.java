@@ -1,19 +1,13 @@
 package UI;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
 
 import Core.LoginFacade;
 import Core.User;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.EOFException;
-import java.io.File;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
 
 /**
  * @generated
@@ -22,7 +16,7 @@ public class LoginView implements ActionListener {
     private static JLabel password, label;
     private static JTextField username;
     private static JButton button;
-    private static JPasswordField Password;
+    private static JPasswordField passwordField;
 
     LoginFacade loginFacade = new LoginFacade();
     public LoginView() {
@@ -41,8 +35,6 @@ public class LoginView implements ActionListener {
         frame.setIconImage(new ImageIcon("draw.png").getImage());
 
 
-        //Panel with image 
-        JPanel fpanel = new JPanel();
         // creating a JPanel class with gradient color
         JPanel panel = new javax.swing.JPanel() {
             protected void paintComponent(Graphics g) {
@@ -78,9 +70,9 @@ public class LoginView implements ActionListener {
         panel.add(password);
 
         // Password TextField
-        Password = new JPasswordField();
-        Password.setBounds(100, 75, 193, 28);
-        panel.add(Password);
+        passwordField = new JPasswordField();
+        passwordField.setBounds(100, 75, 193, 28);
+        panel.add(passwordField);
 
         // Button constructor
         button = new JButton("Login");
@@ -98,7 +90,7 @@ public class LoginView implements ActionListener {
     // Operations
     public void actionPerformed(ActionEvent e) {
         String user = username.getText();
-        String pass = Password.getText();
+        String pass = passwordField.getText();
 
         try {
             User u = this.loginFacade.login(user,pass);
