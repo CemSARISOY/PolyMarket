@@ -8,16 +8,12 @@ public class LoginFacade {
 
     private User user; 
 
+    /**
+     * Returns the user currently logged
+     * @return User object
+     */
     public User getUser() {
         return user;
-    }
-
-    public AbstractFactoryDao getAbstractFactoryDao() {
-        return abstractFactoryDao;
-    }
-
-    public void set(AbstractFactoryDao abstractFactoryDao) {
-
     }
 
     public User login(String nick, String pw) throws Exception{

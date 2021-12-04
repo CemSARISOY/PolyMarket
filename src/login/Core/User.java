@@ -16,12 +16,15 @@ public class User {
     private String nickname;
     private Date dob;
 
-    /*Login facade
-     */
-    private LoginFacade lf;
-
-    
-    /*Constructor
+    /**
+     * 
+     * @param id id
+     * @param fn firstname
+     * @param ln lastname
+     * @param nn nickname
+     * @param em email
+     * @param pw password
+     * @param dob Date of birth
      */
     public User(int id, String fn, String ln, String nn, String em, String pw, Date dob) {
         this.id = id;
@@ -33,24 +36,20 @@ public class User {
         this.dob = dob;
     }
 
-
-    /*Methods
+    /**
+     * Getter method for the password
+     * @return user's passowrd
      */
-    public LoginFacade getLF() {
-        return this.lf;
-    }
-
     public String getPassword(){
         return this.password;
     }
 
+    /**
+     * Getter method for the nickname
+     * @return user's nickname
+     */
     public String getNickname(){
         return this.nickname;
-    }
-    
-    public LoginFacade setLF(LoginFacade l) {
-        this.lf = l;
-        return this.lf;
     }
     
 }
