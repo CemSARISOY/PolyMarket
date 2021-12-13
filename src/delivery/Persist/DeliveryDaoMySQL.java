@@ -18,7 +18,7 @@ public class DeliveryDaoMySQL implements DeliveryDao {
     /**
      * Get a delivery from the MySQL DB by ID
      * @param id
-     * @return
+     * @return the associated delivery from the MySQL DB
      */
     @Override
     public Delivery getDeliveryById(int id) {

@@ -15,7 +15,7 @@ public class TicketDaoMySQL  implements TicketDao {
     /**
      * Get the ticket from the MySQL DB by Ticket ID
      * @param id
-     * @return
+     * @return the associated ticket from the MySQL DB
      */
     @Override
     public Ticket getTicketById(int id) {

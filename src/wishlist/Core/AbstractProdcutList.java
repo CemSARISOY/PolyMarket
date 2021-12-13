@@ -28,7 +28,7 @@ public abstract class AbstractProdcutList {
 
     /**
      * Getter of products
-     * @return
+     * @return AbstractProdcutList's products
      */
     public ArrayList<Product> getProducts() {
         return this.products;
@@ -44,7 +44,7 @@ public abstract class AbstractProdcutList {
  
     /**
      * Getter of title
-     * @return
+     * @return AbstractProdcutList's title
      */
     public String getTitle() {
         return this.title;
@@ -52,7 +52,7 @@ public abstract class AbstractProdcutList {
 
     /**
      * Setter of title
-     * @param title
+     * @param title AbstractProdcutList's title
      */
     public void setTitle(String title) {
         this.title = title;
@@ -60,7 +60,7 @@ public abstract class AbstractProdcutList {
   
     /**
      * Getter of body
-     * @return
+     * @return AbstractProdcutList's body
      */
     public String getBody() {
         return this.body;
@@ -76,7 +76,7 @@ public abstract class AbstractProdcutList {
 
     /**
      * Getter of category
-     * @return
+     * @return AbstractProdcutList's category
      */
     public TicketCategory getCategory() {
         return this.category;
@@ -92,7 +92,7 @@ public abstract class AbstractProdcutList {
   
     /**
      * Getter of userEmail
-     * @return
+     * @return AbstractProdcutList's userEmail
      */
     public String getUserEmail() {
         return this.userEmail;

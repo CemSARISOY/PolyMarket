@@ -4,7 +4,8 @@ import java.awt.event.ActionListener;
  
 public class AnswerTicketView implements ActionListener {
 
-    private Ticket ticket;
+    private WishlistFacade ticketFacade = new TicketFacade();
+    
     /**
      * Answer a ticket using user inputs
      * @param answer

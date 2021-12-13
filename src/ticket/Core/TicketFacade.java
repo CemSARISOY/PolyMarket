@@ -1,13 +1,40 @@
 package Core;
- 
+
+// MAKE IT SINGLETON
 public class TicketFacade {
       
-    private AbstractFactoryDao abstractFactoryDao;
+    private AbstractFactoryDao abstractFactoryDao; 
+    private Ticket actualTicket;
+    private ArrayList<Ticket> listTickets;
 
     /**
      * Constructor of TicketFacade
      */
     public TicketFacade() {}
+ 
+    /**
+     * Getter of actualTicket
+     * @return TicketListView's actualTicket
+     */
+    public Ticket getActualTicket() {
+        return this.actualTicket;
+    } 
+
+    /**
+     * Getter of listTickets
+     * @return TicketListView's listTickets
+     */
+    public ArrayList<Ticket> getListTickets() {
+        return this.listTickets;
+    }
+
+    /**
+     * Setter of listTickets
+     * @param listTickets
+     */
+    public void setListTickets(Wishlist listTickets) {
+        this.listTickets = listTickets;
+    }
 
     /**
      * Send the ticket to the system

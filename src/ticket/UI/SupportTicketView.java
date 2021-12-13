@@ -4,6 +4,8 @@ import java.awt.event.ActionListener;
  
 public class SupportTicketView implements ActionListener { 
       
+    private WishlistFacade ticketFacade = new TicketFacade();
+    
     /**
      * Send a ticket using user inputs
      * @param titleTicket

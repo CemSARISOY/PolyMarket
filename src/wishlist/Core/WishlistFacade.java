@@ -2,20 +2,20 @@ package Core;
  
 public class WishlistFacade {
   
-    private AbstractFactoryDao abstractFactoryDao;
+    private AbstractFactoryDao abstractFactoryDao; 
+    private Wishlist actualWishlist; 
 
     /**
      * Constructor of AbstractFactoryDao
      */
     public WishlistFacade() {
     }
-
-    /**
-     * Create a new wishlist in the user's list of wishlists
-     * @param wishlist
-     */
-    public void createWishlist(Wishlist wishlist) {
-        //TODO
-    }
     
-}
+    /**
+     * Add a product to the actualWishlist's products (WishlistFacade)
+     * @param product
+     */
+    public void addProduct(Product product) {
+        //TODO
+    } 
+} 

@@ -29,7 +29,7 @@ public class Ticket {
 
     /**
      * Getter of id
-     * @return
+     * @return ticket's id
      */
     public int getId() {
         return this.id;
@@ -37,7 +37,7 @@ public class Ticket {
 
     /**
      * Getter of title
-     * @return
+     * @return ticket's title
      */
     public String getTitle() {
         return this.title;
@@ -45,7 +45,7 @@ public class Ticket {
 
     /**
      * Getter of body
-     * @return
+     * @return ticket's body
      */
     public String getBody() {
         return this.body;
@@ -53,7 +53,7 @@ public class Ticket {
      
     /**
      * Getter of category
-     * @return
+     * @return ticket's category
      */
     public TicketCategory getCategory() {
         return this.category;
@@ -61,7 +61,7 @@ public class Ticket {
      
     /**
      * Getter of userEmail
-     * @return
+     * @return ticket's userEmail
      */
     public String getUserEmail() {
         return this.userEmail;
@@ -69,7 +69,7 @@ public class Ticket {
 
     /**
      * Getter of status
-     * @return
+     * @return user's status
      */
     public String getStatus() {
         return this.status;

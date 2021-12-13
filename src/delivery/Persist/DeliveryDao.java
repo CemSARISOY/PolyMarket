@@ -7,7 +7,7 @@ public interface DeliveryDao {
     /**
      * Get a delivery from the DB by ID
      * @param id
-     * @return
+     * @return the associated delivery from the DB
      */
     Delivery getDeliveryById(int id); 
 }

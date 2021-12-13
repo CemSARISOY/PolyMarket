@@ -18,7 +18,7 @@ public class WishlistDaoMySQL implements WishlistDao {
     /**
      * Get a wishlist from the MySQL DB by Wishlist ID
      * @param id
-     * @return
+     * @return the associated wishlist from the MySQL DB
      */
     @Override
     public Wishlist getWishlistById(int id) {

@@ -3,10 +3,8 @@ package ListWishlistsView;
 import java.awt.event.ActionListener;
 
 public class ListWishlistsView implements ActionListener {
-     
-    private ArrayList<Wishlist> wishlists; 
 
-    private WishlistFacade wishlistFacade = new WishlistFacade(); 
+    private WishlistFacade wishlistFacade = new ListWishlistsFacade(); 
 
     /**
      * Event activated when the user clicks on a specific wishlist
@@ -16,10 +14,10 @@ public class ListWishlistsView implements ActionListener {
     }
     
     /**
-     * Add a wishlist to wishlists
+     * Add a wishlist to wishlists (ListWishlistsFacade)
+     * @param wishlist
      */
-    public void addWishlist() {
+    public void addWishlist(Wishlist wishlist) {
         //TODO
-    }
-    
+    } 
 }

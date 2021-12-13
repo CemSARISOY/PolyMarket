@@ -17,7 +17,7 @@ public class Delivery {
 
     /**
      * Getter of id
-     * @return
+     * @return Delivery's id
      */
     public int getId() {
         return this.id;
@@ -25,7 +25,7 @@ public class Delivery {
      
     /**
      * Getter of isDelivered
-     * @return
+     * @return Delivery's isDelivered
      */
     public bool getIsDelivered() {
         return this.isDelivered;
