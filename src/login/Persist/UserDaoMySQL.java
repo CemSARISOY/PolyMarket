@@ -1,6 +1,8 @@
 package Persist;
 
 import java.sql.*;
+import java.util.List;
+
 import Core.User;
 
 public class UserDaoMySQL implements UserDao {
@@ -42,5 +44,30 @@ public class UserDaoMySQL implements UserDao {
             e.printStackTrace();
         }
         return user;
+    }
+
+
+    @Override
+    public List<User> getAllUsers() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public User deleteUser(int id) throws Exception {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public void signUp(String nickname, String password, String firstname, String lastname, String email, Date dob) throws Exception{
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public User modifyUser(int id, String nickname, String firstname, String lastname, String email, Date dob) {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
