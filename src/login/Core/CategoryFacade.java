@@ -1,178 +1,61 @@
 package Core;
 
+import Persist.AbstractFactoryDao;
+import Persist.CatDAO;
 
 /**
 * @generated
 */
 public class CategoryFacade {
     
+    private AbstractFactoryDao abstractFactoryDAO;
+    private Category category;
+    private CatDAO catDAO;
     
     /**
-    * @generated
+    Getters and setters
     */
-    private AbstractFactoryDAO abstractFactoryDAO;
-    
-    /**
-    * @generated
-    */
-    private AbuseDAO abuseDAO;
-    
-    /**
-    * @generated
-    */
-    private AbuseDAO abuseDAO;
-    
-    /**
-    * @generated
-    */
-    private Category report;
-    
-    /**
-    * @generated
-    */
-    private CatFactoryDAO abstractFactoryDAO;
-    
-    /**
-    * @generated
-    */
-    private ProductDAOMySQL productDAO;
-    
-    /**
-    * @generated
-    */
-    private CatDAO abuseDAO;
-    
-    
-    
-    /**
-    * @generated
-    */
-    public Category getReport() {
-        return this.report;
+    public Category getCateogry() {
+        return this.category;
     }
     
-    /**
-    * @generated
-    */
-    public Category setReport(Category report) {
-        this.report = report;
+    public Category setCategory(Category cat) {
+        this.category = cat;
+        return this.category;
     }
     
-    /**
-    * @generated
-    */
-    public ProductDAOMySQL getProductDAO() {
-        return this.productDAO;
+    public CatDAO getCatDAO() {
+        return this.catDAO;
     }
     
-    /**
-    * @generated
-    */
-    public ProductDAOMySQL setProductDAO(ProductDAOMySQL productDAO) {
-        this.productDAO = productDAO;
+    public CatDAO setCatDAO(CatDAO catDAO) {
+        this.catDAO = catDAO;
+        return this.catDAO;
     }
     
-    /**
-    * @generated
-    */
-    public AbuseDAO getAbuseDAO() {
-        return this.abuseDAO;
-    }
-    
-    /**
-    * @generated
-    */
-    public AbuseDAO setAbuseDAO(AbuseDAO abuseDAO) {
-        this.abuseDAO = abuseDAO;
-    }
-    
-    /**
-    * @generated
-    */
-    public AbuseDAO getAbuseDAO() {
-        return this.abuseDAO;
-    }
-    
-    /**
-    * @generated
-    */
-    public AbuseDAO setAbuseDAO(AbuseDAO abuseDAO) {
-        this.abuseDAO = abuseDAO;
-    }
-    
-    /**
-    * @generated
-    */
-    public AbstractFactoryDAO getAbstractFactoryDAO() {
+    public AbstractFactoryDao getAbstractFactoryDAO() {
         return this.abstractFactoryDAO;
     }
     
-    /**
-    * @generated
-    */
-    public AbstractFactoryDAO setAbstractFactoryDAO(AbstractFactoryDAO abstractFactoryDAO) {
+    public AbstractFactoryDao setAbstractFactoryDAO(AbstractFactoryDao abstractFactoryDAO) {
         this.abstractFactoryDAO = abstractFactoryDAO;
-    }
-    
-    /**
-    * @generated
-    */
-    public CatDAO getAbuseDAO() {
-        return this.abuseDAO;
-    }
-    
-    /**
-    * @generated
-    */
-    public CatDAO setAbuseDAO(CatDAO abuseDAO) {
-        this.abuseDAO = abuseDAO;
-    }
-    
-    /**
-    * @generated
-    */
-    public CatFactoryDAO getAbstractFactoryDAO() {
         return this.abstractFactoryDAO;
     }
-    
-    /**
-    * @generated
-    */
-    public CatFactoryDAO setAbstractFactoryDAO(CatFactoryDAO abstractFactoryDAO) {
-        this.abstractFactoryDAO = abstractFactoryDAO;
-    }
-    
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public createCat() {
+    //Operations                                  
+    public void createCat() {
         //TODO
     }
-    /**
-    * @generated
-    */
-    public deleteCat() {
+
+    public void deleteCat() {
         //TODO
     }
-    /**
-    * @generated
-    */
-    public searchCat() {
+
+    public void searchCat() {
         //TODO
     }
-    /**
-    * @generated
-    */
-    public selectCat() {
-        //TODO
-    }
-    /**
-    * @generated
-    */
-    public operation2() {
+
+    public void selectCat() {
         //TODO
     }
     

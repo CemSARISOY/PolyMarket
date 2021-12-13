@@ -1,178 +1,78 @@
 package Core;
 
+import Persist.AbstractFactoryDao;
+import Persist.AbuseDAO;
+import Persist.UserDao;
+import UI.UserViewAbuse;
 
 /**
 * @generated
 */
 public class AbuseFacade {
     
-    
-    /**
-    * @generated
-    */
-    private AbstractFactoryDAO abstractFactoryDAO;
-    
-    /**
-    * @generated
-    */
+    private AbstractFactoryDao abstractFactoryDAO;
     private AbuseDAO abuseDAO;
-    
-    /**
-    * @generated
-    */
-    private AbuseDAO abuseDAO;
-    
-    /**
-    * @generated
-    */
-    private UserDAO userDAO;
-    
-    /**
-    * @generated
-    */
-    private UserView reportView;
-    
-    /**
-    * @generated
-    */
-    private UserView reportView;
-    
-    /**
-    * @generated
-    */
+    private UserDao userDAO;
     private Abuse report;
-    
-    
+    private User user;
     
     /**
-    * @generated
+    Getters and setters
     */
     public Abuse getReport() {
         return this.report;
     }
     
-    /**
-    * @generated
-    */
     public Abuse setReport(Abuse report) {
         this.report = report;
+        return this.report;
     }
     
-    /**
-    * @generated
-    */
-    public UserDAO getUserDAO() {
+    public UserDao getUserDAO() {
         return this.userDAO;
     }
     
-    /**
-    * @generated
-    */
-    public UserDAO setUserDAO(UserDAO userDAO) {
+    public UserDao setUserDAO(UserDao userDAO) {
         this.userDAO = userDAO;
+        return this.userDAO;
     }
     
-    /**
-    * @generated
-    */
     public AbuseDAO getAbuseDAO() {
         return this.abuseDAO;
     }
     
-    /**
-    * @generated
-    */
     public AbuseDAO setAbuseDAO(AbuseDAO abuseDAO) {
         this.abuseDAO = abuseDAO;
-    }
-    
-    /**
-    * @generated
-    */
-    public AbuseDAO getAbuseDAO() {
         return this.abuseDAO;
     }
     
-    /**
-    * @generated
-    */
-    public AbuseDAO setAbuseDAO(AbuseDAO abuseDAO) {
-        this.abuseDAO = abuseDAO;
-    }
-    
-    /**
-    * @generated
-    */
-    public UserView getReportView() {
-        return this.reportView;
-    }
-    
-    /**
-    * @generated
-    */
-    public UserView setReportView(UserView reportView) {
-        this.reportView = reportView;
-    }
-    
-    /**
-    * @generated
-    */
-    public UserView getReportView() {
-        return this.reportView;
-    }
-    
-    /**
-    * @generated
-    */
-    public UserView setReportView(UserView reportView) {
-        this.reportView = reportView;
-    }
-    
-    /**
-    * @generated
-    */
-    public AbstractFactoryDAO getAbstractFactoryDAO() {
+    public AbstractFactoryDao getAbstractFactoryDAO() {
         return this.abstractFactoryDAO;
     }
     
-    /**
-    * @generated
-    */
-    public AbstractFactoryDAO setAbstractFactoryDAO(AbstractFactoryDAO abstractFactoryDAO) {
+    public AbstractFactoryDao setAbstractFactoryDAO(AbstractFactoryDao abstractFactoryDAO) {
         this.abstractFactoryDAO = abstractFactoryDAO;
+        return this.abstractFactoryDAO;
     }
-    
 
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public sendAbuse() {
+    //Operations                                  
+    public void sendAbuse() {
         //TODO
     }
-    /**
-    * @generated
-    */
-    public sendWarning() {
+
+    public void sendWarning() {
         //TODO
     }
-    /**
-    * @generated
-    */
-    public banUser() {
+
+    public void banUser() {
         //TODO
     }
-    /**
-    * @generated
-    */
-    public delAbuse() {
+
+    public void delAbuse() {
         //TODO
     }
-    /**
-    * @generated
-    */
-    public consult() {
+
+    public void consult() {
         //TODO
     }
     

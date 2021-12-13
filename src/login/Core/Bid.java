@@ -5,15 +5,15 @@ import java.util.Date;
 public class Bid {
 
     private int id;
-
     private boolean isPayed;
-
     private int idBider;
-
     private double amount;
-
     private Date dateOfBid;
 
+
+    /**
+    Getters and setters
+    */
     public Date setDate (Date d){
         this.dateOfBid = d;
         return this.dateOfBid;
