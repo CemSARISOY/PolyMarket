@@ -64,5 +64,7 @@ public class PaymentFacade {
 
     public void makeBid() {
         //TODO
-    }   
+    }  
+    
+    public void pay() {}
 }

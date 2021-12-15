@@ -87,7 +87,7 @@ public class LoginView implements ActionListener {
     // Operations
     public void actionPerformed(ActionEvent e) {
         String user = username.getText();
-        String pass = passwordField.getText();
+        String pass = passwordField.getName();
 
         try {
             User u = this.loginFacade.login(user,pass);
@@ -97,8 +97,8 @@ public class LoginView implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        LoginView login = new LoginView();
-    }
+    // public static void main(String[] args) {
+    //     LoginView login = new LoginView();
+    // }
 
 }
