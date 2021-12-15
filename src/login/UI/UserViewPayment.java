@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*; 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import Core.PaymentFacade;
 
@@ -48,8 +49,12 @@ public class UserViewPayment extends JFrame implements ActionListener {
         scroll.setBounds(0, 0, 930, 610);
         liste.setLayout(new GridLayout(50, 1));
         for (int i = 1; i <= 50; i++) {
-            // cell
-            liste.add(new JButton("product n°" + i)); // add cell
+            JPanel cell = new JPanel();  
+            cell.setBorder(new LineBorder(Color.BLACK, 2, true));
+            //cell.setBorder(new Insets(20,0,20,0));
+            cell.setLayout(new GridLayout(0,2));
+            cell.add(new JLabel("product n°" + i));
+            liste.add(cell);
         }  
         JScrollPane scrollList = new JScrollPane(liste);  
         scrollList.setBorder(BorderFactory.createEmptyBorder(50,100,50,100));
