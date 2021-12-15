@@ -26,6 +26,13 @@ public abstract class AbstractFactoryDao {
     public abstract UserDao createUserDao();
 
     /**
+     * Gets the NotificationDao according to the factory
+     * 
+     * @return a {@code NotificationDao} implementation
+     */
+    public abstract NotificationDao createNotificationDao();
+
+    /**
      * Gets an instance of Connection to the database
      * 
      * @return a {@code Connection} object if the connection was established,

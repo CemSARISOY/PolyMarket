@@ -1,6 +1,7 @@
 package Core;
 
 import java.util.Date;
+import java.util.List;
 
 public class User {
 
@@ -11,6 +12,8 @@ public class User {
     private String email;
     private String nickname;
     private Date dob;
+    private List<Product> productsSold;
+    private List<Product> productsOwned;
 
     /**
      * 
@@ -35,7 +38,7 @@ public class User {
     /**
      * Getter method for the password
      * 
-     * @return user's passowrd
+     * @return user's password
      */
     public String getPassword() {
         return this.password;
@@ -61,5 +64,15 @@ public class User {
                 || !this.nickname.equals(u2.nickname) || !this.email.equals(u2.email) || !this.dob.equals(u2.dob))
             return false;
         return true;
+    }
+
+    /**
+     * set the user's attributes relative to the products
+     * 
+     * @param owned list of products owned by the user
+     * @param sold list of products sold by the user
+     */
+    public void setUsersProducts(List<Product> owned, List<Product> sold) {
+        //TODO
     }
 }

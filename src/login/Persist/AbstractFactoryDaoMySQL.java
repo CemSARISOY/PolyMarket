@@ -10,6 +10,11 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
         return new UserDaoMySQL(this);
     }
 
+    public NotificationDao createNotificationDao(){
+        //TODO
+        return null;
+    }
+
     public Connection getConnection() {
         try {
             if (con == null)
