@@ -1,5 +1,7 @@
 package Core;
- 
+
+import Persist.AbstractFactoryDao;
+
 public class DeliveryFacade {  
 
     private AbstractFactoryDao abstractFactoryDao;

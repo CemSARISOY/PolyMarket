@@ -3,14 +3,14 @@ package Core;
 public class Delivery {
      
     private int id; 
-    private bool isDelivered;  
+    private boolean isDelivered;  
     
     /**
      * Constructor of Delivery
      * @param id
      * @param isDelivered
      */
-    public Delivery(int id, bool isDelivered) {
+    public Delivery(int id, boolean isDelivered) {
         this.id = id;
         this.isDelivered = isDelivered;
     }
@@ -27,7 +27,7 @@ public class Delivery {
      * Getter of isDelivered
      * @return Delivery's isDelivered
      */
-    public bool getIsDelivered() {
+    public boolean getIsDelivered() {
         return this.isDelivered;
     }
      

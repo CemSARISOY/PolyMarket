@@ -1,5 +1,6 @@
 package Persist;
 
+import Core.Delivery;
 import Core.User;
 
 public interface DeliveryDao {
