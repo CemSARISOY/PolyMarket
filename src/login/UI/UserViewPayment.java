@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.*; 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 import Core.PaymentFacade;
@@ -26,6 +28,7 @@ public class UserViewPayment extends JFrame implements ActionListener {
 
         for (var button : buttons) {
             button.setMargin(new Insets(10,20,10,20));
+            button.setPreferredSize(new Dimension(200, 40));
         }
 
         JPanel header = new JPanel();
@@ -47,14 +50,17 @@ public class UserViewPayment extends JFrame implements ActionListener {
         JPanel liste = new JPanel(); //Panel où on place tous les événements
         JScrollPane scroll = new JScrollPane(liste, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setBounds(0, 0, 930, 610);
-        liste.setLayout(new GridLayout(50, 1));
+        liste.setLayout(new BoxLayout(liste, BoxLayout.Y_AXIS));
         for (int i = 1; i <= 50; i++) {
-            JPanel cell = new JPanel();  
-            cell.setBorder(new LineBorder(Color.BLACK, 2, true));
-            //cell.setBorder(new Insets(20,0,20,0));
-            cell.setLayout(new GridLayout(0,2));
-            cell.add(new JLabel("product n°" + i));
-            liste.add(cell);
+            JPanel cell = new JPanel();   
+            cell.setPreferredSize(new Dimension(0, 150));
+            cell.setBorder(new LineBorder(Color.BLACK));
+            cell.setLayout(new GridLayout(1, 2));
+            cell.add(new JLabel("product n°" + i), 0, 0);
+            cell.add(new JLabel("product n°" + i), 0, 1); 
+
+            liste.add(cell); 
+            liste.add(Box.createRigidArea(new Dimension(0, 15)));
         }  
         JScrollPane scrollList = new JScrollPane(liste);  
         scrollList.setBorder(BorderFactory.createEmptyBorder(50,100,50,100));
