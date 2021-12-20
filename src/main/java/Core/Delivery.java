@@ -3,16 +3,22 @@ package Core;
 public class Delivery {
      
     private int id; 
-    private boolean isDelivered;  
+    private boolean isDelivered;
+    private int sellerId;
+    private int buyerId;
+    private int productId;
     
     /**
      * Constructor of Delivery
      * @param id
      * @param isDelivered
      */
-    public Delivery(int id, boolean isDelivered) {
+    public Delivery(Integer id, int s, int b, int p, boolean isDelivered) {
         this.id = id;
         this.isDelivered = isDelivered;
+        this.sellerId = s;
+        this.buyerId = b;
+        this.productId = p;
     }
 
     /**
@@ -21,7 +27,19 @@ public class Delivery {
      */
     public int getId() {
         return this.id;
-    } 
+    }
+
+    public int getSellerId(){
+        return sellerId;
+    }
+
+    public int getBuyerId(){
+        return buyerId;
+    }
+
+    public int getProductId() {
+        return productId;
+    }
      
     /**
      * Getter of isDelivered

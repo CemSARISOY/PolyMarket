@@ -1,7 +1,11 @@
 package Persist;
 
-import java.sql.*;
 import Core.User;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class UserDaoMySQL implements UserDao {
 
@@ -42,5 +46,9 @@ public class UserDaoMySQL implements UserDao {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public void updateUser(User u){
+        return;
     }
 }

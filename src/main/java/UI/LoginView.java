@@ -1,13 +1,12 @@
 package UI;
 
-import javax.swing.*;
-
 import Core.LoginFacade;
 import Core.User;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @generated
