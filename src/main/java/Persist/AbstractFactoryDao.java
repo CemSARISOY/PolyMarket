@@ -27,6 +27,8 @@ public abstract class AbstractFactoryDao {
 
     public abstract DeliveryDao createDeliveryDao();
 
+    public abstract ProductDao createProductDao();
+
     /**
      * Gets an instance of Connection to the database
      * 

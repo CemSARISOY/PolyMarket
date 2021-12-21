@@ -2,6 +2,7 @@ package Core;
 
 import Persist.AbstractFactoryDao;
 import Persist.DeliveryDao;
+import Persist.ProductDao;
 import Persist.UserDao;
 
 import java.util.ArrayList;
@@ -10,41 +11,40 @@ public class DeliveryFacade {
 
     private AbstractFactoryDao abstractFactoryDao;
 
-    private User buyer;
-    private User seller;
-    private Product product;
     private Delivery delivery;
     private UserDao userDao;
     private DeliveryDao deliveryDao;
+    private ProductDao productDao;
 
     /**
      * Constructor of DeliveryFacade
      */
     public DeliveryFacade() { }
-     
-    /**
-     * Getter of user
-     * @return DeliveryFacade's user
-    */
-    public User getBuyer() {
-        return this.buyer;
-    } 
 
-    /**
-     * Getter of seller
-     * @return DeliveryFacade's seller
-    */
-    public User getSeller() {
-        return this.seller;
+    public User getSellerFromDelivery(Delivery d) {
+        if (this.abstractFactoryDao == null){
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");}
+        userDao = abstractFactoryDao.createUserDao();
+       User u = userDao.getUserById(d.getSellerId());
+       return u;
     }
 
-    /**
-     * Getter of product
-     * @return DeliveryFacade's product
-    */
-    public Product getProduct() {
-        return this.product;
+    public User getBuyerFromDelivery(Delivery d) {
+        if (this.abstractFactoryDao == null){
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");}
+        userDao = abstractFactoryDao.createUserDao();
+        User u = userDao.getUserById(d.getBuyerId());
+        return u;
     }
+
+    public Product getProductFromDelivery(Delivery d) {
+        if (this.abstractFactoryDao == null){
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");}
+        productDao = abstractFactoryDao.createProductDao();
+        Product p = productDao.getProductById(d.getProductId());
+        return p;
+    }
+
 
     /**
      * Deliver the product from the buyer (me) to the seller 

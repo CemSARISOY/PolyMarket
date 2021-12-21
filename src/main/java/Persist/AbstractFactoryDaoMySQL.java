@@ -11,6 +11,10 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
         return new UserDaoMySQL(this);
     }
 
+    public ProductDao createProductDao() {
+        return new ProductDaoMySQL(this);
+    }
+
     public DeliveryDao createDeliveryDao() {
         return new DeliveryDaoMySQL(this);
     }
