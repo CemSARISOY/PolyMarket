@@ -75,9 +75,10 @@ public class DeliveryView extends JFrame implements ActionListener {
     public void deliver() {
         try {
             //this.delivery =  this.deliveryFacade.deliver(this.buyer,this.seller,this.product);
-            //Thread.sleep(4000);
-            //setVisible(false);
-
+            int res = JOptionPane.showOptionDialog(null, "Product well delivered !", "Information", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, null, null, null);
+            while(res != 0 && res != -1){}
+            setVisible(false);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
