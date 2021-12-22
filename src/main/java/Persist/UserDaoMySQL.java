@@ -9,16 +9,27 @@ import java.sql.Statement;
 
 public class UserDaoMySQL implements UserDao {
 
-    private AbstractFactoryDao creator;
+    //SINGLETON
+    private static UserDaoMySQL userDaoMySQL;
 
-    public UserDaoMySQL(AbstractFactoryDao creator) {
+    private AbstractFactoryDao creator;
+    private Connection con;
+
+    private UserDaoMySQL(AbstractFactoryDao creator) {
         this.creator = creator;
+        this.con = creator.getConnection();
+    }
+
+    public static UserDaoMySQL getUserDaoMySQL(AbstractFactoryDao creator) {
+        if(userDaoMySQL == null) {
+            userDaoMySQL = new UserDaoMySQL(creator);
+        }
+        return userDaoMySQL;
     }
 
     @Override
     public User getUserById(int id) {
         String requete = "SELECT * from users where id = " + id;
-        Connection con = creator.getConnection();
         User user = null;
         try {
             Statement stmt = con.createStatement();
@@ -34,7 +45,6 @@ public class UserDaoMySQL implements UserDao {
 
     public User getUserByNickname(String nickname) {
         String requete = "SELECT * from users where nickname = \"" + nickname + "\"";
-        Connection con = creator.getConnection();
         User user = null;
         try {
             Statement stmt = con.createStatement();

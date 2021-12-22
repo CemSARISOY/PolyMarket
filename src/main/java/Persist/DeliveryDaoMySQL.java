@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class DeliveryDaoMySQL implements DeliveryDao {
 
+    //SINGLETON
+    private static DeliveryDaoMySQL deliveryDaoMySQL;
+
     private AbstractFactoryDao creator;
     private Connection con;
 
@@ -13,9 +16,16 @@ public class DeliveryDaoMySQL implements DeliveryDao {
      * Constructor of DeliveryDaoMySQL
      * @param creator
      */
-    public DeliveryDaoMySQL(AbstractFactoryDao creator) {
+    private DeliveryDaoMySQL(AbstractFactoryDao creator) {
         this.creator = creator;
         this.con = this.creator.getConnection();
+    }
+
+    public static DeliveryDaoMySQL getDeliveryDaoMySQL(AbstractFactoryDao creator) {
+        if(deliveryDaoMySQL == null) {
+            deliveryDaoMySQL = new DeliveryDaoMySQL(creator);
+        }
+        return deliveryDaoMySQL;
     }
 
     /**

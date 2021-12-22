@@ -32,18 +32,15 @@ public class TicketFacade {
      * Setter of listTickets
      * @param listTickets
      */
-    public void setListTickets(Wishlist listTickets) {
+    public void setListTickets(ArrayList<Ticket> listTickets) {
         this.listTickets = listTickets;
     }
 
     /**
      * Send the ticket to the system
-     * @param titleTicket
-     * @param body
-     * @param category
-     * @param userEmail 
+     * @param Ticket
      */
-    public void send(String titleTicket, String body, Category category, String userEmail) {
+    public void send(Ticket ticket) {
         //TODO
     } 
 

@@ -7,11 +7,15 @@ import Persist.UserDao;
 
 import java.util.ArrayList;
 
-public class DeliveryFacade {  
+public class DeliveryFacade {
 
-    private AbstractFactoryDao abstractFactoryDao;
+    //SINGLETON
+    private static DeliveryFacade deliveryFacade;
 
     private Delivery delivery;
+
+    //DAO's
+    private AbstractFactoryDao abstractFactoryDao;
     private UserDao userDao;
     private DeliveryDao deliveryDao;
     private ProductDao productDao;
@@ -19,14 +23,22 @@ public class DeliveryFacade {
     /**
      * Constructor of DeliveryFacade
      */
-    public DeliveryFacade() { }
+    private DeliveryFacade() { }
+
+    public static DeliveryFacade getDeliveryFacade() {
+        if(deliveryFacade == null) {
+            deliveryFacade = new DeliveryFacade();
+        }
+        return deliveryFacade;
+    }
 
     public User getSellerFromDelivery(Delivery d) {
         if (this.abstractFactoryDao == null){
-            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");}
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        }
         userDao = abstractFactoryDao.createUserDao();
-       User u = userDao.getUserById(d.getSellerId());
-       return u;
+        User u = userDao.getUserById(d.getSellerId());
+        return u;
     }
 
     public User getBuyerFromDelivery(Delivery d) {

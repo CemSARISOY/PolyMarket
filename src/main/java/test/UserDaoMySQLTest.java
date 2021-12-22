@@ -1,23 +1,22 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
+import Core.User;
+import Persist.AbstractFactoryDaoMySQL;
+import Persist.UserDao;
 import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import Core.User;
-import Persist.AbstractFactoryDaoMySQL;
-import Persist.UserDao;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 class UserDaoMySQLTest {
 
     @Test
     void getUserByNicknameTest() {
-        AbstractFactoryDaoMySQL af = new AbstractFactoryDaoMySQL();
+        AbstractFactoryDaoMySQL af = AbstractFactoryDaoMySQL.getAbstractFactoryDaoMySQL();
         UserDao dao = af.createUserDao();
         User u = dao.getUserByNickname("cemsarisoy");
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class DeliveryView extends JFrame implements ActionListener {
 
     //Core variables
-    private DeliveryFacade deliveryFacade = new DeliveryFacade();
+    private DeliveryFacade deliveryFacade = DeliveryFacade.getDeliveryFacade();
     private Delivery delivery;
     private User buyer;
     private User seller;

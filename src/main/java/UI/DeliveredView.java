@@ -16,7 +16,7 @@ public class DeliveredView extends JFrame implements ActionListener {
     Product product;
     User seller;
     User buyer;
-    private DeliveryFacade deliveryFacade = new DeliveryFacade();
+    private DeliveryFacade deliveryFacade = DeliveryFacade.getDeliveryFacade();
 
     //View variables
     private Container contentPane = getContentPane();

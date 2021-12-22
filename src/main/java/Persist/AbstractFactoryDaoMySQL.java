@@ -5,19 +5,35 @@ import java.sql.DriverManager;
 
 public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
 
+    //SINGLETON
+    private static AbstractFactoryDaoMySQL abstractFactoryDaoMySQL;
+
+    private AbstractFactoryDaoMySQL() {
+    }
+
+    public static AbstractFactoryDaoMySQL getAbstractFactoryDaoMySQL() {
+        if(abstractFactoryDaoMySQL == null) {
+            abstractFactoryDaoMySQL = new AbstractFactoryDaoMySQL();
+        }
+        return abstractFactoryDaoMySQL;
+    }
+
     Connection con;
 
+
     public UserDao createUserDao() {
-        return new UserDaoMySQL(this);
+        return UserDaoMySQL.getUserDaoMySQL(this);
     }
 
     public ProductDao createProductDao() {
-        return new ProductDaoMySQL(this);
+        return ProductDaoMySQL.getProductDaoMySQL(this);
     }
 
     public DeliveryDao createDeliveryDao() {
-        return new DeliveryDaoMySQL(this);
+        return DeliveryDaoMySQL.getDeliveryDaoMySQL(this);
     }
+
+    public TicketDao createTicketDao() {return TicketDaoMySQL.getTicketDaoMySQL(this);}
 
     public Connection getConnection() {
         try {

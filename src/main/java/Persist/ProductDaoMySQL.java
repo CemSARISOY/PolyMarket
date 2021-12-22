@@ -9,17 +9,27 @@ import java.sql.Statement;
 
 public class ProductDaoMySQL implements ProductDao {
 
+    //SINGLETON
+    private static ProductDaoMySQL productDaoMySQL;
+
     private AbstractFactoryDao creator;
     private Connection con;
 
-    public ProductDaoMySQL(AbstractFactoryDao creator) {
+    private ProductDaoMySQL(AbstractFactoryDao creator) {
         this.creator = creator;
+        this.con = creator.getConnection();
+    }
+
+    public static ProductDaoMySQL getProductDaoMySQL(AbstractFactoryDao creator) {
+        if(productDaoMySQL == null) {
+            productDaoMySQL = new ProductDaoMySQL(creator);
+        }
+        return productDaoMySQL;
     }
 
     @Override
     public Product getProductById(int id) {
         String requete = "SELECT * from products where id = " + id;
-        Connection con = creator.getConnection();
         Product product = null;
         try {
             Statement stmt = con.createStatement();

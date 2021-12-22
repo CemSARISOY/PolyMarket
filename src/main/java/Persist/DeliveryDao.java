@@ -5,7 +5,7 @@ import Core.Delivery;
 import java.util.ArrayList;
 
 public interface DeliveryDao {
- 
+
     /**
      * Get a delivery from the DB by ID
      * @param id
