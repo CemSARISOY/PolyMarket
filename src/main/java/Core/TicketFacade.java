@@ -40,7 +40,18 @@ public class TicketFacade {
      * @return TicketListView's listTickets
      */
     public ArrayList<Ticket> getListTickets() {
-        return this.listTickets;
+        if (this.abstractFactoryDao == null){
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        }
+        ticketDao = abstractFactoryDao.createTicketDao();
+        ArrayList<Ticket> tickets;
+        try{
+            tickets = ticketDao.getTickets();
+        }
+        catch (Exception e) {
+            throw e;
+        }
+        return tickets;
     }
 
     /**

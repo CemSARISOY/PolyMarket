@@ -18,6 +18,7 @@ public class SupportTicketView extends JFrame implements ActionListener {
     private TicketFacade ticketFacade = TicketFacade.getTicketFacade();
     private ArrayList<TicketCategory> categories;
     private TicketCategory categorySelected;
+
     //View variables
     private Container contentPane = getContentPane();
     JTextArea descArea;
@@ -88,12 +89,12 @@ public class SupportTicketView extends JFrame implements ActionListener {
         String title = titleArea.getText();
         String desc = descArea.getText();
         String cat = (String) categoryArea.getSelectedItem();
-        if(title.length() > 30){
-            JOptionPane.showMessageDialog(null, "Your title is too long (>30 chars)");
+        if(title.length() > 30 || title.length() == 0){
+            JOptionPane.showMessageDialog(null, "Your title is empty or too long (>30 chars)");
             return;
         }
-        if(desc.length() > 300){
-            JOptionPane.showMessageDialog(null, "Your description is too long (>300 chars)");
+        if(desc.length() > 300 || desc.length() == 0){
+            JOptionPane.showMessageDialog(null, "Your description is empty too long (>300 chars)");
             return;
         }
        for( int i=0; i< categories.size(); i++ ) {
