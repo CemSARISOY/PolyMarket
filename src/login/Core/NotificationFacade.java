@@ -1,5 +1,7 @@
 package Core;
 
+import java.util.List;
+
 import Persist.NotificationDao;
 
 public class NotificationFacade {
@@ -27,6 +29,16 @@ public class NotificationFacade {
      * @return the sent {@code Notification}
      */
     public Notification sendNotification(User u) {
+        //TODO
+        return null;
+    }
+    
+    /**
+     * gets all the notifications of the user currently logged
+     * 
+     * @return a {@code List<Notification> } whether they are read or not
+     */
+    public List<Notification> getNotifications(){
         //TODO
         return null;
     }
