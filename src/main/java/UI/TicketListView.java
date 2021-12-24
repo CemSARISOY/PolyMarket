@@ -117,9 +117,18 @@ public class TicketListView extends JFrame implements ActionListener {
                                         JButton ans = (JButton) e.getSource();
                                         String[] parts = ans.getText().split(" ");
                                         int idOfTicket = Integer.parseInt(parts[3]);
-                                        AnswerTicketView atv = new AnswerTicketView(idOfTicket);
-                                        dispose();
-                                        atv.setVisible(true);
+                                        try {
+                                            Ticket tempTick = ticketFacade.getTicketById(idOfTicket);
+                                            if(tempTick.getIsAnswered()) {
+                                                JOptionPane.showMessageDialog(null, "This ticket has already been answered");
+                                            }
+                                            else{
+                                                dispose();
+                                                AnswerTicketView atv = new AnswerTicketView(idOfTicket);
+                                            }
+                                        } catch (Exception ex) {
+                                            ex.printStackTrace();
+                                        }
                                     }
                                 });
                                 JPanel btnPanel = new JPanel();
@@ -163,7 +172,7 @@ public class TicketListView extends JFrame implements ActionListener {
             ticketPanel.add(ticketid);
             ticketPanel.add(btnPanel);
             ticketPanel.add(status);
-            ticketPanel.setBorder(new LineBorder(Color.white, 1, true));
+            ticketPanel.setBorder(new LineBorder(Color.black, 1, true));
             center.add(ticketPanel);
         }
 

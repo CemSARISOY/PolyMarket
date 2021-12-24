@@ -105,14 +105,14 @@ public class SupportTicketView extends JFrame implements ActionListener {
         Ticket ticketToSend = new Ticket(1, title, desc, categorySelected.getId(), sender.getId(), false);
         try{
             //ticketFacade.send(ticketToSend);
-            int res = JOptionPane.showOptionDialog(null, "Ticket successfully sent", "Information", JOptionPane.DEFAULT_OPTION,
-                    JOptionPane.INFORMATION_MESSAGE, null, null, null);
-            while(res != 0 && res != -1){}
-            setVisible(false);
         }
         catch (Exception e1) {
             JOptionPane.showMessageDialog(null, e1.getMessage());
         }
+        int res = JOptionPane.showOptionDialog(null, "Ticket successfully sent", "Information", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        while(res != 0 && res != -1){}
+        setVisible(false);
     }
 
     public static void main(String[] args) {

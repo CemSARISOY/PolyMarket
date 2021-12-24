@@ -1,17 +1,9 @@
 package Core;
 
 import Persist.AbstractFactoryDao;
+import Persist.JavaMailService;
 import Persist.TicketDao;
 import Persist.UserDao;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
-
-import javax.activation.DataHandler;
-import javax.mail.MessagingException;
-import javax.mail.util.ByteArrayDataSource;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
 
 import java.util.ArrayList;
 
@@ -142,21 +134,30 @@ public class TicketFacade {
         throw new Exception("Error while getting the ticket category");
     }
 
-    public void sendAnswer(Ticket t, User u, String ans) {
+    public void sendAnswer(Ticket t, User u, String ans) throws Exception {
         //UPDATING TICKET
         ticketDao.updateAnswerTicket(t.getId());
 
         //SENDING EMAIL
-        String email = u.getEmail();
-
+        String senderEmail = "valent.taqz@gmail.com"; //TO BE REPLACED BY u.getEmail();
+        try {
+            sendEmail(senderEmail,ans,t.getTitle());
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
-    public void sendEmail(String to, String ans) {
-        HtmlEmail email = new HtmlEmail();
-        email.setHostName("smtp.gmail.com");
-        email.setSmtpPort(465);
-        email.setSSLOnConnect(true);
-        email.setAuthentication("your-account-name@gmail.com", "your-password");
-    }
+    private void sendEmail(String to, String ans, String title) throws Exception{
+        try {
+            String from = "polymarkethelp@gmail.com";
+            String subject = "Feedback from your recent ticket";
+            String text = "Ticket title : "+title+"<br><br>"+"Answer from our support staff :<br>"+ans;
 
+            // Call the mail service to send the message
+            JavaMailService.send(from, to, subject, text, null, null, null);
+
+        } catch (Exception e) {
+            throw new Exception("Error while sending the mail");
+        }
+    }
 }

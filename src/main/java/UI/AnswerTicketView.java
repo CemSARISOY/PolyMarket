@@ -84,7 +84,18 @@ public class AnswerTicketView extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ticketFacade.sendAnswer(ticket,sender,ansArea.getText());
+        if(ansArea.getText().length() == 0){
+            JOptionPane.showMessageDialog(null, "Your answer is empty");
+            return;
+        }
+        try {
+            ticketFacade.sendAnswer(ticket,sender,ansArea.getText());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+        int res = JOptionPane.showOptionDialog(null, "Answer successfully sent", "Information", JOptionPane.DEFAULT_OPTION,
+                JOptionPane.INFORMATION_MESSAGE, null, null, null);
+        while(res != 0 && res != -1){}
         dispose();
         TicketListView ticketListView = new TicketListView();
     }
