@@ -49,9 +49,10 @@ public class UserDaoMySQL implements UserDao {
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
-            while (rs.next())
+            while (rs.next()){
                 user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getDate(7));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

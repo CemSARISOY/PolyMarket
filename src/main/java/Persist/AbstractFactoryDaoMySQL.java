@@ -37,9 +37,10 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
 
     public Connection getConnection() {
         try {
-            if (con == null)
+            if (con == null){
                 con = DriverManager.getConnection("jdbc:mysql://eu01-db.cus.mc-panel.net/db_442584", "db_442584",
                         "9bfc0fd115");
+            }
             return con;
         } catch (Exception e) {
             e.printStackTrace();

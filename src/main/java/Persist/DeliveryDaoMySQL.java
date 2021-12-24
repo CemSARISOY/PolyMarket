@@ -40,10 +40,11 @@ public class DeliveryDaoMySQL implements DeliveryDao {
         try {
             Statement stmt = this.con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
-            while (rs.next())
+            while (rs.next()){
                 delivery = new Delivery(rs.getInt(1), rs.getInt(2),
                         rs.getInt(3), rs.getInt(4),
                         rs.getBoolean(5));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,10 +58,11 @@ public class DeliveryDaoMySQL implements DeliveryDao {
         try {
             Statement stmt = this.con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
-            while (rs.next())
+            while (rs.next()){
                 delivery = new Delivery(rs.getInt(1), rs.getInt(2),
                         rs.getInt(3), rs.getInt(4),
                         rs.getBoolean(5));
+            }
                 deliveries.add(delivery);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,10 +97,11 @@ public class DeliveryDaoMySQL implements DeliveryDao {
         try {
             Statement stmt = this.con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
-            while (rs.next())
+            while (rs.next()){
                 delivery = new Delivery(rs.getInt(1), rs.getInt(2),
                         rs.getInt(3), rs.getInt(4),
                         rs.getBoolean(5));
+            }
             deliveries.add(delivery);
         } catch (SQLException e) {
             e.printStackTrace();

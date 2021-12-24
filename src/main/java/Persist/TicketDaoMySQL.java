@@ -70,13 +70,60 @@ public class TicketDaoMySQL implements TicketDao {
         try {
             Statement stmt = this.con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
-            while (rs.next())
+            while (rs.next()){
                 ticket = new Ticket(rs.getInt(1), rs.getString(2), rs.getString(3),
                         rs.getInt(4), rs.getInt(5), rs.getBoolean(6));
                 tickets.add(ticket);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return tickets;
+    }
+
+    @Override
+    public TicketCategory getTicketCategory(int id) {
+        String requete = "SELECT * from ticketCategories where id = \"" + id + "\"";
+        TicketCategory category = null;
+        try {
+            Statement stmt = this.con.createStatement();
+            ResultSet rs = stmt.executeQuery(requete);
+            while (rs.next())
+                category = new TicketCategory(rs.getInt(1), rs.getString(2));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return category;
+    }
+
+    @Override
+    public Ticket getTicketById(int id) {
+        String requete = "SELECT * from tickets where id = \"" + id + "\"";
+        Ticket ticket = null;
+        try {
+            Statement stmt = this.con.createStatement();
+            ResultSet rs = stmt.executeQuery(requete);
+            while (rs.next())
+                ticket = new Ticket(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getInt(4), rs.getInt(5), rs.getBoolean(6));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ticket;
+    }
+
+    @Override
+    public void updateAnswerTicket(int id) {
+        String requete = "UPDATE tickets SET isAnswered = ? where id = " + id;
+        try{
+            Statement stmt = this.con.createStatement();
+            PreparedStatement updateStatement = con.prepareStatement(requete);
+            updateStatement.setBoolean(1, true);
+            updateStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

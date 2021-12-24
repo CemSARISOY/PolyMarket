@@ -68,6 +68,10 @@ public class User {
         return this.nickname;
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

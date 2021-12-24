@@ -12,4 +12,10 @@ public interface TicketDao {
     public ArrayList<TicketCategory> getTicketCategories();
 
     public ArrayList<Ticket> getTickets();
+
+    public TicketCategory getTicketCategory(int id);
+
+    public Ticket getTicketById(int id);
+
+    public void updateAnswerTicket(int id);
 }

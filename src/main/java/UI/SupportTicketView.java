@@ -105,7 +105,7 @@ public class SupportTicketView extends JFrame implements ActionListener {
         Ticket ticketToSend = new Ticket(1, title, desc, categorySelected.getId(), sender.getId(), false);
         try{
             //ticketFacade.send(ticketToSend);
-            int res = JOptionPane.showOptionDialog(null, "Ticket send successfully", "Information", JOptionPane.DEFAULT_OPTION,
+            int res = JOptionPane.showOptionDialog(null, "Ticket successfully sent", "Information", JOptionPane.DEFAULT_OPTION,
                     JOptionPane.INFORMATION_MESSAGE, null, null, null);
             while(res != 0 && res != -1){}
             setVisible(false);

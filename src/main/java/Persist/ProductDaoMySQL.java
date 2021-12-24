@@ -34,8 +34,9 @@ public class ProductDaoMySQL implements ProductDao {
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
-            while (rs.next())
+            while (rs.next()){
                 product = new Product(rs.getInt(1));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

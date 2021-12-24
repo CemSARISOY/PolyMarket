@@ -2,6 +2,16 @@ package Core;
 
 import Persist.AbstractFactoryDao;
 import Persist.TicketDao;
+import Persist.UserDao;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.HtmlEmail;
+
+import javax.activation.DataHandler;
+import javax.mail.MessagingException;
+import javax.mail.util.ByteArrayDataSource;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
 
 import java.util.ArrayList;
 
@@ -14,6 +24,7 @@ public class TicketFacade {
     //DAO's
     private AbstractFactoryDao abstractFactoryDao;
     private TicketDao ticketDao;
+    private UserDao userDao;
 
     //SINGLETON
     private static TicketFacade ticketFacade;
@@ -90,6 +101,62 @@ public class TicketFacade {
             return ticketCategories;
         }
         throw new Exception("Error while getting the ticket categories");
+    }
+
+    public TicketCategory getTicketCategory(int id) throws Exception{
+        if (this.abstractFactoryDao == null){
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        }
+        ticketDao = abstractFactoryDao.createTicketDao();
+        TicketCategory ticketCategory;
+        ticketCategory = ticketDao.getTicketCategory(id);
+        if(ticketCategory != null){
+            return ticketCategory;
+        }
+        throw new Exception("Error while getting the ticket category");
+    }
+
+    public User getUserById(int id) throws Exception{
+        if (this.abstractFactoryDao == null){
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        }
+        userDao = abstractFactoryDao.createUserDao();
+        User sender;
+        sender = userDao.getUserById(id);
+        if(sender != null){
+            return sender;
+        }
+        throw new Exception("Error while getting the ticket category");
+    }
+
+    public Ticket getTicketById(int id) throws Exception{
+        if (this.abstractFactoryDao == null){
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        }
+        ticketDao = abstractFactoryDao.createTicketDao();
+        Ticket ticket;
+        ticket = ticketDao.getTicketById(id);
+        if(ticket != null){
+            return ticket;
+        }
+        throw new Exception("Error while getting the ticket category");
+    }
+
+    public void sendAnswer(Ticket t, User u, String ans) {
+        //UPDATING TICKET
+        ticketDao.updateAnswerTicket(t.getId());
+
+        //SENDING EMAIL
+        String email = u.getEmail();
+
+    }
+
+    public void sendEmail(String to, String ans) {
+        HtmlEmail email = new HtmlEmail();
+        email.setHostName("smtp.gmail.com");
+        email.setSmtpPort(465);
+        email.setSSLOnConnect(true);
+        email.setAuthentication("your-account-name@gmail.com", "your-password");
     }
 
 }
