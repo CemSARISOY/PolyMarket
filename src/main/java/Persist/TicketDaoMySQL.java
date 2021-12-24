@@ -46,7 +46,7 @@ public class TicketDaoMySQL implements TicketDao {
     }
 
     @Override
-    public ArrayList<TicketCategory> getTicketCategories() {
+    public ArrayList<TicketCategory> getTicketCategories() throws Exception{
             String requete = "SELECT * from ticketCategories";
             ArrayList<TicketCategory> ticketCategories = new ArrayList<TicketCategory>();
             TicketCategory category = null;
@@ -57,7 +57,7 @@ public class TicketDaoMySQL implements TicketDao {
                     category = new TicketCategory(rs.getInt(1), rs.getString(2));
                 ticketCategories.add(category);
             } catch (SQLException e) {
-                e.printStackTrace();
+                throw e;
             }
             return ticketCategories;
     }
@@ -121,6 +121,19 @@ public class TicketDaoMySQL implements TicketDao {
             PreparedStatement updateStatement = con.prepareStatement(requete);
             updateStatement.setBoolean(1, true);
             updateStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void deleteTicketById(int id) {
+        String requete = "DELETE FROM tickets where id = " + id;
+        try{
+            Statement stmt = this.con.createStatement();
+            PreparedStatement deleteStatement = con.prepareStatement(requete);
+            deleteStatement.executeUpdate();
         }
         catch (SQLException e) {
             e.printStackTrace();

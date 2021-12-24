@@ -9,13 +9,15 @@ public interface TicketDao {
 
     public void sendTicket(Ticket t) throws Exception;
 
-    public ArrayList<TicketCategory> getTicketCategories();
+    public ArrayList<TicketCategory> getTicketCategories() throws Exception;
 
-    public ArrayList<Ticket> getTickets();
+    public ArrayList<Ticket> getTickets() throws Exception;
 
-    public TicketCategory getTicketCategory(int id);
+    public TicketCategory getTicketCategory(int id) throws Exception;
 
-    public Ticket getTicketById(int id);
+    public Ticket getTicketById(int id) throws Exception;
 
-    public void updateAnswerTicket(int id);
+    public void updateAnswerTicket(int id) throws Exception;
+
+    public void deleteTicketById(int id) throws Exception;
 }

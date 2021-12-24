@@ -42,7 +42,7 @@ public class TicketFacade {
      * Getter of listTickets
      * @return TicketListView's listTickets
      */
-    public ArrayList<Ticket> getListTickets() {
+    public ArrayList<Ticket> getListTickets() throws Exception{
         if (this.abstractFactoryDao == null){
             abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
         }
@@ -132,6 +132,19 @@ public class TicketFacade {
             return ticket;
         }
         throw new Exception("Error while getting the ticket category");
+    }
+
+    public void deleteTicketById(int id) throws Exception{
+        if (this.abstractFactoryDao == null){
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        }
+        ticketDao = abstractFactoryDao.createTicketDao();
+        try {
+            ticketDao.deleteTicketById(id);
+        }
+        catch (Exception e) {
+            throw new Exception("Error while deleting the ticket");
+        }
     }
 
     public void sendAnswer(Ticket t, User u, String ans) throws Exception {

@@ -123,7 +123,7 @@ public class DeliveredView extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        this.setVisible(false);
+        dispose();
     }
 
     public static void main(String[] args){

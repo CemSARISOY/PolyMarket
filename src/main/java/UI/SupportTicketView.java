@@ -40,6 +40,26 @@ public class SupportTicketView extends JFrame implements ActionListener {
         setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //NORTH CONTENT
+        JPanel north = new JPanel();
+        north.setLayout(new FlowLayout(SwingConstants.NORTH_WEST));
+        ImageIcon back = new ImageIcon(getClass().getResource("back.png"));
+        Image newBack = back.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
+        ImageIcon finalBack = new ImageIcon(newBack);
+        JButton backBtn = new JButton(finalBack);
+        backBtn.setBackground(Color.WHITE);
+        backBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        north.add(backBtn);
+        JLabel header = new JLabel("Make a new ticket");
+        header.setBorder(BorderFactory.createEmptyBorder(0,515,0,0));
+        north.add(header);
+        north.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
+
         //CENTER CONTENT
         JPanel center = new JPanel();
         center.setBorder(BorderFactory.createEmptyBorder(50,100,100,500));
@@ -79,6 +99,7 @@ public class SupportTicketView extends JFrame implements ActionListener {
         center.add(panelBtn);
 
         //FINAL CONFIG
+        contentPane.add(north, BorderLayout.NORTH);
         contentPane.add(center, BorderLayout.CENTER);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -97,22 +118,29 @@ public class SupportTicketView extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Your description is empty too long (>300 chars)");
             return;
         }
-       for( int i=0; i< categories.size(); i++ ) {
-           if(categories.get(i).getName().equals(cat)) {
-               categorySelected = categories.get(i);
-           }
-       }
-        Ticket ticketToSend = new Ticket(1, title, desc, categorySelected.getId(), sender.getId(), false);
-        try{
-            //ticketFacade.send(ticketToSend);
+        int input = JOptionPane.showConfirmDialog(null,
+                "Do you really want to send your ticket ?",
+                "Select an option",
+                JOptionPane.OK_CANCEL_OPTION);
+        while(input != JOptionPane.CANCEL_OPTION && input != JOptionPane.OK_OPTION) {}
+        if(input == 0){
+            for( int i=0; i< categories.size(); i++ ) {
+                if(categories.get(i).getName().equals(cat)) {
+                    categorySelected = categories.get(i);
+                }
+            }
+            Ticket ticketToSend = new Ticket(1, title, desc, categorySelected.getId(), sender.getId(), false);
+            try{
+                //ticketFacade.send(ticketToSend);
+            }
+            catch (Exception e1) {
+                JOptionPane.showMessageDialog(null, e1.getMessage());
+            }
+            int res = JOptionPane.showOptionDialog(null, "Ticket successfully sent", "Information", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, null, null, null);
+            while(res != 0 && res != -1){}
+            setVisible(false);
         }
-        catch (Exception e1) {
-            JOptionPane.showMessageDialog(null, e1.getMessage());
-        }
-        int res = JOptionPane.showOptionDialog(null, "Ticket successfully sent", "Information", JOptionPane.DEFAULT_OPTION,
-                JOptionPane.INFORMATION_MESSAGE, null, null, null);
-        while(res != 0 && res != -1){}
-        setVisible(false);
     }
 
     public static void main(String[] args) {

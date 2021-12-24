@@ -36,7 +36,21 @@ public class TicketListView extends JFrame implements ActionListener {
 
         //NORTH CONTENT
         JPanel north = new JPanel();
+        north.setLayout(new FlowLayout(SwingConstants.NORTH_WEST));
+        ImageIcon back = new ImageIcon(getClass().getResource("back.png"));
+        Image newBack = back.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH);
+        ImageIcon finalBack = new ImageIcon(newBack);
+        JButton backBtn = new JButton(finalBack);
+        backBtn.setBackground(Color.WHITE);
+        backBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        north.add(backBtn);
         JLabel title = new JLabel("List of tickets sent by users");
+        title.setBorder(BorderFactory.createEmptyBorder(0,515,0,0));
         north.add(title);
         north.setBorder(BorderFactory.createEmptyBorder(0,0,10,0));
 
@@ -68,7 +82,7 @@ public class TicketListView extends JFrame implements ActionListener {
             ticketButton.setBackground(Color.darkGray);
             ticketButton.setForeground(Color.white);
 
-            //Button action performed
+            //Ticket Button action performed
             ticketButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e1) {
@@ -108,15 +122,16 @@ public class TicketListView extends JFrame implements ActionListener {
                                 descPanel.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 
                                 //Answer button management
-                                JButton answer = new JButton("Answer to ticket "+tickets.get(j).getId());
+                                JButton answer = new JButton("Answer");
+                                answer.setName(String.valueOf(tickets.get(j).getId()));
                                 answer.setBackground(Color.darkGray);
                                 answer.setForeground(Color.WHITE);
                                 answer.addActionListener(new ActionListener() {
                                     @Override
                                     public void actionPerformed(ActionEvent e) {
                                         JButton ans = (JButton) e.getSource();
-                                        String[] parts = ans.getText().split(" ");
-                                        int idOfTicket = Integer.parseInt(parts[3]);
+                                        String id = ans.getName();
+                                        int idOfTicket = Integer.parseInt(id);
                                         try {
                                             Ticket tempTick = ticketFacade.getTicketById(idOfTicket);
                                             if(tempTick.getIsAnswered()) {
@@ -159,6 +174,9 @@ public class TicketListView extends JFrame implements ActionListener {
             ticketid.setBorder(BorderFactory.createEmptyBorder(0,0,0,50));
 
             //Status Button
+            JPanel rightPanel = new JPanel();
+            rightPanel.setLayout(new BoxLayout(rightPanel,BoxLayout.Y_AXIS));
+            JPanel statusPanel = new JPanel();
             JButton status = new JButton();
             status.setBorder(new RoundedBorder(5));
             if(tickets.get(i).getIsAnswered()) {
@@ -167,17 +185,50 @@ public class TicketListView extends JFrame implements ActionListener {
             else{
                 status.setBackground(Color.red);
             }
+            statusPanel.add(status);
+            statusPanel.setBorder(BorderFactory.createEmptyBorder(10,30,0,0));
+            ImageIcon img = new ImageIcon(getClass().getResource("poubelle.png"));
+            Image newimg = img.getImage().getScaledInstance(15,15, Image.SCALE_SMOOTH);
+            ImageIcon finalImg = new ImageIcon(newimg);
+            JButton delBtn = new JButton(finalImg);
+            delBtn.setName(String.valueOf(tickets.get(i).getId()));
+            delBtn.setBackground(Color.WHITE);
+            delBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    JButton but = (JButton) e.getSource();
+                    int input = JOptionPane.showConfirmDialog(null,
+                            "Do you really want to delete this ticket ?",
+                            "Select an option",
+                            JOptionPane.OK_CANCEL_OPTION);
+                    while(input != JOptionPane.CANCEL_OPTION && input != JOptionPane.OK_OPTION) {}
+                    if(input == 0) {
+                        try {
+                            ticketFacade.deleteTicketById(Integer.parseInt(but.getName()));
+                            dispose();
+                            TicketListView newTicketList = new TicketListView();
+                        }
+                        catch (Exception e2) {
+                            JOptionPane.showMessageDialog(null, e2.getMessage());
+                        }
+                    }
+                }
+            });
+            rightPanel.add(delBtn);
+            rightPanel.add(statusPanel);
+
 
             //Grouping
             ticketPanel.add(ticketid);
             ticketPanel.add(btnPanel);
-            ticketPanel.add(status);
+            ticketPanel.add(rightPanel);
             ticketPanel.setBorder(new LineBorder(Color.black, 1, true));
             center.add(ticketPanel);
         }
 
         //Scrollable
-        JScrollPane scroll = new JScrollPane(center);
+        JScrollPane scroll = new JScrollPane(center,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         //FINAL CONFIG
         contentPane.add(north, BorderLayout.NORTH);
