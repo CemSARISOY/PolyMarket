@@ -35,6 +35,8 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
 
     public TicketDao createTicketDao() {return TicketDaoMySQL.getTicketDaoMySQL(this);}
 
+    public WishlistDao createWishlistDao() {return WishlistDaoMySQL.getWishlistDaoMySQL(this);}
+
     public Connection getConnection() {
         try {
             if (con == null){

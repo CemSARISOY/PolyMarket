@@ -74,7 +74,6 @@ public class TicketFacade {
             abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
         }
         ticketDao = abstractFactoryDao.createTicketDao();
-        ArrayList<Ticket> tickets;
         try{
             ticketDao.sendTicket(ticket);
         }

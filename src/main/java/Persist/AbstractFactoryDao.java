@@ -31,6 +31,8 @@ public abstract class AbstractFactoryDao {
 
     public abstract TicketDao createTicketDao();
 
+    public abstract WishlistDao createWishlistDao();
+
     /**
      * Gets an instance of Connection to the database
      * 
