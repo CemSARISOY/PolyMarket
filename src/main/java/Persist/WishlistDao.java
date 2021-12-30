@@ -1,5 +1,6 @@
 package Persist;
 
+import Core.Product;
 import Core.Wishlist;
 
 import java.util.ArrayList;
@@ -13,4 +14,8 @@ public interface WishlistDao {
     ArrayList<Wishlist> getWishlistsFromUser(int id) throws Exception;
 
     void deleteWishlistById(int id) throws Exception;
+
+    ArrayList<Product> getProductsFromWishlistId(int id) throws Exception;
+
+    void deleteProductFromWishlistById(int wishId, int productId) throws Exception;
 }

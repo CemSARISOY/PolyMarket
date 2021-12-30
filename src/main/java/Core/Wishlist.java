@@ -3,13 +3,17 @@ package Core;
 public class Wishlist extends AbstractProdcutList {
 
     /**
-     * Constructor of Wishlist
+     * Constructor of Wishlist when id is know (received from DB)
      * @param id
-     * @param productList
      * @param title
+     * @param userId
      */
-    public Wishlist(int id, int user, String title, int productList) {
-        super(id,user, title, productList);
+    public Wishlist(int id, int userId, String title) {
+        super(id,userId, title);
+    }
+
+    public Wishlist(int userId, String title){
+        super(userId, title);
     }
 
     /**

@@ -2,21 +2,23 @@ package Core;
 
 abstract class AbstractProdcutList {
 
-    private int id;
-    private int productListID;
+    private Integer id = null;
     private String title;
     private int userId;
 
     /**
-     * Constructor of AbstractProdcutList
+     * Constructor of AbstractProdcutList when id is known
      * @param id
-     * @param products
      * @param title
      */
-    public AbstractProdcutList(int id, int userId,  String title, int products) {
+    public AbstractProdcutList(int id , int userId,  String title) {
         this.id = id;
         this.userId = userId;
-        this.productListID = products;
+        this.title = title;
+    }
+
+    public AbstractProdcutList(int userId,  String title) {
+        this.userId = userId;
         this.title = title;
     }
 
@@ -37,22 +39,6 @@ abstract class AbstractProdcutList {
     }
 
     /**
-     * Getter of products
-     * @return AbstractProdcutList's products
-     */
-    public int getProducts() {
-        return this.productListID;
-    }
-
-    /**
-     * Setter of products
-     * @param products
-     */
-    public void setProducts(int products) {
-        this.productListID = products;
-    }
-
-    /**
      * Getter of title
      * @return AbstractProdcutList's title
      */
@@ -68,11 +54,4 @@ abstract class AbstractProdcutList {
         this.title = title;
     }
 
-
-    /**
-     * Add a product to products
-     */
-    public void addProduct() {
-        //TODO
-    }
 }

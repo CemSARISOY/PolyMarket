@@ -32,6 +32,14 @@ public class DeliveryFacade {
         return deliveryFacade;
     }
 
+    public Delivery getDeliveryById(int id) {
+        if (this.abstractFactoryDao == null){
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");}
+        deliveryDao = abstractFactoryDao.createDeliveryDao();
+        Delivery delivery = deliveryDao.getDeliveryById(id);
+        return delivery;
+    }
+
     public User getSellerFromDelivery(Delivery d) {
         if (this.abstractFactoryDao == null){
             abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
@@ -85,7 +93,7 @@ public class DeliveryFacade {
         userDao.updateUser(seller);
 
         //CREATING THE DELIVERY ASSOCIATED
-        this.delivery = new Delivery(1,seller.getId(),buyer.getId(),product.getId(),true);
+        this.delivery = new Delivery(seller.getId(),buyer.getId(),product.getId(),true);
 
         //SENDING THE DELIVERY TO THE DB
         this.delivery = deliveryDao.addDelivery(this.delivery);

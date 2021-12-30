@@ -1,9 +1,6 @@
 package UI;
 
-import Core.Ticket;
-import Core.TicketCategory;
-import Core.TicketFacade;
-import Core.User;
+import Core.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -129,9 +126,9 @@ public class SupportTicketView extends JFrame implements ActionListener {
                     categorySelected = categories.get(i);
                 }
             }
-            Ticket ticketToSend = new Ticket(1, title, desc, categorySelected.getId(), sender.getId(), false);
+            Ticket ticketToSend = new Ticket(title, desc, categorySelected.getId(), sender.getId(), false);
             try{
-                //ticketFacade.send(ticketToSend);
+                ticketFacade.send(ticketToSend);
             }
             catch (Exception e1) {
                 JOptionPane.showMessageDialog(null, e1.getMessage());
@@ -144,6 +141,11 @@ public class SupportTicketView extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        SupportTicketView supportTicketView = new SupportTicketView(new User(1));
+        LoginFacade loginFacade = LoginFacade.getLoginFacade();
+        try {
+            SupportTicketView supportTicketView = new SupportTicketView(loginFacade.getUserById(1));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
     }
 }

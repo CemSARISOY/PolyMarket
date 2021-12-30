@@ -93,8 +93,7 @@ public class NewWishlistView extends JFrame implements ActionListener {
                 JOptionPane.OK_CANCEL_OPTION);
         while(input != JOptionPane.CANCEL_OPTION && input != JOptionPane.OK_OPTION) {}
         if(input == 0){
-            ProductList productList = new ProductList(1);
-            Wishlist wishlist = new Wishlist(2, user.getId(), title,1 );
+            Wishlist wishlist = new Wishlist(user.getId(), title);
             try{
                 wishlistFacade.createWishlist(wishlist);
             }

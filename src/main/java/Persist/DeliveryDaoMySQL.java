@@ -76,7 +76,7 @@ public class DeliveryDaoMySQL implements DeliveryDao {
         try{
             Statement stmt = this.con.createStatement();
             PreparedStatement deliveryStatement = con.prepareStatement(requete);
-            deliveryStatement.setInt(1, d.getId());
+            deliveryStatement.setNull(1, 1);
             deliveryStatement.setInt(2, d.getSellerId());
             deliveryStatement.setInt(3, d.getBuyerId());
             deliveryStatement.setInt(4, d.getProductId());

@@ -1,9 +1,6 @@
 package UI;
 
-import Core.Delivery;
-import Core.DeliveryFacade;
-import Core.Product;
-import Core.User;
+import Core.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -90,13 +87,21 @@ public class DeliveryView extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        User u1 = new User(2);
-        User u2 = new User(3);
+        LoginFacade loginFacade = LoginFacade.getLoginFacade();
+        ProductFacade productFacade = ProductFacade.getProductFacade();
+        User u1 = null;
+        User u2 = null;
+        try {
+            u1 = loginFacade.getUserById(1);
+            u2 = loginFacade.getUserById(2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         ArrayList<Product> p1 = new ArrayList<Product>();
-        p1.add(new Product(1));
         u1.setProducts(p1);
+        Product product1 = productFacade.getProductById(1);
+        p1.add(product1);
         u2.setProducts(p1);
-        Product p2 = new Product(2);
-        DeliveryView del = new DeliveryView(u1, u2, p2);
+        DeliveryView del = new DeliveryView(u1, u2, product1);
     }
 }

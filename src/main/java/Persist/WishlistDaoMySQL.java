@@ -1,5 +1,6 @@
 package Persist;
 
+import Core.Product;
 import Core.Wishlist;
 
 import java.sql.*;
@@ -29,15 +30,14 @@ public class WishlistDaoMySQL implements WishlistDao {
 
     @Override
     public void sendWishlist(Wishlist wl) throws Exception {
-        String requete = "INSERT INTO wishlists VALUES (?, ?, ?, ?)";
+        String requete = "INSERT INTO wishlists VALUES (?, ?, ?)";
         try{
             Statement stmt = this.con.createStatement();
-            PreparedStatement ticketStatement = con.prepareStatement(requete);
-            ticketStatement.setInt(1, wl.getId());
-            ticketStatement.setInt(2, wl.getUserId());
-            ticketStatement.setString(3, wl.getTitle());
-            ticketStatement.setInt(4, wl.getProducts());
-            ticketStatement.executeUpdate();
+            PreparedStatement wishStatement = con.prepareStatement(requete);
+            wishStatement.setNull(1, 1);
+            wishStatement.setInt(2, wl.getUserId());
+            wishStatement.setString(3, wl.getTitle());
+            wishStatement.executeUpdate();
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -46,8 +46,20 @@ public class WishlistDaoMySQL implements WishlistDao {
     }
 
     @Override
-    public Wishlist getWishlistyById(int id) {
-        return null;
+    public Wishlist getWishlistyById(int id) throws Exception{
+        String requete = "SELECT * from wishlists where id = \"" + id + "\"";
+        Wishlist wishlist = null;
+        try {
+            Statement stmt = this.con.createStatement();
+            ResultSet rs = stmt.executeQuery(requete);
+            while (rs.next()){
+                wishlist = new Wishlist(rs.getInt(1), rs.getInt(2), rs.getString(3));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error while getting the wishlists");
+        }
+        return wishlist;
     }
 
     @Override
@@ -59,8 +71,7 @@ public class WishlistDaoMySQL implements WishlistDao {
             Statement stmt = this.con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next()){
-                wishlist = new Wishlist(rs.getInt(1), rs.getInt(2), rs.getString(3),
-                        rs.getInt(4));
+                wishlist = new Wishlist(rs.getInt(1), rs.getInt(2), rs.getString(3));
                 wishlists.add(wishlist);
             }
         } catch (SQLException e) {
@@ -68,6 +79,28 @@ public class WishlistDaoMySQL implements WishlistDao {
             throw new Exception("Error while getting the wishlists");
         }
         return wishlists;
+    }
+
+    @Override
+    public ArrayList<Product> getProductsFromWishlistId(int id) throws Exception {
+        String requete = "SELECT P.id , P.name, P.token, P.content, P.categoryId, P.body, P.author,P.price,P.startDate" +
+                " from wishes W join products P ON P.id = W.productId where W.wishlistId = \"" + id + "\"";
+        ArrayList<Product> products = new ArrayList<Product>();
+        Product product = null;
+        try {
+            Statement stmt = this.con.createStatement();
+            ResultSet rs = stmt.executeQuery(requete);
+            while (rs.next()){
+                product = new Product(rs.getInt(1), rs.getString(2), rs.getString(3),
+                        rs.getInt(4), rs.getInt(5), rs.getString(6),
+                        rs.getInt(7), rs.getDouble(8), rs.getDate(9));
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error while getting the products from wishslist");
+        }
+        return products;
     }
 
     @Override
@@ -81,6 +114,20 @@ public class WishlistDaoMySQL implements WishlistDao {
         catch (SQLException e) {
             e.printStackTrace();
             throw new Exception("Error while deleting the wishlist");
+        }
+    }
+
+    @Override
+    public void deleteProductFromWishlistById(int wishId, int productId) throws Exception{
+        String requete = "DELETE FROM wishes where productId = \"" + productId + "\" and wishlistId = \"" + wishId + "\"";
+        try{
+            Statement stmt = this.con.createStatement();
+            PreparedStatement deleteStatement = con.prepareStatement(requete);
+            deleteStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error while deleting the product from the wishlist");
         }
     }
 }

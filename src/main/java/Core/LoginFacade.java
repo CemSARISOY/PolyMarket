@@ -4,6 +4,18 @@ import Persist.*;
 
 public class LoginFacade {
 
+    //SINGLETON
+    private static LoginFacade loginFacade;
+
+    private LoginFacade(){}
+
+    public static LoginFacade getLoginFacade() {
+        if(loginFacade == null) {
+            loginFacade = new LoginFacade();
+        }
+        return loginFacade;
+    }
+
     private AbstractFactoryDao abstractFactoryDao;
 
     private User user;
@@ -13,7 +25,18 @@ public class LoginFacade {
      * 
      * @return User object
      */
-    public User getUser() {
+    public User getUser(int id) {
+        return user;
+    }
+
+    public User getUserById(int id) throws Exception{
+        if (this.abstractFactoryDao == null)
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        UserDao userDao = abstractFactoryDao.createUserDao();
+        this.user = userDao.getUserById(id);
+        if (user == null){
+            throw new Exception("User doesn't exist");
+        }
         return user;
     }
 

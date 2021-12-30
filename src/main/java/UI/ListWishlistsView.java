@@ -13,7 +13,6 @@ public class ListWishlistsView extends JFrame implements ActionListener {
 
     //Core variables
     private WishlistFacade wishlistFacade  = WishlistFacade.getWishlistFacade();
-    private LoginFacade loginFacade  = new LoginFacade();
     private ArrayList<Wishlist> wishlists;
     private User user;
 
@@ -78,7 +77,7 @@ public class ListWishlistsView extends JFrame implements ActionListener {
                 public void actionPerformed(ActionEvent e1) {
                     JButton b = (JButton) e1.getSource();
                     dispose();
-                    WishlistView wishlistView = new WishlistView(b.getName());
+                    WishlistView wishlistView = new WishlistView(b.getName(), user);
                 }
             });
 
@@ -158,6 +157,11 @@ public class ListWishlistsView extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        ListWishlistsView listWishlistsView = new ListWishlistsView(new User(1));
+        LoginFacade loginFacade = LoginFacade.getLoginFacade();
+        try {
+            ListWishlistsView listWishlistsView = new ListWishlistsView(loginFacade.getUserById(1));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
     }
 }

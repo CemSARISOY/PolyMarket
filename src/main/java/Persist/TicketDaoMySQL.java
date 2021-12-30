@@ -31,7 +31,7 @@ public class TicketDaoMySQL implements TicketDao {
         try{
             Statement stmt = this.con.createStatement();
             PreparedStatement ticketStatement = con.prepareStatement(requete);
-            ticketStatement.setInt(1, t.getId());
+            ticketStatement.setNull(1, 1);
             ticketStatement.setString(2, t.getTitle());
             ticketStatement.setString(3, t.getBody());
             ticketStatement.setInt(4, t.getCategory());

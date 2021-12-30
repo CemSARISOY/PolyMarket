@@ -10,7 +10,7 @@ public class Ticket {
     private boolean isAnswered;
 
     /**
-     * Constructor of Ticket
+     * Constructor of Ticket when id is know (received from DB)
      * @param id
      * @param title
      * @param body
@@ -20,6 +20,14 @@ public class Ticket {
      */
     public Ticket(int id, String title, String body, int categoryId, int userId, boolean isAnswered) {
         this.id = id;
+        this.title = title;
+        this.body = body;
+        this.categoryId = categoryId;
+        this.userId = userId;
+        this.isAnswered = isAnswered;
+    }
+
+    public Ticket(String title, String body, int categoryId, int userId, boolean isAnswered) {
         this.title = title;
         this.body = body;
         this.categoryId = categoryId;

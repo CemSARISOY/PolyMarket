@@ -127,6 +127,7 @@ public class DeliveredView extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args){
-        DeliveredView dv = new DeliveredView(new Delivery(2,1,2,1,true));
+        DeliveryFacade deliveryFacade = DeliveryFacade.getDeliveryFacade();
+        DeliveredView dv = new DeliveredView(deliveryFacade.getDeliveryById(1));
     }
 }

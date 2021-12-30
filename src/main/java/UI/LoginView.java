@@ -17,7 +17,7 @@ public class LoginView implements ActionListener {
     private static JButton button;
     private static JPasswordField passwordField;
 
-    LoginFacade loginFacade = new LoginFacade();
+    LoginFacade loginFacade = LoginFacade.getLoginFacade();
     public LoginView() {
 
         // JFrame class
