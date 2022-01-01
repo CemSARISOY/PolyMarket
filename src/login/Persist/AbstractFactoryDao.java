@@ -26,6 +26,13 @@ public abstract class AbstractFactoryDao {
     public abstract UserDao createUserDao();
 
     /**
+     * Get the AbuseDAO according to the factory
+     * 
+     * @return a {@code AbuseDAO} implementation
+     */
+    public abstract AbuseDAO createAbuseDao();
+
+    /**
      * Gets an instance of Connection to the database
      * 
      * @return a {@code Connection} object if the connection was established,

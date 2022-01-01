@@ -6,11 +6,19 @@ package Core;
 */
 public class Abuse {
     
-    private Integer id;
+    private int id;
     private String title;
-    private Integer userTargetRef;
     private String desc;
+    private User userReporting;
+    private User userTarget;
     
+    public Abuse(int id, String title, String desc, User u1, User u2){
+        this.id = id;
+        this.title = title;
+        this.desc = desc;
+        userReporting = u1;
+        userTarget = u2;
+    }
     
     /**
     Getters and setters
@@ -19,36 +27,41 @@ public class Abuse {
         return this.title;
     }
     
-    public String setTitle(String title) {
+    public void setTitle(String title) {
         this.title = title;
-        return this.title;
     }
     
     public Integer getId() {
         return this.id;
     }
     
-    public Integer setId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
-        return this.id;
     }
     
-    public Integer getTargetRef() {
-        return this.userTargetRef;
+    public User getTarget() {
+        return this.userTarget;
     }
     
-    public Integer setTargetRef(Integer userRef) {
-        this.userTargetRef = userRef;
-        return this.userTargetRef;
+    public void setTargetRef(User userRef) {
+        this.userTarget = userRef;
     }
+
+    public User getReporter() {
+        return this.userReporting;
+    }
+    
+    public void setReporter(User userRef) {
+        this.userReporting = userRef;
+    }
+
 
     public String getDesc() {
         return this.desc;
     }
     
-    public String setDesc(String desc) {
+    public void setDesc(String desc) {
         this.desc = desc;
-        return this.desc;
     }
     
 }

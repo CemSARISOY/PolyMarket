@@ -8,6 +8,11 @@ public class LoginFacade {
 
     private User user;
 
+    public static LoginFacade getInstance(){
+        return null;
+    }
+    
+
     /**
      * Returns the user currently logged
      * 

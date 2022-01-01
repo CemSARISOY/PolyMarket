@@ -1,5 +1,7 @@
 package Core;
 
+import java.util.List;
+
 import Persist.AbstractFactoryDao;
 import Persist.AbuseDAO;
 import Persist.UserDao;
@@ -10,12 +12,21 @@ import UI.UserViewAbuse;
 */
 public class AbuseFacade {
     
-    private AbstractFactoryDao abstractFactoryDAO;
+    private AbstractFactoryDao abstractFactoryDao;
     private AbuseDAO abuseDAO;
     private UserDao userDAO;
     private Abuse report;
     private User user;
     
+
+    public AbuseFacade(){
+        if (this.abstractFactoryDao == null)
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        abuseDAO = abstractFactoryDao.createAbuseDao();
+        userDAO = abstractFactoryDao.createUserDao();
+
+    }
+
     /**
     Getters and setters
     */
@@ -23,41 +34,26 @@ public class AbuseFacade {
         return this.report;
     }
     
-    public Abuse setReport(Abuse report) {
+    public void setReport(Abuse report) {
         this.report = report;
-        return this.report;
-    }
-    
-    public UserDao getUserDAO() {
-        return this.userDAO;
-    }
-    
-    public UserDao setUserDAO(UserDao userDAO) {
-        this.userDAO = userDAO;
-        return this.userDAO;
-    }
-    
-    public AbuseDAO getAbuseDAO() {
-        return this.abuseDAO;
-    }
-    
-    public AbuseDAO setAbuseDAO(AbuseDAO abuseDAO) {
-        this.abuseDAO = abuseDAO;
-        return this.abuseDAO;
     }
     
     public AbstractFactoryDao getAbstractFactoryDAO() {
-        return this.abstractFactoryDAO;
+        return this.abstractFactoryDao;
     }
     
-    public AbstractFactoryDao setAbstractFactoryDAO(AbstractFactoryDao abstractFactoryDAO) {
-        this.abstractFactoryDAO = abstractFactoryDAO;
-        return this.abstractFactoryDAO;
+    public void setAbstractFactoryDAO(AbstractFactoryDao abstractFactoryDAO) {
+        this.abstractFactoryDao = abstractFactoryDAO;
     }
 
+
     //Operations                                  
-    public void sendAbuse() {
-        //TODO
+    public void sendAbuse(String title, String description, String nickname) {
+        User target = userDAO.getUserByNickname(nickname);
+        User source = LoginFacade.getInstance().getUser();
+
+        abuseDAO.addAbuse(title, description, source.getId(), target.getId());
+
     }
 
     public void sendWarning() {
@@ -69,11 +65,14 @@ public class AbuseFacade {
     }
 
     public void delAbuse() {
-        //TODO
+        
+        abuseDAO.deleteAbuseById(report.getId());
     }
 
-    public void consult() {
-        //TODO
+    public List<Abuse> consult() {
+
+        List<Abuse> abuses = abuseDAO.getAbuses();
+        return abuses;
     }
     
 }
