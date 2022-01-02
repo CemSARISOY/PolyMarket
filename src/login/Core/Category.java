@@ -6,18 +6,22 @@ package Core;
 */
 public class Category {
     
-    private Integer id;
+    private int id;
     private String name;
     
-    
+    public Category(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     /**
     Getters and setters
      */
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
     
-    public Integer setId(Integer id) {
+    public int setId(Integer id) {
         this.id = id;
         return this.id;
     }

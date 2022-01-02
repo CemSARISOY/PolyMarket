@@ -1,54 +1,67 @@
 package Core;
 
+import java.util.ArrayList;
+
 import Persist.AbstractFactoryDao;
-import Persist.CatDAO;
+import Persist.CategoryDao;
 
 /**
 * @generated
 */
 public class CategoryFacade {
     
-    private AbstractFactoryDao abstractFactoryDAO;
-    private Category category;
-    private CatDAO catDAO;
+    private AbstractFactoryDao abstractFactoryDao; 
+    private CategoryDao catDAO;
     
     /**
     Getters and setters
     */
-    public Category getCateogry() {
-        return this.category;
-    }
     
-    public Category setCategory(Category cat) {
-        this.category = cat;
-        return this.category;
-    }
-    
-    public CatDAO getCatDAO() {
+    public CategoryDao getCatDAO() {
         return this.catDAO;
     }
     
-    public CatDAO setCatDAO(CatDAO catDAO) {
+    public CategoryDao setCatDAO(CategoryDao catDAO) {
         this.catDAO = catDAO;
         return this.catDAO;
     }
     
     public AbstractFactoryDao getAbstractFactoryDAO() {
-        return this.abstractFactoryDAO;
+        return this.abstractFactoryDao;
     }
     
     public AbstractFactoryDao setAbstractFactoryDAO(AbstractFactoryDao abstractFactoryDAO) {
-        this.abstractFactoryDAO = abstractFactoryDAO;
-        return this.abstractFactoryDAO;
+        this.abstractFactoryDao = abstractFactoryDAO;
+        return this.abstractFactoryDao;
     }
 
-    //Operations                                  
-    public void createCat() {
-        //TODO
+    //Operations   
+    public ArrayList<Category> getCateogries() {
+        if (this.abstractFactoryDao == null)
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        CategoryDao categoryDao = abstractFactoryDao.createCategoryDao(); 
+        return categoryDao.getCategories();
+    }
+    
+    public void updateCategory(Category cat) {
+        if (this.abstractFactoryDao == null)
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        CategoryDao categoryDao = abstractFactoryDao.createCategoryDao(); 
+        categoryDao.updateCategory(cat);;
     }
 
-    public void deleteCat() {
-        //TODO
+    public void createCat(Category cat) {
+        if (this.abstractFactoryDao == null)
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        CategoryDao categoryDao = abstractFactoryDao.createCategoryDao(); 
+        categoryDao.addCategory(cat);;
+    }
+
+    public void deleteCat(int id) {
+        if (this.abstractFactoryDao == null)
+            abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        CategoryDao categoryDao = abstractFactoryDao.createCategoryDao(); 
+        categoryDao.deleteCategoryById(id);;
     }
 
     public void searchCat() {

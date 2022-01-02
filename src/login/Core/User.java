@@ -62,4 +62,12 @@ public class User {
             return false;
         return true;
     }
+
+    /**
+     * Getter method for the id
+     * @return
+     */
+    public int getId() {
+        return this.id;
+    }
 }

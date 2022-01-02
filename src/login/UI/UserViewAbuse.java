@@ -1,7 +1,7 @@
 package UI;
 import java.awt.event.*;
 
-import Core.AbuseFacade;
+import Core.OrderFacade;
 
 
 /**
@@ -9,7 +9,7 @@ import Core.AbuseFacade;
 */
 public class UserViewAbuse implements ActionListener {                                
     
-   private AbuseFacade af;
+   private OrderFacade af;
    
     @Override
     public void actionPerformed(ActionEvent e) {

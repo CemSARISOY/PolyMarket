@@ -8,13 +8,7 @@ import Core.PaymentOrder;
 * @generated
 */
 public interface PaymentDAO {
-
-     /**
-     * 
-     * @param The payment mean to add to the DB 
-     */
-    public void addUpdateMean(PaymentMean pm);
-    
+        
     /**
      * 
      * @param The PaymentOrder to add to the DB

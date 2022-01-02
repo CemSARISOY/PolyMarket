@@ -10,6 +10,14 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
         return new UserDaoMySQL(this);
     }
 
+    public OrderDao createOrderDao() {
+        return new OrderDaoMySql(this);
+    }
+
+    public CategoryDao createCategoryDao() {
+        return new CategoryDaoMySQL(this);
+    }
+
     public Connection getConnection() {
         try {
             if (con == null)

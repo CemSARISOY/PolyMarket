@@ -1,14 +1,16 @@
 package Persist;
 
+import java.util.ArrayList;
+
 import Core.Category;
 
-public interface CatDAO {
+public interface CategoryDao {
 
     /**
      * 
      * @return a list of all the categories stored
      */
-    public Category[] getCategories();
+    public ArrayList<Category> getCategories();
 
     /**
      * 

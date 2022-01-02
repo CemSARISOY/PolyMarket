@@ -1,13 +1,13 @@
 package UI;
 import java.awt.event.*;
 
-import Core.AbuseFacade;
+import Core.OrderFacade;
 /**
 * @generated
 */
 public class AdminViewAbuse implements ActionListener {
 
-    private AbuseFacade abf;
+    private OrderFacade abf;
     
     @Override
     public void actionPerformed(ActionEvent e) {
