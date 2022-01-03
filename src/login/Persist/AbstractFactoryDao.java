@@ -25,6 +25,8 @@ public abstract class AbstractFactoryDao {
      */
     public abstract UserDao createUserDao();
 
+    public abstract AbuseDAO createAbuseDao();
+
     /**
      * Get the OrderDao according to the factory
      * @return a {@code OrderDao} implementation

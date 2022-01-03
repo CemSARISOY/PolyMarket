@@ -34,11 +34,9 @@ public class UserViewAbuse extends JFrame implements ActionListener {
         System.out.println("Test");
         af.sendAbuse("J'aime pas ce mec", "la dernière fois il a dit que j'étais pas beau ça m'a blessé", "cemsarisoy");
         // TODO Auto-generated method stub
-        
     }
 
     public static void main(String[] args) {
         new UserViewAbuse();
     }
-    
 }

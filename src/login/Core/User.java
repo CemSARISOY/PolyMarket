@@ -39,11 +39,7 @@ public class User {
      */
     public String getPassword() {
         return this.password;
-    }
-
-    public int getId(){
-        return id;
-    }
+    } 
 
     /**
      * Getter method for the nickname

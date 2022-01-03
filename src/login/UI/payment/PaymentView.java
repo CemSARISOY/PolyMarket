@@ -50,7 +50,7 @@ public class PaymentView extends JPanel {
         JPanel rightResume = new JPanel(); 
         rightResume.setBorder(new EmptyBorder(10,10,10,10));
         try { 
-            ImageIcon image = new ImageIcon(new ImageIcon("src\\login\\UI\\payment\\nft2.png").getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
+            ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("nft2.png")).getImage().getScaledInstance(80, 80, Image.SCALE_SMOOTH));
             JLabel productImage = new JLabel(image);  
             rightResume.add(productImage); 
         } catch (Exception e) {

@@ -18,6 +18,10 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
         return new CategoryDaoMySQL(this);
     }
 
+    public AbuseDAO createAbuseDao() {
+        return new AbuseDAOMySQL(this);
+    }
+
     public Connection getConnection() {
         try {
             if (con == null)

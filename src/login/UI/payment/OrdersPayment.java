@@ -47,7 +47,7 @@ public class OrdersPayment extends JPanel {
             ));
 
             try { 
-                ImageIcon image = new ImageIcon(new ImageIcon("src\\login\\UI\\payment\\nft2.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("nft2.png")).getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
                 JLabel productImage = new JLabel(image);  
                 product.add(productImage); 
             } catch (Exception e) {
@@ -83,7 +83,7 @@ public class OrdersPayment extends JPanel {
             cellRight.setLayout(new BorderLayout());
             cellRight.setBorder(BorderFactory.createEmptyBorder(15, 15, 10, 15));
              
-            ImageIcon image = new ImageIcon(new ImageIcon("src\\login\\UI\\payment\\oeil.png").getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
+            ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("oeil.png")).getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
             JLabel eyeImage = new JLabel(image, SwingConstants.RIGHT);   
             eyeImage.addMouseListener(new MouseInputAdapter() { 
                 @Override

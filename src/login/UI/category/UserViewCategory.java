@@ -142,7 +142,7 @@ public class UserViewCategory extends JPanel {
         
         JButton edit = new JButton("Modifier");
         try { 
-            ImageIcon image = new ImageIcon(new ImageIcon("src\\login\\UI\\category\\edit.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+            ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("edit.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
             edit = new JButton(image); 
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,7 +181,7 @@ public class UserViewCategory extends JPanel {
         } 
         JButton delete = new JButton("Supprimer"); 
         try { 
-            ImageIcon image = new ImageIcon(new ImageIcon("src\\login\\UI\\category\\delete.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
+            ImageIcon image = new ImageIcon(new ImageIcon(getClass().getResource("delete.png")).getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
             delete = new JButton(image); 
         } catch (Exception e) {
             e.printStackTrace();
