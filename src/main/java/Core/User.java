@@ -1,5 +1,6 @@
 package Core;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class User {
@@ -11,6 +12,7 @@ public class User {
     private String email;
     private String nickname;
     private Date dob;
+    private ArrayList<Product> productsOwned;
 
     /**
      * 
@@ -32,6 +34,11 @@ public class User {
         this.dob = dob;
     }
 
+    //Useless constructor, just temporarily for DeliveryView constructor
+    public User(int id) {
+        this.id = id;
+    }
+
     /**
      * Getter method for the password
      * 
@@ -39,7 +46,18 @@ public class User {
      */
     public String getPassword() {
         return this.password;
-    } 
+    }
+
+    public int getId() {return this.id;}
+
+    public ArrayList<Product> getProducts() {
+        return this.productsOwned;
+    }
+
+    public ArrayList<Product> setProducts(ArrayList<Product> p) {
+        this.productsOwned = p;
+        return this.productsOwned;
+    }
 
     /**
      * Getter method for the nickname
@@ -49,6 +67,11 @@ public class User {
     public String getNickname() {
         return this.nickname;
     }
+
+    public String getEmail() {
+        return this.email;
+    }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -63,6 +86,7 @@ public class User {
         return true;
     }
 
+
     /**
      * Getter method for the id
      * @return
@@ -70,4 +94,5 @@ public class User {
     public int getId() {
         return this.id;
     }
+
 }

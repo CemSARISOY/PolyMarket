@@ -1,6 +1,5 @@
 package UI;
 
-import javax.swing.*;
 
 import Core.LoginFacade;
 import Core.User;
@@ -9,13 +8,16 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+import javax.swing.*;
+
+
 public class LoginView implements ActionListener {
     private static JLabel password, label;
     private static JTextField username;
     private static JButton button;
     private static JPasswordField passwordField;
 
-    LoginFacade loginFacade = new LoginFacade();
+    LoginFacade loginFacade = LoginFacade.getLoginFacade();
     public LoginView() {
 
         // JFrame class
@@ -87,7 +89,7 @@ public class LoginView implements ActionListener {
     // Operations
     public void actionPerformed(ActionEvent e) {
         String user = username.getText();
-        String pass = passwordField.getName();
+        String pass = passwordField.getText();
 
         try {
             User u = this.loginFacade.login(user,pass);
