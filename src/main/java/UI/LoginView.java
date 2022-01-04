@@ -1,16 +1,16 @@
 package UI;
 
+
 import Core.LoginFacade;
 import Core.User;
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
-/**
- * @generated
- */
+import javax.swing.*;
+
+
 public class LoginView implements ActionListener {
     private static JLabel password, label;
     private static JTextField username;

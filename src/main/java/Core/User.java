@@ -72,6 +72,7 @@ public class User {
         return this.email;
     }
 
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -84,4 +85,14 @@ public class User {
             return false;
         return true;
     }
+
+
+    /**
+     * Getter method for the id
+     * @return
+     */
+    public int getId() {
+        return this.id;
+    }
+
 }

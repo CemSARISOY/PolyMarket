@@ -22,5 +22,7 @@ public interface UserDao {
      */
     User getUserByNickname(String nickname);
 
+
     void updateUser(User u);
+
 }

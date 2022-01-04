@@ -25,6 +25,20 @@ public abstract class AbstractFactoryDao {
      */
     public abstract UserDao createUserDao();
 
+    public abstract AbuseDAO createAbuseDao();
+
+    /**
+     * Get the OrderDao according to the factory
+     * @return a {@code OrderDao} implementation
+     */
+    public abstract OrderDao createOrderDao();
+
+    /**
+     * Get the CatDAO according to the factory
+     * @return a {@code CatDAO} implementation
+     */
+    public abstract CategoryDao createCategoryDao();
+  
     public abstract DeliveryDao createDeliveryDao();
 
     public abstract ProductDao createProductDao();
@@ -32,6 +46,7 @@ public abstract class AbstractFactoryDao {
     public abstract TicketDao createTicketDao();
 
     public abstract WishlistDao createWishlistDao();
+
 
     /**
      * Gets an instance of Connection to the database
