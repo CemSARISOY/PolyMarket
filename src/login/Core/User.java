@@ -1,7 +1,6 @@
 package Core;
 
 import java.util.Date;
-import java.util.List;
 
 public class User {
 
@@ -11,9 +10,7 @@ public class User {
     private String password;
     private String email;
     private String nickname;
-    private Date dob;
-    private List<Product> productsSold;
-    private List<Product> productsOwned;
+    private java.sql.Date dob;
 
     /**
      * 
@@ -25,7 +22,7 @@ public class User {
      * @param pw  password
      * @param dob Date of birth
      */
-    public User(int id, String fn, String ln, String nn, String em, String pw, Date dob) {
+    public User(int id, String fn, String ln, String nn, String em, String pw, java.sql.Date dob) {
         this.id = id;
         this.lastname = ln;
         this.firstname = fn;
@@ -35,10 +32,64 @@ public class User {
         this.dob = dob;
     }
 
-    /**
+    @Override
+	public String toString() {
+		return "User [id=" + id + ", lastname=" + lastname + ", firstname=" + firstname + ", password=" + password
+				+ ", email=" + email + ", nickname=" + nickname + ", dob=" + dob + "]";
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public java.sql.Date getDob() {
+		return dob;
+	}
+
+	public void setDob(java.sql.Date dob) {
+		this.dob = dob;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	/**
      * Getter method for the password
      * 
-     * @return user's password
+     * @return user's passowrd
      */
     public String getPassword() {
         return this.password;
@@ -64,15 +115,5 @@ public class User {
                 || !this.nickname.equals(u2.nickname) || !this.email.equals(u2.email) || !this.dob.equals(u2.dob))
             return false;
         return true;
-    }
-
-    /**
-     * set the user's attributes relative to the products
-     * 
-     * @param owned list of products owned by the user
-     * @param sold list of products sold by the user
-     */
-    public void setUsersProducts(List<Product> owned, List<Product> sold) {
-        //TODO
     }
 }
