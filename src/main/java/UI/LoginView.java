@@ -1,13 +1,12 @@
 package UI;
 
-import javax.swing.*;
-
 import Core.LoginFacade;
 import Core.User;
 
+import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * @generated
@@ -18,7 +17,7 @@ public class LoginView implements ActionListener {
     private static JButton button;
     private static JPasswordField passwordField;
 
-    LoginFacade loginFacade = new LoginFacade();
+    LoginFacade loginFacade = LoginFacade.getLoginFacade();
     public LoginView() {
 
         // JFrame class

@@ -1,20 +1,35 @@
 package Persist;
 
-import java.sql.*;
 import Core.User;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class UserDaoMySQL implements UserDao {
 
-    private AbstractFactoryDao creator;
+    //SINGLETON
+    private static UserDaoMySQL userDaoMySQL;
 
-    public UserDaoMySQL(AbstractFactoryDao creator) {
+    private AbstractFactoryDao creator;
+    private Connection con;
+
+    private UserDaoMySQL(AbstractFactoryDao creator) {
         this.creator = creator;
+        this.con = creator.getConnection();
+    }
+
+    public static UserDaoMySQL getUserDaoMySQL(AbstractFactoryDao creator) {
+        if(userDaoMySQL == null) {
+            userDaoMySQL = new UserDaoMySQL(creator);
+        }
+        return userDaoMySQL;
     }
 
     @Override
     public User getUserById(int id) {
         String requete = "SELECT * from users where id = " + id;
-        Connection con = creator.getConnection();
         User user = null;
         try {
             Statement stmt = con.createStatement();
@@ -30,17 +45,21 @@ public class UserDaoMySQL implements UserDao {
 
     public User getUserByNickname(String nickname) {
         String requete = "SELECT * from users where nickname = \"" + nickname + "\"";
-        Connection con = creator.getConnection();
         User user = null;
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
-            while (rs.next())
+            while (rs.next()){
                 user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
                         rs.getString(6), rs.getDate(7));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public void updateUser(User u){
+        return;
     }
 }
