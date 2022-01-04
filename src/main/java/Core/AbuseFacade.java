@@ -50,7 +50,7 @@ public class AbuseFacade {
     //Operations                                  
     public void sendAbuse(String title, String description, String nickname) {
         User target = userDAO.getUserByNickname(nickname);
-        User source = LoginFacade.getInstance().getUser();
+        User source = LoginFacade.getLoginFacade().getUser();
 
         abuseDAO.addAbuse(title, description, source.getId(), target.getId());
 
