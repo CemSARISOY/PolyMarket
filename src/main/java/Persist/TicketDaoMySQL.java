@@ -53,9 +53,10 @@ public class TicketDaoMySQL implements TicketDao {
             try {
                 Statement stmt = this.con.createStatement();
                 ResultSet rs = stmt.executeQuery(requete);
-                while (rs.next())
+                while (rs.next()){
                     category = new TicketCategory(rs.getInt(1), rs.getString(2));
-                ticketCategories.add(category);
+                    ticketCategories.add(category);
+                }
             } catch (SQLException e) {
                 throw e;
             }

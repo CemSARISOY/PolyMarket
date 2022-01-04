@@ -136,7 +136,7 @@ public class SupportTicketView extends JFrame implements ActionListener {
             int res = JOptionPane.showOptionDialog(null, "Ticket successfully sent", "Information", JOptionPane.DEFAULT_OPTION,
                     JOptionPane.INFORMATION_MESSAGE, null, null, null);
             while(res != 0 && res != -1){}
-            setVisible(false);
+            dispose();
         }
     }
 
