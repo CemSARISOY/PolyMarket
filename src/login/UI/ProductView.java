@@ -1,13 +1,18 @@
 package UI;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
+import Core.Product;
 import Core.ProductFacade;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 
-public class ProductView implements ActionListener {
+public class ProductView extends JFrame implements ActionListener {
     
     
     private JFrame createProductView;
@@ -22,80 +27,44 @@ public class ProductView implements ActionListener {
     private JFrame detailledProductView;
     
    
-    private JFrame ProductView;
+    private JFrame productList;
     
     
    
-    private ProductFacade productFacade ;
+    private ProductFacade productFacade = ProductFacade.getInstance();
     
-    
-    
-    
-    /**  Get the product View
-     * @return JFrame
-     */
-    public JFrame getCreateProductView() {
-        return this.createProductView;
+    public ProductView(){
+        JButton button1 = new JButton("Liste des produits");
+        JButton button2 = new JButton("Ajouter un produit");
+        button1.addActionListener(this);
+        button2.addActionListener(this);
+        Container c =  this.getContentPane();
+        c.setLayout(new FlowLayout());
+        c.add(button1);
+        c.add(button2);
+        this.pack();
+        setVisible(true);
     }
-    
-  
-    
-    /** Get the Update Product View
-     * @return JFrame
-     */
-    public JFrame getUpdateProductView() {
-        return this.updateProductView;
-    }
-    
-    
-    
-    
-   
-    
-    /** Get the Delete Product View
-     * @return JFrame
-     */
-    public JFrame getDeleteProductView() {
-        return this.deleteProductView;
-    }
-    
-   
-    
-    /** Get the Detailled Product View
-     * @return JFrame
-     */
-    public JFrame getDetailledProductView() {
-        return this.detailledProductView;
-    }
-    
-  
-  
-    
-    /** Get the Products View (List of all products)
-     * @return JFrame
-     */
-    public JFrame getProductView() {
-        return this.ProductView;
-    }
-    
 
-    
-    /** Get the Product facade
-     * @return ProductFacade
-     */
-    public ProductFacade get() {
-        return this.productFacade;
+    private void createListView(){
+        List<Product> products = productFacade.getProducts();
+
+        this.productList = new JFrame();
+        Container c = productList.getContentPane();
+        c.setLayout(new BorderLayout());
+        c.add(new JButton("test"), BorderLayout.NORTH);
+
+        Container center = new Container();
+        center.setLayout(new FlowLayout());
+        for(Product p : products){
+            center.add(new JLabel(p.getName()));
+        }
+
+        
+        productList.pack();
+        productList.setVisible(true);
     }
-    
-    
-    
-    /** Set the product facade
-     * @param productFacade
-     */
-    public void set(ProductFacade productFacade ) {
-        this.productFacade = productFacade;
-    }
-    
+
 
 
     
@@ -104,7 +73,18 @@ public class ProductView implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
+        switch(e.getActionCommand()){
+            case "Liste des produits":
+                createListView();
+                break;
+            case "Ajouter un produit":
+                createProductView.setVisible(true);
+                break;
+        }
         
+    }
+
+    public static void main(String[] args) {
+        new ProductView();
     }
 }

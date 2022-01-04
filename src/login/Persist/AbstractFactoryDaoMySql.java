@@ -42,14 +42,12 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
 
     @Override
     public ProductDao createProductDao() {
-        // TODO Auto-generated method stub
-        return null;
+        return new ProductDaoMySql(this);
     }
 
     @Override
     public AuctionDao createAuctionDao() {
-        // TODO Auto-generated method stub
-        return null;
+        return new AuctionDaoMySql(this);
     }
 
     @Override

@@ -1,6 +1,10 @@
 package Core;
 
+import java.util.List;
+
 import Persist.AbstractFactoryDao;
+import Persist.ProductDao;
+import Persist.ProductDaoMySql;
 import UI.ProductView;
 
 /** Class ProductFacade
@@ -11,26 +15,26 @@ public class ProductFacade {
     /**
      * Instance of the ProductFacade class (Singleton)
      */
-    private ProductFacade instance;
-    
-    
-    
-    private Product[] products ;
-    
+    private static ProductFacade instance = new ProductFacade();
  
     private AbstractFactoryDao abstractFactoryDao ;
     
  
     private ProductView productView;
     
-    
+    /**
+     * Private constructor of the class (Singleton)
+     */
+    private ProductFacade(){
+        this.abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+    }
  
     
     /** Get the singleton instance of the ProductFacade
      * @return ProductFacade
      */
-    private ProductFacade getInstance() {
-        return this.instance;
+    public static ProductFacade getInstance() {
+        return ProductFacade.instance;
     }
     
  
@@ -45,10 +49,10 @@ public class ProductFacade {
  
     
     /** 
-     * @return Product[]
+     * @return products
      */
-    public Product[] getProducts() {
-        return this.products;
+    public List<Product> getProducts() {
+        return abstractFactoryDao.createProductDao().getProducts();
     }
     
  
@@ -68,14 +72,6 @@ public class ProductFacade {
      */
     public AbstractFactoryDao get() {
         return this.abstractFactoryDao;
-    }
-
-    
-    /**
-     * Private constructor of the class (Singleton)
-     */
-    private ProductFacade() {
-        //TODO
     }
 
 
