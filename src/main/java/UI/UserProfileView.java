@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
 import Core.User;
 import Core.UserFacade;
 import Persist.AbstractFactoryDao;
-import Persist.ProductDaoMySql;
+import Persist.ProductDaoMySQL;
 import Persist.UserDaoMySQL;
 
 import javax.swing.JLabel;
@@ -60,7 +60,7 @@ public class UserProfileView extends JFrame {
 	public UserProfileView(User user, User userToView) {
 		
 		
-		this.userFacade = new UserFacade(user,new UserDaoMySQL(AbstractFactoryDao.getFactory("mysql")), new ProductDaoMySql());
+		this.userFacade = new UserFacade(user, AbstractFactoryDao.getFactory("mysql").createUserDao(),AbstractFactoryDao.getFactory("mysql").createProductDao());
 
         frame = new JFrame();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -152,14 +152,14 @@ public class UserProfileView extends JFrame {
 	}
 
 	public void update() {
-		userFacade = new UserFacade(this.userFacade.getUserById(this.userFacade.getUser().getId()),new UserDaoMySQL(AbstractFactoryDao.getFactory("mysql")), new ProductDaoMySql());
+		userFacade = new UserFacade(this.userFacade.getUserById(this.userFacade.getUser().getId()), AbstractFactoryDao.getFactory("mysql").createUserDao(), AbstractFactoryDao.getFactory("mysql").createProductDao());
 		System.out.println(userFacade.getUser().getNickname());
 		username.setText(userFacade.getUser().getNickname());
 	}
 	
 	
 	public static void main(String[] args) {
-		UserFacade userFacade = new UserFacade(null,new UserDaoMySQL(AbstractFactoryDao.getFactory("mysql")), null);
+		UserFacade userFacade = new UserFacade(null, AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
 		User user = userFacade.getUserDao().getUserById(1);
 		UserProfileView view = new UserProfileView(user, user);
 	}

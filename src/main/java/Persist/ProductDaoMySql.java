@@ -18,12 +18,20 @@ import Core.Cart;
 /**
 * @generated
 */
-public class ProductDaoMySql implements ProductDao {
+public class ProductDaoMySQL implements ProductDao {
 
     private AbstractFactoryDao creator;
+    private static ProductDaoMySQL productDaoMySQL;
 
-    public ProductDaoMySql(AbstractFactoryDao creator){
+    private ProductDaoMySQL(AbstractFactoryDao creator){
         this.creator = creator;
+    }
+
+    public static ProductDaoMySQL getProductDaoMySQL(AbstractFactoryDao creator) {
+        if(productDaoMySQL == null) {
+            productDaoMySQL = new ProductDaoMySQL(creator);
+        }
+        return productDaoMySQL;
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ProductView extends JFrame implements ActionListener {
     
     
    
-    private ProductFacade productFacade = ProductFacade.getInstance();
+    private ProductFacade productFacade = ProductFacade.getProductFacade();
     
     public ProductView(){
         JButton button1 = new JButton("Liste des produits");

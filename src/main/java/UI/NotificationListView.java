@@ -22,7 +22,8 @@ import Core.UserFacade;
 import Persist.AbstractFactoryDao;
 import Persist.NotificationDao;
 import Persist.NotificationDaoMySQL;
-import Persist.ProductDaoMySql;
+import Persist.ProductDaoMySQL;
+import Persist.UserDao;
 import Persist.UserDaoMySQL;
 
 public class NotificationListView extends AbstractTableModel {
@@ -175,7 +176,7 @@ public class NotificationListView extends AbstractTableModel {
 
 	public static void main(String[] args) {
 		AbstractFactoryDao abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
-		UserDaoMySQL userDaoMySql = new UserDaoMySQL(abstractFactoryDao);
+		UserDao userDaoMySql = abstractFactoryDao.createUserDao();
 		User user = userDaoMySql.getUserById(2);
 		NotificationListView view = new NotificationListView(user);
 

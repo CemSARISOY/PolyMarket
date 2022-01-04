@@ -13,10 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class UserDaoMySQL implements UserDao {
-
-    private AbstractFactoryDao creator;
  
-
+    private static UserDaoMySQL userDaoMySQL;
     private AbstractFactoryDao creator;
     private Connection con;
 

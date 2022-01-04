@@ -4,7 +4,7 @@ import java.util.List;
 
 import Persist.AbstractFactoryDao;
 import Persist.ProductDao;
-import Persist.ProductDaoMySql;
+import Persist.ProductDaoMySQL;
 import UI.ProductView;
 
 public class ProductFacade {
@@ -30,7 +30,7 @@ public class ProductFacade {
     /** Get the singleton instance of the ProductFacade
      * @return ProductFacade
      */
-    public static ProductFacade getInstance() {
+    public static ProductFacade getProductFacade() {
         return ProductFacade.instance;
     }
     
@@ -95,7 +95,7 @@ public class ProductFacade {
      * @param id id of the product to get 
      * @return Product
      */
-    public Product getProductById(String id) {
+    public Product getProductById(int id) {
         return null;
     }
    

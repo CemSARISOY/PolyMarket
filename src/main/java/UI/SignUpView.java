@@ -33,7 +33,7 @@ public class SignUpView implements ActionListener {
 	    private static JButton button;
 	    private static JPasswordField passwordField;
 
-	    UserFacade userFacade = new UserFacade(null, new UserDaoMySQL(AbstractFactoryDao.getFactory("mysql")), null);
+	    UserFacade userFacade = new UserFacade(null, AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
 	    
 	    public SignUpView() {
 	        // JFrame class

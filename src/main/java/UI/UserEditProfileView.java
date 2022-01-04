@@ -39,7 +39,7 @@ public class UserEditProfileView extends Observable implements ActionListener {
 	    UserFacade userFacade; 
 	    UserProfileView userProfile;
 	    public UserEditProfileView(User user,UserProfileView userProfile) {
-	    	this.userFacade = new UserFacade(user,new UserDaoMySQL(AbstractFactoryDao.getFactory("mysql")), null);
+	    	this.userFacade = new UserFacade(user,AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
 	    	this.userProfile = userProfile;
 	    	 // JFrame class
 	        frame = new JFrame();
@@ -211,7 +211,7 @@ public class UserEditProfileView extends Observable implements ActionListener {
 
 
 	public static void main(String[] args) {
-		UserFacade userFacade = new UserFacade(null,new UserDaoMySQL(AbstractFactoryDao.getFactory("mysql")), null);
+		UserFacade userFacade = new UserFacade(null,AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
 		User user = userFacade.getUserDao().getUserById(1);
 		//UserEditProfileView view = new UserEditProfileView(user);
 	}

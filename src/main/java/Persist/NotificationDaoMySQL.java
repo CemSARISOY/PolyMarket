@@ -182,7 +182,7 @@ public class NotificationDaoMySQL implements NotificationDao{
 		public static void main(String[] args) {
 			AbstractFactoryDao abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
 			NotificationDaoMySQL notif = new NotificationDaoMySQL(abstractFactoryDao);
-			UserDaoMySQL userDaoMySql = new UserDaoMySQL(abstractFactoryDao);
+			UserDao userDaoMySql = abstractFactoryDao.createUserDao();
 	    	User user = userDaoMySql.getUserById(2);
 	    	//Notification not = notif.getNotificationById(3);
 	    	
