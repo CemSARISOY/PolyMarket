@@ -1,18 +1,16 @@
 package Core;
 
-import java.util.Observable;
-
 import Persist.AbstractFactoryDao;
 import UI.AuctionView;
 
 /** Class AuctionFacade
 * @generated
 */
-public class AuctionFacade extends Observable {
+public class AuctionFacade {
     
      /** instance of AuctionFacade (Singleton)
     */
-    private AuctionFacade instance;
+    private static AuctionFacade instance = new AuctionFacade();
      /** product facade associated to the auctionFacade
     */
     private ProductFacade productFacade;
@@ -34,11 +32,12 @@ public class AuctionFacade extends Observable {
     /** get the instance of ActionFacade ( Singleton )
      * @return AuctionFacade
      */
-    private AuctionFacade getInstance() {
-        return this.instance;
+    public AuctionFacade getInstance() {
+        return AuctionFacade.instance;
     }
     
     
+    private AuctionFacade(){}
     
    
     
@@ -137,7 +136,8 @@ public class AuctionFacade extends Observable {
      */
     public Auction[] getAuctionByCategory(ProductCategory category) {
         //TODO
-        return null;    }
+        return null;    
+    }
    
     
     /** get the auction by id in the database 

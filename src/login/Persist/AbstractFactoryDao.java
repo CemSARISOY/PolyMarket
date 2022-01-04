@@ -29,6 +29,8 @@ public abstract class AbstractFactoryDao {
 
     public abstract AuctionDao createAuctionDao();
 
+    public abstract CategoryDao createCategoryDao();
+
     /**
      * Gets an instance of Connection to the database
      * 

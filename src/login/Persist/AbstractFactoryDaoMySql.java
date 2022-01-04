@@ -2,28 +2,7 @@ package Persist;
 
 import java.sql.Connection;
 
-/**
-* @generated
-*/
 public class AbstractFactoryDaoMySql extends AbstractFactoryDao {
-    
-    
-    
-    
-
-    //                          Operations                                  
-    
-    /**
-    * @generated
-    */
-    public AuctionDao createAuctionDao() {
-        return new AuctionDaoMySql(this);
-        //TODO
-    }
-
-    public ProductDao createProductDao(){
-        return new ProductDaoMySql(this);
-    }
 
     @Override
     public UserDao createUserDao() {
@@ -36,5 +15,23 @@ public class AbstractFactoryDaoMySql extends AbstractFactoryDao {
         // TODO Auto-generated method stub
         return null;
     }
-    
+
+    @Override
+    public ProductDao createProductDao() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public AuctionDao createAuctionDao() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public CategoryDao createCategoryDao() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

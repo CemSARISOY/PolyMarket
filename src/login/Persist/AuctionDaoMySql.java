@@ -53,7 +53,7 @@ public class AuctionDaoMySql implements AuctionDao {
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next())
                 auction = new Auction(rs.getInt(1), rs.getDouble(2), rs.getBoolean(3), userDao.getUserById(rs.getInt(4)), rs.getDate(5),
-                        rs.getDouble(6), productDao.getProductByid(rs.getInt(7)));
+                        rs.getDouble(6), productDao.getProductById(rs.getInt(7)));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -76,7 +76,7 @@ public class AuctionDaoMySql implements AuctionDao {
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next())
                 auctions.add(new Auction(rs.getInt(1), rs.getDouble(2), rs.getBoolean(3), userDao.getUserById(rs.getInt(4)), rs.getDate(5),
-                        rs.getDouble(6), productDao.getProductByid(rs.getInt(7))));
+                        rs.getDouble(6), productDao.getProductById(rs.getInt(7))));
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -2,7 +2,7 @@ package Persist;
 
 import java.sql.*;
 
-public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
+public class AbstractFactoryDaoMySql extends AbstractFactoryDao {
 
     Connection con;
 
@@ -19,6 +19,24 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    @Override
+    public ProductDao createProductDao() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public AuctionDao createAuctionDao() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public CategoryDao createCategoryDao() {
+        // TODO Auto-generated method stub
         return null;
     }
 

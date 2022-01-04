@@ -12,12 +12,28 @@ public class Product {
     private int id;
     private String name;
     private String token;
-    private File content;
+    private int content;
     private ProductCategory category;
     private String body;
     private User author;
     private double price;
     private Date startDate;
+    private boolean sold;
+
+
+    public Product(int id, String name, String token, int content, ProductCategory category, String body, User author, double price, Date startDate, boolean sold) {
+        this.id = id;
+        this.name = name;
+        this.token = token;
+        this.content = content;
+        this.category = category;
+        this.body = body;
+        this.author = author;
+        this.price = price;
+        this.startDate = startDate;
+        this.sold = sold;
+    }
+
     
     /** Get the id of the product
      * @return id
@@ -66,7 +82,7 @@ public class Product {
     /** Get the content of the product 
      * @return File
      */
-    public File getContent() {
+    public int getContent() {
         return this.content;
     }
     
@@ -75,7 +91,7 @@ public class Product {
     /** Set the content of the product
      * @param content
      */
-    public void setContent(File content) {
+    public void setContent(int content) {
         this.content = content;
     }
     
