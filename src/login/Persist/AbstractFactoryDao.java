@@ -14,7 +14,7 @@ public abstract class AbstractFactoryDao {
      */
     public static AbstractFactoryDao getFactory(String db) {
         if (db.equals("mysql"))
-            return new AbstractFactoryDaoMySql();
+            return AbstractFactoryDaoMySQL.getAbstractFactoryDaoMySQL();
         return null;
     }
 
