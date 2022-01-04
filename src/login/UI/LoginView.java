@@ -9,6 +9,9 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * @generated
+ */
 public class LoginView implements ActionListener {
     private static JLabel password, label;
     private static JTextField username;
