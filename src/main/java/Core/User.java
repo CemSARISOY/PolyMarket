@@ -12,6 +12,7 @@ public class User {
     private String email;
     private String nickname;
     private java.sql.Date dob;
+    private ArrayList<Product> productsOwned;
 
     /**
      * 
@@ -39,9 +40,6 @@ public class User {
 				+ ", email=" + email + ", nickname=" + nickname + ", dob=" + dob + "]";
 	}
 
-	public int getId() {
-		return id;
-	}
 
 	public void setId(int id) {
 		this.id = id;
@@ -113,11 +111,6 @@ public class User {
     public String getNickname() {
         return this.nickname;
     }
-
-    public String getEmail() {
-        return this.email;
-    }
-
 
     @Override
     public boolean equals(Object obj) {
