@@ -17,7 +17,7 @@ class UserDaoMySQLTest {
 
     @Test
     void getUserByNicknameTest() {
-        AbstractFactoryDaoMySQL af = new AbstractFactoryDaoMySQL();
+        AbstractFactoryDaoMySQL af = AbstractFactoryDaoMySQL.getAbstractFactoryDaoMySQL();
         UserDao dao = af.createUserDao();
         User u = dao.getUserByNickname("cemsarisoy");
         SimpleDateFormat s = new SimpleDateFormat("yyyy-MM-dd");
