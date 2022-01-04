@@ -16,9 +16,13 @@ public class AbstractFactoryDaoMySql extends AbstractFactoryDao {
     /**
     * @generated
     */
-    public AuctionDaoMySql createAuctionDao() {
-        return null;
+    public AuctionDao createAuctionDao() {
+        return new AuctionDaoMySql(this);
         //TODO
+    }
+
+    public ProductDao createProductDao(){
+        return new ProductDaoMySql(this);
     }
 
     @Override

@@ -9,29 +9,39 @@ public class Auction {
     
   
     private int id;
-    
-  
-    private float amount;
-    
-  
-    private Boolean isWon;
-    
-  
+    private double amount;
+    private boolean isWon;
     private User winner;
-    
-  
     private Date endDate;
-    
+    private double highestOffer;
+    private Product product;
+
   
-    private Integer highestOffer;
+
+    public Auction(int id, double amount, boolean isWon, User winner, Date endDate, double highestOffer, Product product) {
+        this.id = id;
+        this.amount = amount;
+        this.isWon = isWon;
+        this.winner = winner;
+        this.endDate = endDate;
+        this.highestOffer = highestOffer;
+        this.product = product;
+    }
     
+
+    public boolean isWon() {
+        return this.isWon;
+    }
+
+    public Product getProduct() {
+        return this.product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
     
-  
-    private AuctionFacade auctionFacade;
-    
-    
-  
-    
+
     /** Get the id of the auction
      * @return int
      */
@@ -51,9 +61,9 @@ public class Auction {
   
     
     /** Get the ammount of the auction
-     * @return float
+     * @return double
      */
-    public float getAmount() {
+    public double getAmount() {
         return this.amount;
     }
     
@@ -65,17 +75,6 @@ public class Auction {
     public void setAmount(float amount) {
         this.amount = amount;
     }
-    
-  
-    
-    /** get a bool which represent if the aucion has been won or nor
-     * @return Boolean
-     */
-    public Boolean getIsWon() {
-        return this.isWon;
-    }
-    
-  
     
     /** Set the isWon attribute of auction
      * @param isWon
@@ -125,7 +124,7 @@ public class Auction {
     /** Get the highest offer of the auction
      * @return Integer
      */
-    public Integer getHighestOffer() {
+    public double getHighestOffer() {
         return this.highestOffer;
     }
     
@@ -138,23 +137,5 @@ public class Auction {
         this.highestOffer = highestOffer;
     }
     
-    
-  
-    
-    /** Get the Auction Facade
-     * @return AuctionFacade
-     */
-    public AuctionFacade get() {
-        return this.auctionFacade;
-    }
-    
-  
-    
-    /** Set the auction Facade
-     * @param auctionFacade
-     */
-    public void set(AuctionFacade auctionFacade ) {
-        this.auctionFacade = auctionFacade;
-    }
     
 }

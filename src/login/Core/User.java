@@ -41,6 +41,10 @@ public class User {
         return this.password;
     }
 
+    public int getId(){
+        return this.id;
+    }
+
     /**
      * Getter method for the nickname
      * 

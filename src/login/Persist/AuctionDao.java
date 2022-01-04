@@ -1,29 +1,28 @@
 package Persist;
 
+import java.sql.Date;
+import java.util.List;
+
 import Core.Auction;
+import Core.Product;
+import Core.ProductCategory;
 import Core.User;
 
 public interface AuctionDao {
     
-    public void participate(User user,int offer);
+    public void participate(Auction auc, User user,double offer);
 
-    public Auction getAuctionById(String id) ;
+    public Auction getAuctionById(int id) ;
 
+    public List<Auction> getAuctionByCategory(ProductCategory category);
 
-    public Auction[] getAuctionByCategory();
-        
-
-    public Auction[] getAllAuctions() ;
-       
+    public List<Auction> getAllAuctions() ;
     
-    public void deleteAuction(String id) ;
-        
-    
+    public void deleteAuction(int id) ;
 
-    public void updateAuction(String id);
-    
+    public void updateAuction(Auction auction);
 
-    public String createAuction(Auction auction);
+    public int createAuction(double baseAmount, Date endDate, Product product);
      
     
 

@@ -14,7 +14,7 @@ public abstract class AbstractFactoryDao {
      */
     public static AbstractFactoryDao getFactory(String db) {
         if (db.equals("mysql"))
-            return new AbstractFactoryDaoMySQL();
+            return new AbstractFactoryDaoMySql();
         return null;
     }
 
@@ -24,6 +24,10 @@ public abstract class AbstractFactoryDao {
      * @return a {@code UserDao} implementation
      */
     public abstract UserDao createUserDao();
+
+    public abstract ProductDao createProductDao();
+
+    public abstract AuctionDao createAuctionDao();
 
     /**
      * Gets an instance of Connection to the database

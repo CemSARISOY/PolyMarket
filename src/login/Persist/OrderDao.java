@@ -1,6 +1,6 @@
 package Persist;
 import Core.Order;
-import Persist.Cart;
+import Core.Cart;
 import Core.User;
 
 public interface OrderDao{

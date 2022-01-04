@@ -9,46 +9,22 @@ import java.util.Date;
 public class Product {
     
 
-    private Integer id;
-    
-
+    private int id;
     private String name;
-    
-
     private String token;
-    
-
     private File content;
-    
-
     private ProductCategory category;
-    
-
     private String body;
-    
-
     private User author;
-    
-
-    private float price;
-    
-
+    private double price;
     private Date startDate;
     
-    
-
-    private AuctionFacade auctionFacade;
-    
-    
-
-    
     /** Get the id of the product
-     * @return Integer
+     * @return id
      */
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
-
 
     
     /** Get the name of the product
@@ -162,7 +138,7 @@ public class Product {
     /** Get the price of the product 
      * @return float
      */
-    public float getPrice() {
+    public double getPrice() {
         return this.price;
     }
     
@@ -171,7 +147,7 @@ public class Product {
     /** Set the price of the product
      * @param price
      */
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
     

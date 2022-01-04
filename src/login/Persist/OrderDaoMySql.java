@@ -2,6 +2,7 @@ package Persist;
 
 import Core.Order;
 import Core.User;
+import Core.Cart;
 
 /**
 * @generated

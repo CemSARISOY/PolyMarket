@@ -82,10 +82,10 @@ public class ProductFacade {
     
     /** Create a new product in the database with a Product
      * @param product Product to be created 
-     * @return String id of the product created in the database
+     * @return id of the product created in the database
      */
-    public String createProduct(Product product) {
-        return null;
+    public int createProduct(Product product) {
+        return 0;
     }
    
     
@@ -93,7 +93,7 @@ public class ProductFacade {
      * @param id id of the product to upadate 
      * @param newproduct product with the changes 
      */
-    public void updateProduct(String id, Product newproduct) {
+    public void updateProduct(int id, Product newproduct) {
         
     }
    
