@@ -85,7 +85,7 @@ public class User {
 		this.nickname = nickname;
 	}
 
-	/**
+    /**
      * Getter method for the password
      * 
      * @return user's passowrd
@@ -101,6 +101,7 @@ public class User {
     public ArrayList<Product> setProducts(ArrayList<Product> p) {
         this.productsOwned = p;
         return this.productsOwned;
+
     }
 
     /**

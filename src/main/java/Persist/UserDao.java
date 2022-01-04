@@ -74,4 +74,3 @@ public interface UserDao {
     User modifyUser(int id,String firstname, String lastname,String nickname, String email,String pw, Date dob) ;
 
 }
-

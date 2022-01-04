@@ -47,11 +47,15 @@ public abstract class AbstractFactoryDao {
   
     public abstract DeliveryDao createDeliveryDao();
 
-    public abstract ProductDao createProductDao();
 
     public abstract TicketDao createTicketDao();
 
     public abstract WishlistDao createWishlistDao();
+
+    public abstract ProductDao createProductDao();
+
+    public abstract AuctionDao createAuctionDao();
+
 
 
     /**
