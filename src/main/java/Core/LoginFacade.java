@@ -25,7 +25,7 @@ public class LoginFacade {
      * 
      * @return User object
      */
-    public User getUser(int id) {
+    public User getUser() {
         return user;
     }
 

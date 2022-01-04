@@ -46,9 +46,7 @@ public class User {
      */
     public String getPassword() {
         return this.password;
-    }
-
-    public int getId() {return this.id;}
+    } 
 
     public ArrayList<Product> getProducts() {
         return this.productsOwned;
