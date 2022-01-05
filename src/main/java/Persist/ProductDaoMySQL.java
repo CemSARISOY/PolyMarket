@@ -35,15 +35,21 @@ public class ProductDaoMySQL implements ProductDao {
     }
 
     @Override
-    public int createProduct(String name, String token, String content, int idCategory, String body, int idUser, double price, Date startDate) {
-        String requete = "INSERT INTO products VALUES("+name+","+token+","+content+","+idCategory+","+body+","+idUser+","+price+","+startDate+","+0+") RETURNING id";
+    public int createProduct(String name, String token, String content, int idCategory, String body, int idUser, double price, Date startDate) throws Exception {
+        String requete = "INSERT INTO products(name,token,content,categoryId,body,author,price,startDate,sold) VALUES(\'"+name+"\',\'"+token+"\',\'"+content+"\',\'"+idCategory+"\',\'"+body+"\',\'"+idUser+"\',\'"+price+"\',\'"+startDate+"\',\'"+0+"\')";
         Connection con = creator.getConnection();
         int id = 0;
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(requete);
-            while (rs.next())
-                id = rs.getInt(1);
+            int rows = stmt.executeUpdate(requete, Statement.RETURN_GENERATED_KEYS);
+            if(rows > 0){
+                ResultSet rs = stmt.getGeneratedKeys();
+                while (rs.next())
+                    id = rs.getInt(1);
+            }else{
+                throw new Exception("product was not correctly created");
+            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -79,7 +85,7 @@ public class ProductDaoMySQL implements ProductDao {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next())
-                products.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), categoryDao.getCategoryById(rs.getInt(5)), rs.getString(6),
+                products.add(new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), categoryDao.getCategoryById(rs.getInt(5)), rs.getString(6),
                                         userDao.getUserById(rs.getInt(7)), rs.getInt(8), rs.getDate(9), rs.getBoolean(10) ));
         } catch (SQLException e) {
             e.printStackTrace();
@@ -129,7 +135,7 @@ public class ProductDaoMySQL implements ProductDao {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next())
-                product = new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), categoryDao.getCategoryById(rs.getInt(5)), rs.getString(6),
+                product = new Product(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), categoryDao.getCategoryById(rs.getInt(5)), rs.getString(6),
                 userDao.getUserById(rs.getInt(7)), rs.getInt(8), rs.getDate(9), rs.getBoolean(10) );
         } catch (SQLException e) {
             e.printStackTrace();

@@ -1,5 +1,7 @@
 package Core;
 
+import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import Persist.AbstractFactoryDao;
@@ -15,7 +17,7 @@ public class ProductFacade {
     private static ProductFacade instance = new ProductFacade();
  
     private AbstractFactoryDao abstractFactoryDao ;
-    
+    private ProductDao productDao;
  
     private ProductView productView;
     
@@ -24,6 +26,7 @@ public class ProductFacade {
      */
     private ProductFacade(){
         this.abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        this.productDao = abstractFactoryDao.createProductDao();
     }
  
     
@@ -77,8 +80,17 @@ public class ProductFacade {
      * @param product Product to be created 
      * @return id of the product created in the database
      */
-    public int createProduct(Product product) {
-        return 0;
+    public int createProduct(String title, double price, String nft, String body, File f) {
+        LoginFacade loginFacade = LoginFacade.getLoginFacade();
+        User author = loginFacade.getUser();
+        System.out.println(f.getName());
+        try {
+            return productDao.createProduct(title, nft, f.getName(), 1, body, 1, price, new java.sql.Date(new Date().getTime()));
+        } catch (Exception e) {
+            //TODO: handle exception
+            return -1;
+        }
+        //return  productDao.createProduct(title, nft, f.getName(), 1, body, author.getId(), price, new java.sql.Date(new Date().getTime()));
     }
    
     
