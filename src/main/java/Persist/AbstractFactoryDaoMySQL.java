@@ -68,5 +68,11 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
         return new AuctionDaoMySql(this);
     }
 
+    @Override
+    public NotificationDao createNotificationDao() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 
 }
