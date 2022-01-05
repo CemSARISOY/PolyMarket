@@ -95,11 +95,7 @@ public class UserViewPayment extends JFrame {
             products.setVisible(true);
         }
 
-    }
-
-    public void pay() {
-        paymentFacade.pay();
-    }
+    } 
 
     public static void main(String[] args) {
         new UserViewPayment();

@@ -59,4 +59,8 @@ public class Product {
         return this.body;
     }
     
+    public int getAuthor() {
+        return this.author;
+    }
+    
 }

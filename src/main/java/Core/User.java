@@ -13,6 +13,8 @@ public class User {
     private String nickname;
     private Date dob;
     private ArrayList<Product> productsOwned;
+    private boolean isAdmin;
+    private double balance;
 
     /**
      * 
@@ -23,8 +25,10 @@ public class User {
      * @param em  email
      * @param pw  password
      * @param dob Date of birth
+     * @param isAdmin isAdmin
+     * @param balance balance
      */
-    public User(int id, String fn, String ln, String nn, String em, String pw, Date dob) {
+    public User(int id, String fn, String ln, String nn, String em, String pw, Date dob, boolean isAdmin, double balance) {
         this.id = id;
         this.lastname = ln;
         this.firstname = fn;
@@ -32,6 +36,8 @@ public class User {
         this.email = em;
         this.nickname = nn;
         this.dob = dob;
+        this.isAdmin = isAdmin;
+        this.balance = balance;
     }
 
     //Useless constructor, just temporarily for DeliveryView constructor
@@ -92,5 +98,29 @@ public class User {
     public int getId() {
         return this.id;
     }
+    
+    /**
+     * Getter method for the isAdmin
+     * @return isAdmin
+     */
+    public boolean getIsAdmin() {
+        return this.isAdmin;
+    }
 
+    /**
+     * Getter method for the isAdmin
+     * @return isAdmin
+     */
+    public double getBalance() {
+        return this.balance;
+    }
+    
+    /**
+     * Getter method for the isAdmin
+     * @return isAdmin
+     */
+    public double setBalance(double newBalance) {
+        this.balance = newBalance;
+        return this.balance;
+    }
 }

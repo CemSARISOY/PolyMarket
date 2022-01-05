@@ -3,12 +3,14 @@ package UI.payment;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.border.*;
-
-import com.mysql.cj.conf.ConnectionUrlParser.Pair;  
+import javax.swing.border.*; 
+import com.mysql.cj.conf.ConnectionUrlParser.Pair; 
+import Core.PaymentFacade;
+import Persist.Cart;  
 
 public class PaymentView extends JPanel {
 
+    private PaymentFacade paymentFacade = new PaymentFacade();
     JTextField cardNumberInput = new JTextField(); 
     JTextField cardDateInput = new JTextField(); 
     JTextField cardCodeInput = new JTextField(); 
@@ -118,24 +120,17 @@ public class PaymentView extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Pair<Boolean, String> checks = checkCardFields(cardNumberInput.getText(), cardDateInput.getText(), cardCodeInput.getText());
-                JDialog dialog;
-                JLabel message;
                 if (checks.left) {
-                    dialog = new JDialog(new JFrame(), "Paiement accepté"); 
-                    message = new JLabel("<html><pre>Félicitations !\nVous pouvez désormais accéder au récapitulatif\nde votre achat via la rubrique \"Mes Commandes\"</pre></html>"); 
+                    // Cart cart = CartFacade.getCartFacade().getCart();
+                    Cart cart = new Cart();
+                    paymentFacade.pay(cart, true);
+                    JOptionPane.showOptionDialog(null, "Félicitations !\nVous pouvez désormais accéder au récapitulatif\nde votre achat via la rubrique \"Mes Commandes\"", "Paiement accepté", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, null, null, null);
                 }
                 else {
-                    dialog = new JDialog(new JFrame(), "Paiement refusé"); 
-                    String formattedMessage = String.format("<html><pre>Attention !\nVous devez renseigner correctiement l'entreé\nsuivante : %s</pre></html>", checks.right);
-                    message = new JLabel(formattedMessage); 
-
-                }
-                message.setBorder(BorderFactory.createEmptyBorder(40, 20, 40, 20));
-                dialog.add(message);
-                dialog.pack();
-                dialog.setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
-                dialog.setResizable(false);
-                dialog.setVisible(true); 
+                    JOptionPane.showOptionDialog(null, "Attention !\nVous devez renseigner correctiement l'entreé\nsuivante : " + checks.right, "Paiement refusé", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, null, null, null);  
+                } 
                 JFrame topFrame = (JFrame)SwingUtilities.getWindowAncestor(this10);
                 
                 if (checks.left) topFrame.dispose();
