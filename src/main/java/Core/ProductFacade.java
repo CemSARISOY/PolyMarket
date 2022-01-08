@@ -1,5 +1,7 @@
 package Core;
 
+import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import Persist.AbstractFactoryDao;
@@ -15,7 +17,7 @@ public class ProductFacade {
     private static ProductFacade instance = new ProductFacade();
  
     private AbstractFactoryDao abstractFactoryDao ;
-    
+    private ProductDao productDao;
  
     private ProductView productView;
     
@@ -24,6 +26,7 @@ public class ProductFacade {
      */
     private ProductFacade(){
         this.abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        this.productDao = abstractFactoryDao.createProductDao();
     }
  
     
@@ -77,8 +80,17 @@ public class ProductFacade {
      * @param product Product to be created 
      * @return id of the product created in the database
      */
-    public int createProduct(Product product) {
-        return 0;
+    public int createProduct(String title, double price, String nft, String body, File f) {
+        LoginFacade loginFacade = LoginFacade.getLoginFacade();
+        User author = loginFacade.getUser();
+        System.out.println(f.getName());
+        try {
+            return productDao.createProduct(title, nft, f.getName(), 1, body, 1, price, new java.sql.Date(new Date().getTime()));
+        } catch (Exception e) {
+            //TODO: handle exception
+            return -1;
+        }
+        //return  productDao.createProduct(title, nft, f.getName(), 1, body, author.getId(), price, new java.sql.Date(new Date().getTime()));
     }
    
     
@@ -86,8 +98,10 @@ public class ProductFacade {
      * @param id id of the product to upadate 
      * @param newproduct product with the changes 
      */
-    public void updateProduct(int id, Product newproduct) {
-        
+    public void updateProduct(int id, String title, double price, String nft, String body, File f) {
+        Product p = productDao.getProductById(id);
+        Product newProduct = new Product(id, title, nft, f.getName(), p.getCategory(), body, p.getAuthor(), price, p.getStartDate(), false );
+        productDao.updateProduct(newProduct);
     }
    
     
@@ -96,7 +110,7 @@ public class ProductFacade {
      * @return Product
      */
     public Product getProductById(int id) {
-        return null;
+        return productDao.getProductById(id);
     }
    
     /** Purchase a product directly 
@@ -118,8 +132,8 @@ public class ProductFacade {
      * @param user 
      * @return Product[] List of the products of the user 
      */
-    public Product[] getProductsByUser(User user) {
-        return null;
+    public List<Product> getProductsByUser(User user) {
+        return productDao.getProductByUser(user) ;
     }
    
     
@@ -127,8 +141,8 @@ public class ProductFacade {
      * @param category category of the product
      * @return Product[]
      */
-    public Product[] getProductsByCategory(ProductCategory category) {
-        return null;
+    public List<Product> getProductsByCategory(ProductCategory category) {
+        return productDao.getProductbyCategory(category) ;
     }
    
     
@@ -136,8 +150,8 @@ public class ProductFacade {
      * @param user The author 
      * @return Product[]
      */
-    public Product[] getProductsByAuthor(User author) {
-        return null;
+    public List<Product> getProductsByAuthor(User author) {
+        return productDao.getProductByAuthor(author);
     }
    
 
@@ -146,6 +160,13 @@ public class ProductFacade {
      */
     public void like(Product product) {
         //TODO
+    }
+
+    public void deleteProduct(int id){
+        //TODO : Test if admin or own product
+        //LoginFacade lf = LoginFacade.getLoginFacade();
+        //User u = lf.getUser();
+        productDao.deleteProduct(id);
     }
     
 }

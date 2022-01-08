@@ -12,14 +12,19 @@ import UI.UserViewAbuse;
 */
 public class AbuseFacade {
     
+    private static AbuseFacade abuseFacade = new AbuseFacade();
+
     private AbstractFactoryDao abstractFactoryDao;
     private AbuseDAO abuseDAO;
     private UserDao userDAO;
     private Abuse report;
     private User user;
     
+    public static AbuseFacade getAbuseFacade(){
+        return abuseFacade;
+    }
 
-    public AbuseFacade(){
+    private AbuseFacade(){
         if (this.abstractFactoryDao == null)
             abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
         abuseDAO = abstractFactoryDao.createAbuseDao();
@@ -48,11 +53,10 @@ public class AbuseFacade {
 
 
     //Operations                                  
-    public void sendAbuse(String title, String description, String nickname) {
-        User target = userDAO.getUserByNickname(nickname);
+    public void sendAbuse(String title, String description, int targetId) {
         User source = LoginFacade.getLoginFacade().getUser();
 
-        abuseDAO.addAbuse(title, description, source.getId(), target.getId());
+        abuseDAO.addAbuse(title, description, source.getId(), targetId);
 
     }
 
