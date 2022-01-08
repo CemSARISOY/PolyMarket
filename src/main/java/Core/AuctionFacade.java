@@ -1,6 +1,12 @@
 package Core;
 
+import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import Persist.AbstractFactoryDao;
+import Persist.AuctionDao;
 import UI.AuctionView;
 
 /** Class AuctionFacade
@@ -16,15 +22,13 @@ public class AuctionFacade {
     private ProductFacade productFacade;
      /**product of the auction
     */
-    private Product product;
-    
    
     private AbstractFactoryDao abstractFactoryDao ;
     
     private AuctionView auctionView ;
     
    
-    private Auction auction ;
+    private AuctionDao auctionDao ;
     
     
    
@@ -32,76 +36,34 @@ public class AuctionFacade {
     /** get the instance of ActionFacade ( Singleton )
      * @return AuctionFacade
      */
-    public AuctionFacade getInstance() {
+    public static AuctionFacade getAuctionFacade() {
         return AuctionFacade.instance;
     }
     
     
-    private AuctionFacade(){}
-    
-   
-    
-    /** Get the product of the auction
-     * @return Product
-     */
-    public Product getProduct() {
-        return this.product;
+    private AuctionFacade(){
+        abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
+        auctionDao = abstractFactoryDao.createAuctionDao();
+        productFacade = ProductFacade.getProductFacade();
     }
     
-   
-    
-    /** Set the product of the auction
-     * @param product
-     */
-    public void set(Product product) {
-        this.product = product ;
-    }
-    
-   
-    
-    /** Get the AuctionView
-     * @return AuctionView
-     */
-    public AuctionView getAuctionView() {
-        return this.auctionView;
-    }
-    
-  
-    
-   
-    
-    /** Get the auction
-     * @return Auction
-     */
-    public Auction getAuction() {
-        return this.auction;
-    }
-    
-   
-    
-    /** Set the auction
-     * @param auction
-     */
-    public void setAuction(Auction auction ) {
-        this.auction = auction ;
-    }
-    
-   
-    
-    /** Get the AbstractFactoryDao
-     * @return AbstractFactoryDao
-     */
-    public AbstractFactoryDao getAbstractFactoryDao() {
-        return this.abstractFactoryDao;
-    }
     
 
     /** Create an Auction in the database 
      * @param auction The auction to be created 
-     * @return String The id of the new auction
+     * @return The id of the new auction
      */
-    public String createAuction(Auction auction) {
-        return null;
+    public int createAuction(String title, double price, String nft, String body, File f, double duration) {
+        int id = productFacade.createProduct(title, price, nft, body, f);
+        Product p = productFacade.getProductById(id);
+        Date endDate = Calendar.getInstance().getTime();
+        endDate.setDate(endDate.getDate() + 16);
+        try {
+            return auctionDao.createAuction(price, new java.sql.Date(endDate.getTime()), p);
+        } catch (Exception e) {
+            //TODO: handle exception
+            return -1;
+        }
     }
    
     
@@ -109,7 +71,7 @@ public class AuctionFacade {
      * @param newAuction the auction with the changes
      * * @param id id of the auction to update 
      */
-    public void updateAuction(String id,Auction newAuction) {
+    public void updateAuction(int id,Auction newAuction) {
         //TODO
     }
    
@@ -125,8 +87,8 @@ public class AuctionFacade {
     /** Get the all the auctions
      * @return Auction[]
      */
-    public Auction[] getAllAuctions() {
-        return null;
+    public List<Auction> getAllAuctions() {
+        return auctionDao.getAllAuctions();
     }
    
     
@@ -134,7 +96,7 @@ public class AuctionFacade {
      * @param category category of the product
      * @return Auction[]
      */
-    public Auction[] getAuctionByCategory(ProductCategory category) {
+    public List<Auction> getAuctionByCategory(ProductCategory category) {
         //TODO
         return null;    
     }
@@ -144,17 +106,16 @@ public class AuctionFacade {
      * @param id id of the auction to look for
      * @return Auction
      */
-    public Auction getAuctionById(String id ) {
-        //TODO
-        return null;
+    public Auction getAuctionById(int id ) {
+        return auctionDao.getAuctionById(id);
     }
    
      /** Method which let an user participate at an auction
       * @param user the user whi participate
       * @param offer the offer tha propose the user ( the offer has to be uppper than the highest offer of the auction)
      */
-    public void participate(User user, int offer) {
-        //TODO
+    public void participate(double offer) {
+        User u = LoginFacade.getLoginFacade().getUser();
     }
     
 }

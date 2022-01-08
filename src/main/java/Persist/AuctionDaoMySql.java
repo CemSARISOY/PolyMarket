@@ -110,15 +110,21 @@ public class AuctionDaoMySql implements AuctionDao {
     }
 
     @Override
-    public int createAuction(double baseAmount, Date endDate, Product p) {
-        String requete = "INSERT INTO auction VALUES("+baseAmount+","+false+","+null+","+endDate+","+null+","+p.getId()+") RETURNING id";
+    public int createAuction(double baseAmount, Date endDate, Product p) throws Exception {
+        String requete = "INSERT INTO auction(amount,isWon,idWinner,endDate,highestOffer,idProduct) VALUES(\'"+baseAmount+"\',"+false+","+null+",\'"+endDate+"\',"+null+","+p.getId()+")";
         Connection con = creator.getConnection();
         int id = 0;
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(requete);
-            while (rs.next())
-                id = rs.getInt(1);
+            int rows = stmt.executeUpdate(requete, Statement.RETURN_GENERATED_KEYS);
+            if(rows > 0){
+                ResultSet rs = stmt.getGeneratedKeys();
+                while (rs.next())
+                    id = rs.getInt(1);
+            }else{
+                throw new Exception("auction was not correctly created");
+            }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }

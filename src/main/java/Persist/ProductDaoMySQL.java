@@ -95,7 +95,7 @@ public class ProductDaoMySQL implements ProductDao {
 
     @Override
     public List<Product> getProducts() {
-        return getter("select * from products");
+        return getter("select p.id, p.name, p.token, p.content, p.categoryId, p.body, p.author, p.price, p.startDate, p.sold from products p, auction a WHERE p.sold = false and p.id != a.idProduct");
     }
 
     @Override

@@ -22,7 +22,7 @@ public interface AuctionDao {
 
     public void updateAuction(Auction auction);
 
-    public int createAuction(double baseAmount, Date endDate, Product product);
+    public int createAuction(double baseAmount, Date endDate, Product product) throws Exception;
      
     
 
