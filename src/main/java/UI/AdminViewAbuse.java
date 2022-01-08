@@ -29,7 +29,7 @@ public class AdminViewAbuse extends JFrame implements ActionListener {
         getList();
     }
 
-    private void getList(){
+    public Container getList(){
         setContentPane(new Container());
         abuses = abf.consult();
         sortedAbuses = new ArrayList<>();
@@ -73,10 +73,8 @@ public class AdminViewAbuse extends JFrame implements ActionListener {
         js.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         js.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        add(js, BorderLayout.CENTER);
-        pack();
-        setVisible(true);
-
+        add(js, BorderLayout.CENTER); 
+        return getContentPane();
     }
 
     @Override
@@ -84,10 +82,5 @@ public class AdminViewAbuse extends JFrame implements ActionListener {
         setVisible(false);
         getList();
         
-    }
-
-    public static void main(String[] args) {
-        new AdminViewAbuse();
-    }
-    
+    }  
 }

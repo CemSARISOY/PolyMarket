@@ -60,12 +60,12 @@ public class ProductView extends JFrame implements ActionListener {
         c.setLayout(new FlowLayout());
         c.add(button1);
         c.add(button2);
-        this.pack();
-        setVisible(true);
+        // this.pack();
+        // setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    private void createListView(){
+    public Container createListView(){
         this.productList = new JFrame("Product - list");
 
 
@@ -109,19 +109,16 @@ public class ProductView extends JFrame implements ActionListener {
                 card.add(picLabel, BorderLayout.CENTER);
                 center.add(card);
             } catch (Exception e) {
-                e.printStackTrace();
-                //TODO: handle exception
-            }
-            
+                e.printStackTrace(); 
+            } 
         }
 
         JScrollPane js = new JScrollPane(cbis);
         js.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         js.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        c.add(js);
-        productList.pack();
-        productList.setVisible(true);
+        c.add(js); 
+        return c;
     }
 
     private void createProduct(){

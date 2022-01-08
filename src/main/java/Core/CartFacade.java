@@ -1,6 +1,7 @@
 package Core;
 
-
+import UI.payment.PaymentView;
+import UI.payment.ProductsPayment;
 
 public class CartFacade extends AbstractProdcutList{
     
@@ -16,7 +17,8 @@ public class CartFacade extends AbstractProdcutList{
      * Starts the process of purchasing the items in the cart
      */
     public void validate() {
-        //TODO
+        var t = new PaymentView();
+        t.setVisible(true);
     }
 
     public static void main(String[] args) {

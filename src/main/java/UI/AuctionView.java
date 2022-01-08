@@ -52,13 +52,10 @@ public class AuctionView extends JFrame implements ActionListener {
         Container c =  this.getContentPane();
         c.setLayout(new FlowLayout());
         c.add(button1);
-        c.add(button2);
-        this.pack();
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        c.add(button2);  
     }
 
-    private void createListView(){
+    public Container createListView(){
         auctionsView = new JFrame("Auctions - list");
 
         List<Auction> auctions = auctionFacade.getAllAuctions();
@@ -104,8 +101,7 @@ public class AuctionView extends JFrame implements ActionListener {
             } catch (Exception e) {
                 e.printStackTrace();
                 //TODO: handle exception
-            }
-            
+            } 
         }
 
         JScrollPane js = new JScrollPane(cbis);
@@ -113,8 +109,7 @@ public class AuctionView extends JFrame implements ActionListener {
         js.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
         c.add(js);
-        auctionsView.pack();
-        auctionsView.setVisible(true);
+        return c;
     }
 
     private void createAuction(){
@@ -287,9 +282,5 @@ public class AuctionView extends JFrame implements ActionListener {
         }
 
         public int getId(){ return id; }
-    }
-    
-    public static void main(String[] args) {
-        new AuctionView();
-    }
+    } 
 }

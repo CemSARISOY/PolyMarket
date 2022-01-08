@@ -1,27 +1,28 @@
 package UI;
-
-
+ 
 import Core.LoginFacade;
 import Core.User;
+import UI.payment.UserViewPayment;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
+import java.awt.event.ActionEvent; 
 import javax.swing.*;
 
 
 public class LoginView implements ActionListener {
+
+    JFrame frame = new JFrame();
     private static JLabel password, label;
     private static JTextField username;
     private static JButton button;
+    private static JButton button2;
     private static JPasswordField passwordField;
 
     LoginFacade loginFacade = LoginFacade.getLoginFacade();
     public LoginView() {
 
         // JFrame class
-        JFrame frame = new JFrame();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Integer realWidth = (int) Math.round(0.5 * screenSize.getWidth());
         Integer realHeight = (int) Math.round(0.5 * screenSize.getHeight());
@@ -71,7 +72,7 @@ public class LoginView implements ActionListener {
         // Password TextField
         passwordField = new JPasswordField();
         passwordField.setBounds(100, 75, 193, 28);
-        panel.add(passwordField);
+        panel.add(passwordField); 
 
         // Button constructor
         button = new JButton("Login");
@@ -80,6 +81,16 @@ public class LoginView implements ActionListener {
         button.setBackground(Color.BLACK);
         button.addActionListener(this);
         panel.add(button);
+
+        // Button2 constructor
+        button2 = new JButton("Sign up");
+        button2.setBounds(200, 110, 90, 25);
+        button2.setForeground(Color.WHITE);
+        button2.setBackground(Color.BLACK);
+        button2.addActionListener(e -> {
+            new SignUpView();
+        }); 
+        panel.add(button2);
 
         // Display frame
         frame.add(panel);
@@ -93,7 +104,8 @@ public class LoginView implements ActionListener {
 
         try {
             User u = this.loginFacade.login(user,pass);
-            System.out.println("Connected : " + u.getNickname());
+            frame.dispose();
+            new UserViewPayment();
         } catch (Exception e1) { 
             JOptionPane.showMessageDialog(null, e1.getMessage());
         }

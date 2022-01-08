@@ -7,18 +7,18 @@ import javax.swing.border.*;
 
 import com.mysql.cj.conf.ConnectionUrlParser.Pair;  
 
-public class PaymentView extends JPanel {
+public class PaymentView extends JFrame {
 
     JTextField cardNumberInput = new JTextField(); 
     JTextField cardDateInput = new JTextField(); 
     JTextField cardCodeInput = new JTextField(); 
 
     public PaymentView() { 
-        JPanel content = new JPanel();
+        Container content = getContentPane();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));  
         content.add(initResume());
         content.add(initBankInfo());
-        this.add(content);
+        this.pack(); 
         this.setVisible(true);
     }
 
@@ -266,9 +266,7 @@ public class PaymentView extends JPanel {
         return true;
     }
 
-    // public void initContent() {
-    //     this.removeAll();
-    //     this.revalidate();
-    //     this.repaint(); 
-    // }
+    public static void main(String[] args) {
+        new ProductsPayment();
+    }
 }

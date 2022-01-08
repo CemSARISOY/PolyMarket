@@ -9,9 +9,7 @@ import java.awt.Paint;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.function.ToIntFunction;
-
+import java.awt.event.ActionListener; 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,12 +17,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-import Core.User;
+import javax.swing.JTextField; 
 import Core.UserFacade;
-import Persist.AbstractFactoryDao;
-import Persist.UserDaoMySQL;
+import Persist.AbstractFactoryDao; 
 
 public class SignUpView implements ActionListener {
 	
@@ -45,8 +40,7 @@ public class SignUpView implements ActionListener {
 	        frame.setTitle("PolyMarket Sign Up");
 	        frame.setLocation(new Point(realWidth - 200, realHeight - 100));
 	        frame.setSize(new Dimension(400, 400));
-	        frame.setResizable(false);
-	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        frame.setResizable(false); 
 	        frame.setIconImage(new ImageIcon("draw.png").getImage());
 
 
@@ -174,15 +168,5 @@ public class SignUpView implements ActionListener {
 	            JOptionPane.showMessageDialog(null, e1.getMessage());
 	        }
 	        
-	    }
-			
-		
-
-
-	public static void main(String[] args) {
-		SignUpView signUp = new SignUpView();
-	}
-
-
-
+	    } 
 }
