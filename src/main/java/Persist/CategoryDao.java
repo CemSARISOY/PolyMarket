@@ -3,6 +3,7 @@ package Persist;
 import java.util.ArrayList;
 
 import Core.Category;
+import Core.ProductCategory;
 
 public interface CategoryDao {
 
@@ -29,6 +30,9 @@ public interface CategoryDao {
      * @param The Category to update
      */
     public void updateCategory(Category c);
+
+    public ProductCategory getCategoryById(int id);
+
 
     
 }

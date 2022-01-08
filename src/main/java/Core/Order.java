@@ -1,6 +1,5 @@
 package Core;
 
- 
 public class Order {
     
     /** id of the order
@@ -62,7 +61,7 @@ public class Order {
     public void setIsPayed(Boolean isPaid) {
         this.isPaid = isPaid;
     }
-     
+  
     /** Get the order facade
      * @return OrderFacade
      */
@@ -76,11 +75,12 @@ public class Order {
     public void set(OrderFacade orderFacade ) {
         this.orderFacade = orderFacade ;
     }
-     
+
     /** Pay the order     
     */
     public void pay() {
         //TODO
     }
-    
+
 }
+

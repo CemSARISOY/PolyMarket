@@ -67,7 +67,7 @@ public class UserViewCategory extends JPanel {
                     }
                     formattedCategories.substring(0, formattedCategories.length() - 2); 
                 } 
-                topFrame.products.initFilters(formattedCategories);
+                // topFrame.products.initFilters(formattedCategories); // PRODUITS PAR CATEGORIES
                 selectedCategories.clear();
             }
 

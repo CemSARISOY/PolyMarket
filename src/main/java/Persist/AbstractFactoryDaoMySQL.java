@@ -2,6 +2,7 @@ package Persist;
 
 import java.sql.*;
 import java.sql.Connection;
+import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
@@ -9,6 +10,7 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
     //SINGLETON
     private static AbstractFactoryDaoMySQL abstractFactoryDaoMySQL;
 
+    Connection con;
     private AbstractFactoryDaoMySQL() {
     }
 
@@ -19,7 +21,19 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
         return abstractFactoryDaoMySQL;
     }
 
-    Connection con;
+  
+  public Connection getConnection() {
+        try {
+            if (con == null){
+                con = DriverManager.getConnection("jdbc:mysql://eu01-db.cus.mc-panel.net/db_442584", "db_442584",
+                        "9bfc0fd115");
+            }
+            return con;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
   
     public OrderDao createOrderDao() {
         return new OrderDaoMySql(this);
@@ -49,17 +63,16 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
 
     public WishlistDao createWishlistDao() {return WishlistDaoMySQL.getWishlistDaoMySQL(this);}
 
-    public Connection getConnection() {
-        try {
-            if (con == null){
-                con = DriverManager.getConnection("jdbc:mysql://eu01-db.cus.mc-panel.net/db_442584", "db_442584",
-                        "9bfc0fd115");
-            }
-            return con;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @Override
+    public AuctionDao createAuctionDao() {
+        return new AuctionDaoMySql(this);
+    }
+
+    @Override
+    public NotificationDao createNotificationDao() {
+        // TODO Auto-generated method stub
         return null;
     }
-}
 
+
+}

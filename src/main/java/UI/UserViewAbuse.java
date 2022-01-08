@@ -4,7 +4,9 @@ import java.awt.event.*;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import Core.AbuseFacade;
 
@@ -15,15 +17,32 @@ import Core.AbuseFacade;
 public class UserViewAbuse extends JFrame implements ActionListener {                                
     
     private AbuseFacade af;
+    private int userId;
+    private JTextField textField_1;
+    private JTextField textField_2;
     
-    public UserViewAbuse(){
-        af = new AbuseFacade();
+    public UserViewAbuse(int userId){
+        this.userId = userId;
+        af = AbuseFacade.getAbuseFacade();
 
         Container container = this.getContentPane();
-        JPanel panel = new JPanel();
+        container.setLayout(new FlowLayout());
+
+        JLabel panel = new JLabel("Title");
         container.add(panel);
-        JButton button = new JButton("Test");
-        panel.add(button);
+        textField_1 = new JTextField();
+        container.add(textField_1);
+        textField_1.setColumns(10);
+
+        JLabel panel2 = new JLabel("Description");
+        container.add(panel2);
+        textField_2 = new JTextField();
+        container.add(textField_2);
+        textField_2.setColumns(10);
+        
+
+        JButton button = new JButton("Send");
+        container.add(button);
         button.addActionListener(this);
         this.pack();
         this.setVisible(true);
@@ -31,12 +50,11 @@ public class UserViewAbuse extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("Test");
-        af.sendAbuse("J'aime pas ce mec", "la dernière fois il a dit que j'étais pas beau ça m'a blessé", "cemsarisoy");
-        // TODO Auto-generated method stub
+        af.sendAbuse(textField_1.getText(),textField_2.getText(), userId);
+        this.setVisible(false);
     }
 
     public static void main(String[] args) {
-        new UserViewAbuse();
+        new UserViewAbuse(1);
     }
 }

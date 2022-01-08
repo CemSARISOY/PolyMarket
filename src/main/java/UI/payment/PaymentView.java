@@ -8,7 +8,7 @@ import com.mysql.cj.conf.ConnectionUrlParser.Pair;
 import Core.PaymentFacade;
 import Persist.Cart;  
 
-public class PaymentView extends JPanel {
+public class PaymentView extends JFrame {
 
     private PaymentFacade paymentFacade = new PaymentFacade();
     JTextField cardNumberInput = new JTextField(); 
@@ -16,11 +16,11 @@ public class PaymentView extends JPanel {
     JTextField cardCodeInput = new JTextField(); 
 
     public PaymentView() { 
-        JPanel content = new JPanel();
+        Container content = getContentPane();
         content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));  
         content.add(initResume());
         content.add(initBankInfo());
-        this.add(content);
+        this.pack(); 
         this.setVisible(true);
     }
 
@@ -261,9 +261,7 @@ public class PaymentView extends JPanel {
         return true;
     }
 
-    // public void initContent() {
-    //     this.removeAll();
-    //     this.revalidate();
-    //     this.repaint(); 
-    // }
+    public static void main(String[] args) {
+        new ProductsPayment();
+    }
 }

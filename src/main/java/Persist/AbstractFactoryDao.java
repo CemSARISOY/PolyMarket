@@ -24,6 +24,12 @@ public abstract class AbstractFactoryDao {
      * @return a {@code UserDao} implementation
      */
     public abstract UserDao createUserDao();
+    /**
+    * Gets the NotificationDao according to the factory
+    * 
+    * @return a {@code NotificationDao} implementation
+    */
+   public abstract NotificationDao createNotificationDao();
 
     public abstract AbuseDAO createAbuseDao();
 
@@ -41,11 +47,15 @@ public abstract class AbstractFactoryDao {
   
     public abstract DeliveryDao createDeliveryDao();
 
-    public abstract ProductDao createProductDao();
 
     public abstract TicketDao createTicketDao();
 
     public abstract WishlistDao createWishlistDao();
+
+    public abstract ProductDao createProductDao();
+
+    public abstract AuctionDao createAuctionDao();
+
 
 
     /**

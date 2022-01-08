@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import Core.Category;
+import Core.ProductCategory;
 
 /**
 * @generated
@@ -68,5 +69,11 @@ public class CategoryDaoMySQL implements CategoryDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } 
+    }
+
+    @Override
+    public ProductCategory getCategoryById(int id) {
+        // TODO Auto-generated method stub
+        return null;
     }  
 } 
