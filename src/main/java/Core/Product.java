@@ -176,6 +176,10 @@ public class Product {
         return this.startDate;
     }
     
+    public int getAuthor() {
+        return this.author;
+    }
+    
 
     
     /** Set the startDate of the product

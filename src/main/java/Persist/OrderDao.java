@@ -2,16 +2,14 @@ package Persist;
 
 import java.util.ArrayList;
 
-import Core.Order;
-import Persist.Cart;
+import Core.Order; 
 import Core.User;
 
 public interface OrderDao{
-    public String createOrder(Cart cart);
 
-    public void updateOrder(String id, Order order);
+    public void createOrder(Cart cart, boolean isPayed); 
         
-    public Order[] getOrdersSold(User user);
+    public ArrayList<Order> getOrdersSold(int sellerId);
 
     public ArrayList<Order> getOrdersPurchase(int userId); 
 
