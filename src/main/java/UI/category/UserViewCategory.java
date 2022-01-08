@@ -4,10 +4,7 @@ import java.awt.event.*;
 import java.util.ArrayList; 
 import javax.swing.*; 
 import javax.swing.border.*;
-import javax.swing.plaf.DimensionUIResource;
-
 import java.awt.*;
-
 import Core.Category;
 import Core.CategoryFacade;
 import UI.payment.UserViewPayment;
@@ -22,6 +19,9 @@ public class UserViewCategory extends JPanel {
 
     public UserViewCategory() {  
  
+        //boolean isAdmin = LoginFacade.getLoginFacade().getUser().getIsAdmin();
+        boolean isAdmin = true;
+
         JPanel labelContainer = new JPanel();
         JLabel topLabel = new JLabel("Voici la liste des catégories", SwingConstants.CENTER);
         topLabel.setFont(new Font("Serif", Font.PLAIN, 20));
@@ -38,7 +38,7 @@ public class UserViewCategory extends JPanel {
         ArrayList<Category> categories = categoryFacade.getCateogries();
         rightListe.setLayout(new BoxLayout(rightListe, BoxLayout.Y_AXIS));
         for (Category category : categories) {
-            JPanel cell = initCell(liste, category);
+            JPanel cell = initCell(liste, category, isAdmin);
             liste.add(cell);
         } 
 
@@ -67,43 +67,43 @@ public class UserViewCategory extends JPanel {
                     }
                     formattedCategories.substring(0, formattedCategories.length() - 2); 
                 } 
-                topFrame.products.initFilters(formattedCategories);
+                // topFrame.products.initFilters(formattedCategories); // PRODUITS PAR CATEGORIES
                 selectedCategories.clear();
             }
 
         });
  
-        JButton add = new JButton("Ajouter"); 
-        add.setPreferredSize(new Dimension(400,50));
-        add.addActionListener(new ActionListener() {
-              public void actionPerformed(ActionEvent e) { 
-                String m = JOptionPane.showInputDialog("Ajouter une nouvelle catégorie :");
-                JDialog dialog;
-                JLabel  message;
-                if (m == null || m.isEmpty()) {
-                    dialog =  new JDialog(new JFrame(), "Erreur");                            
-                    message = new JLabel("<html><pre>Attention !\nVous devez rensigner un nom de catégorie valide</pre></html>"); 
-                } 
-                else {
-                    Category category = new Category(0, m); 
-                    categoryFacade.createCat(category); // UPDATE ON DB  
-                    liste.add(initCell(liste, category));
-                    dialog =  new JDialog(new JFrame(), "Message Administrateur");                            
-                    message = new JLabel("<html><pre>Enregirstrement effectué !\n</pre></html>"); 
+        if (isAdmin) {
+            JButton add = new JButton("Ajouter"); 
+            add.setPreferredSize(new Dimension(400,50));
+            add.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) { 
+                    String m = JOptionPane.showInputDialog("Ajouter une nouvelle catégorie :");
+                    JDialog dialog;
+                    JLabel  message;
+                    if (m == null || m.isEmpty()) {
+                        dialog =  new JDialog(new JFrame(), "Erreur");                            
+                        message = new JLabel("<html><pre>Attention !\nVous devez rensigner un nom de catégorie valide</pre></html>"); 
+                    } 
+                    else {
+                        Category category = new Category(0, m); 
+                        categoryFacade.createCat(category); // UPDATE ON DB  
+                        liste.add(initCell(liste, category, isAdmin));
+                        dialog =  new JDialog(new JFrame(), "Message Administrateur");                            
+                        message = new JLabel("<html><pre>Enregirstrement effectué !\n</pre></html>"); 
+                    }
+                    message.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+                    dialog.add(message);
+                    dialog.pack();
+                    dialog.setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
+                    dialog.setResizable(false);
+                    dialog.setVisible(true);  
                 }
-                message.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-                dialog.add(message);
-                dialog.pack();
-                dialog.setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
-                dialog.setResizable(false);
-                dialog.setVisible(true);  
-            }
-        }); 
-
+            });  
+            validate.add(add);
+        }
         validate.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
-        validate.add(add);
-        validate.add(button);
-
+        validate.add(button); 
  
         this.setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createEmptyBorder(0,50,100,50));
@@ -113,7 +113,7 @@ public class UserViewCategory extends JPanel {
         this.setVisible(true); 
     }  
 
-    private JPanel initCell(JPanel liste, Category category) {
+    private JPanel initCell(JPanel liste, Category category, boolean isAdmin) {
         
         JPanel cell = new JPanel();
         cell.setLayout(new BorderLayout()); 
@@ -214,7 +214,7 @@ public class UserViewCategory extends JPanel {
 
         buttons.add(button);  
         cell.add(buttonContainer, BorderLayout.CENTER);
-        cell.add(adminButtons, BorderLayout.EAST); 
+        if (isAdmin) cell.add(adminButtons, BorderLayout.EAST); 
 
         return cell;
     }

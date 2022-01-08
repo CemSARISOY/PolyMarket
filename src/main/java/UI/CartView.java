@@ -5,6 +5,7 @@ import Core.User;
 import Core.UserFacade;
 import Core.Wishlist;
 import Persist.AbstractFactoryDao;
+import UI.payment.PaymentView;
 import Core.CartFacade;
 
 import javax.swing.*;
@@ -19,27 +20,22 @@ public class CartView extends JFrame implements ActionListener {
     //Core variables
     private CartFacade cartFacade;
     private ArrayList<Product> products;
-    private User user;
+    private User user; 
 
 
     //View variables
-    private Container contentPane = getContentPane();
+    public Container contentPane = getContentPane();
 
-    public CartView(CartFacade cartFacade, User u){
+    public CartView(User u){
 
+        cartFacade = new CartFacade(u.getId(), "title");
         //GLOBAL VARIABLES INIT
-        try {
-        	this.cartFacade = cartFacade;
+        try { 
             this.products = (ArrayList<Product>) cartFacade.getItemsInCart();
             this.user = u;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-
-        //FRAME INIT
-        this.setTitle("Your Cart");
-        setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        } 
 
         //NORTH CONTENT
         JPanel north = new JPanel();
@@ -113,12 +109,12 @@ public class CartView extends JFrame implements ActionListener {
                             JOptionPane.OK_CANCEL_OPTION);
                     while(input != JOptionPane.CANCEL_OPTION && input != JOptionPane.OK_OPTION) {}
                     if(input == 0) {
-                    	System.out.println("hhllo there");
+                    	System.out.println("hello there");
                         try {
                         	cartFacade.deleteProductById(Integer.parseInt(but.getName()));
                         	System.out.println(cartFacade.getNbItems());
                             dispose();
-                            CartView wishlistView = new CartView(cartFacade,user);
+                            CartView cartView = new CartView(user);
                         }
                         catch (Exception e2) {
                             JOptionPane.showMessageDialog(null, e2.getMessage());
@@ -158,9 +154,7 @@ public class CartView extends JFrame implements ActionListener {
         //FINAL CONFIG
         contentPane.add(north, BorderLayout.NORTH);
         contentPane.add(scroll, BorderLayout.CENTER);
-        contentPane.add(south, BorderLayout.SOUTH);
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
+        contentPane.add(south, BorderLayout.SOUTH); 
     }
 
     @Override
@@ -169,27 +163,22 @@ public class CartView extends JFrame implements ActionListener {
                 "Do you want to purchase the products in your cart ?",
                 "Select an option",
                 JOptionPane.OK_CANCEL_OPTION);
-        while(input != JOptionPane.CANCEL_OPTION && input != JOptionPane.OK_OPTION) {}
-        if(input == 0) {
-            for(int i=0; i< products.size(); i++) {
-                try {
-                    cartFacade.validate();
-                } catch (Exception e2) {
-                    JOptionPane.showMessageDialog(null, e2.getMessage());
-                }
-            }
+        while(input != JOptionPane.CANCEL_OPTION && input != JOptionPane.OK_OPTION && input != JOptionPane.CLOSED_OPTION) {} 
+        if(input == 0) { 
+            var t = new PaymentView();
+            t.setVisible(true);
         }
     }
     
     public static void main(String[] args) {
     	UserFacade userFacade = new UserFacade(null,AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
 		User user = userFacade.getUserDao().getUserById(1);
-		Product prod1 = new Product(1, "prod1", "dslfklfjfkf", "1", null, "je suis un prod de test", user, 15474.3, null, false);
+		//Product prod1 = new Product(1, "prod1", "dslfklfjfkf", 1, null, "je suis un prod de test", user, 15474.3, null, false);
 		CartFacade cart = new CartFacade(user.getId(),"CartTest");
-		System.out.println(prod1);
-		cart.addProduct(prod1);
+		//System.out.println(prod1);
+		//cart.addProduct(prod1);
 		System.out.println(cart.getNbItems());
-		new CartView(cart, user);
+		new CartView(user);
 	}
 
 }

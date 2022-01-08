@@ -17,32 +17,17 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import javax.swing.ImageIcon;
-import javax.swing.ListSelectionModel;
-import java.awt.FlowLayout;
-import javax.swing.JScrollBar;
-import javax.swing.JTextPane;
-import java.awt.Canvas;
+import javax.swing.border.BevelBorder; 
+import java.awt.Dimension; 
+import javax.swing.JScrollPane; 
+import javax.swing.ImageIcon; 
 import java.awt.Panel;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserProfileView extends JFrame {
-	
-	private static JFrame frame;
-
-	private static JPanel contentPane;
-
+public class UserProfileView extends JPanel {  
 	private static JLabel username;
 	UserFacade userFacade;
 	/**
@@ -57,49 +42,34 @@ public class UserProfileView extends JFrame {
      * 
      * @param userToView user to show the profile of
      */
-	public UserProfileView(User user, User userToView) {
+	public UserProfileView(User user, User userToView) { 
 		
-		
+		this.setLayout(null);
 		this.userFacade = new UserFacade(user, AbstractFactoryDao.getFactory("mysql").createUserDao(),AbstractFactoryDao.getFactory("mysql").createProductDao());
-
-        frame = new JFrame();
+ 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Integer realWidth = (int) Math.round(0.5 * screenSize.getWidth());
-        Integer realHeight = (int) Math.round(0.5 * screenSize.getHeight());
-
-        frame.setTitle("PolyMarket Edit Profile");
-        frame.setLocation(new Point(realWidth - 200, realHeight - 100));
-        frame.setSize(new Dimension(400, 400));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setIconImage(new ImageIcon("draw.png").getImage());
-		
-		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 705, 453);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
+        Integer realHeight = (int) Math.round(0.5 * screenSize.getHeight());  
 		
 		username = new JLabel(userToView.getNickname());
 		username.setFont(new Font("Tahoma", Font.BOLD, 19));
 		username.setBounds(33, 20, 139, 33);
-		frame.add(username);
+		this.add(username);
 		
 		
 		if (user.equals(userToView)) {
 			UserProfileView instance = this;
 			JButton btnNewButton = new JButton("Edit Profile");
-			btnNewButton.setBounds(558, 30, 85, 21);
-			contentPane.add(btnNewButton);
+			btnNewButton.setBounds(558, 30, 85, 21); 
+			var this10 = this;
 			btnNewButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent ae) {
              	  new UserEditProfileView(userFacade.getUser(),instance);
-             	  frame.setEnabled(false);
+             	  this10.setEnabled(false);
              	  
                 }
              });
-			frame.add(btnNewButton);
+			 this.add(btnNewButton);
 		}
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
@@ -109,7 +79,7 @@ public class UserProfileView extends JFrame {
 		tabbedPane.setSelectedIndex(-1);
 		tabbedPane.setToolTipText("");
 		tabbedPane.setBounds(10, 112, 671, 294);
-		frame.add(tabbedPane);
+		this.add(tabbedPane);
 		
 		JPanel activeSalesPanel = new JPanel();
 		tabbedPane.addTab("Active Sales", null, activeSalesPanel, null);
@@ -133,22 +103,16 @@ public class UserProfileView extends JFrame {
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scrollPane.setBounds(50, 30, 300, 50);
-		
-		JPanel contentPane = new JPanel(null);
-		contentPane.setPreferredSize(new Dimension(500,400));
-		contentPane.add(scrollPane);
 
-		frame.add(panel);
-		frame.setVisible(true);
-		
-		
+		this.add(panel); 
+		this.setVisible(true); 
 	}
 	
 	public void toFront() {
-		frame.toFront();
+		this.toFront();
 	}
 	public void setEnabled(boolean bool) {
-		frame.setEnabled(bool);
+		this.setEnabled(bool);
 	}
 
 	public void update() {
