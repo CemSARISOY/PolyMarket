@@ -142,6 +142,18 @@ public class ProductDaoMySQL implements ProductDao {
         }
         return product;
     }
+
+    @Override
+    public void deleteProduct(int id) {
+        String requete = "DELETE FROM products WHERE id = "+ id;
+        Connection con = creator.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            stmt.execute(requete);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     
     

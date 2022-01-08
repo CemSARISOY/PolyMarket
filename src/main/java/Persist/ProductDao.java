@@ -16,5 +16,6 @@ public interface ProductDao{
     public List<Product> getProductbyCategory(ProductCategory category);
     public List<Product> getProductByAuthor(User user);
     public Product getProductById (int id);
+    public void deleteProduct(int id);
 
 }

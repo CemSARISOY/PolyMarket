@@ -98,8 +98,10 @@ public class ProductFacade {
      * @param id id of the product to upadate 
      * @param newproduct product with the changes 
      */
-    public void updateProduct(int id, Product newproduct) {
-        
+    public void updateProduct(int id, String title, double price, String nft, String body, File f) {
+        Product p = productDao.getProductById(id);
+        Product newProduct = new Product(id, title, nft, f.getName(), p.getCategory(), body, p.getAuthor(), price, p.getStartDate(), false );
+        productDao.updateProduct(newProduct);
     }
    
     
@@ -108,7 +110,7 @@ public class ProductFacade {
      * @return Product
      */
     public Product getProductById(int id) {
-        return null;
+        return productDao.getProductById(id);
     }
    
     /** Purchase a product directly 
@@ -130,8 +132,8 @@ public class ProductFacade {
      * @param user 
      * @return Product[] List of the products of the user 
      */
-    public Product[] getProductsByUser(User user) {
-        return null;
+    public List<Product> getProductsByUser(User user) {
+        return productDao.getProductByUser(user) ;
     }
    
     
@@ -139,8 +141,8 @@ public class ProductFacade {
      * @param category category of the product
      * @return Product[]
      */
-    public Product[] getProductsByCategory(ProductCategory category) {
-        return null;
+    public List<Product> getProductsByCategory(ProductCategory category) {
+        return productDao.getProductbyCategory(category) ;
     }
    
     
@@ -148,8 +150,8 @@ public class ProductFacade {
      * @param user The author 
      * @return Product[]
      */
-    public Product[] getProductsByAuthor(User author) {
-        return null;
+    public List<Product> getProductsByAuthor(User author) {
+        return productDao.getProductByAuthor(author);
     }
    
 
@@ -158,6 +160,13 @@ public class ProductFacade {
      */
     public void like(Product product) {
         //TODO
+    }
+
+    public void deleteProduct(int id){
+        //TODO : Test if admin or own product
+        //LoginFacade lf = LoginFacade.getLoginFacade();
+        //User u = lf.getUser();
+        productDao.deleteProduct(id);
     }
     
 }
