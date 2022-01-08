@@ -1,17 +1,21 @@
 package Core;
 
-import UI.payment.PaymentView;
-import UI.payment.ProductsPayment;
+import Core.LoginFacade;
+import UI.payment.PaymentView; 
 
 public class CartFacade extends AbstractProdcutList{
+ 
+    private static CartFacade cartFacade = new CartFacade(LoginFacade.getLoginFacade().getUser().getId(), "titre");
+     
+    // Operations                                  
     
-
-    //                          Operations                                  
-    
-    public CartFacade(int userId, String title) {
-		super(userId, title);
-		// TODO Auto-generated constructor stub
+    private CartFacade(int userId, String title) {
+		super(userId, title); 
 	}
+
+    public static CartFacade getCartFacade() {
+        return cartFacade;
+    }
 
 	/**
      * Starts the process of purchasing the items in the cart

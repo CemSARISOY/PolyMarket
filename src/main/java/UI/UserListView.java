@@ -150,7 +150,7 @@ public class UserListView extends AbstractTableModel
         else if(4 == columnIndex) {
         	 row.setPassword((String) aValue);
         }
-        userFacade.modifyUser(row.getId(), row.getFirstname(), row.getLastname(),row.getNickname(),row.getEmail(), row.getPassword(), row.getDob());
+        userFacade.modifyUser(row.getId(), row.getFirstname(), row.getLastname(),row.getNickname(),row.getEmail(), row.getPassword(), new Date(row.getDob().getTime()));
   
     }
     

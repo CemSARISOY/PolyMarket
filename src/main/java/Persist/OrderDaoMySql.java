@@ -1,8 +1,10 @@
 package Persist;
 
+import Core.CartFacade;
 import Core.LoginFacade;
 import Core.Order;
 import Core.Product;
+import Core.ProductCategory;
 import Core.User;
 import java.sql.*;
 import java.util.ArrayList;
@@ -17,9 +19,9 @@ public class OrderDaoMySql implements OrderDao {
     }
 
     @Override
-    public void createOrder(Cart cart, boolean isPayed) {
+    public void createOrder(CartFacade cart, boolean isPayed) {
         var isPayedNewFormat = isPayed ? 1 : 0;
-        String requete = "INSERT INTO orders (id, userId, isPayed) VALUES (NULL, " + 1 + ", " + isPayedNewFormat + ")"; // LoginFacade.getLoginFacade().getUser().getId() instead of 1
+        String requete = "INSERT INTO orders (id, userId, isPayed) VALUES (NULL, " + LoginFacade.getLoginFacade().getUser().getId() + ", " + isPayedNewFormat + ")";
         Connection con = creator.getConnection(); 
         int insertedId = -1;
         try {
@@ -36,7 +38,7 @@ public class OrderDaoMySql implements OrderDao {
                 if (insertedId != -1) {
                     Orders_ProductsDAOMySQL orders_ProductsDAOMySQL = new Orders_ProductsDAOMySQL(creator);
                     // for(Product p : cart.getProducts()) {
-                    Product[] cart2 = { new Product(1, "name", "token", 1, 1, "body", 1, 50d, new Date()) };
+                    Product[] cart2 = { new Product(1, "name", "token", "image", new ProductCategory(), "body", LoginFacade.getLoginFacade().getUser(), 50d, new Date(), true) };
                     for(Product p : cart2) {
                         orders_ProductsDAOMySQL.createOrder_Product(insertedId, p.getId());
                     }
@@ -56,7 +58,7 @@ public class OrderDaoMySql implements OrderDao {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next()) {
-                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3), rs.getInt(4));
+                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3));
                 System.out.println(order);
                 orders.add(order);
             }
@@ -75,7 +77,7 @@ public class OrderDaoMySql implements OrderDao {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next()) {
-                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3), rs.getInt(4));
+                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3));
                 System.out.println(order);
                 orders.add(order);
             }

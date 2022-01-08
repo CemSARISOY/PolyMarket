@@ -105,7 +105,7 @@ public class UserProfileView extends JPanel {
 		scrollPane.setBounds(50, 30, 300, 50);
 
 		this.add(panel); 
-		this.setVisible(true); 
+		this.setVisible(true);  
 	}
 	
 	public void toFront() {

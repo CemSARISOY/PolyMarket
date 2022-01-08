@@ -33,7 +33,7 @@ public class Orders_ProductsDAOMySQL implements Orders_ProductsDAO{
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next()) {
-                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3), rs.getInt(4));
+                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3));
                 System.out.println(order);
                 orders.add(order);
             }

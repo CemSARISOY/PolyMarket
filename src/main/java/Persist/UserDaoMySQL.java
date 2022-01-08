@@ -93,7 +93,7 @@ public class UserDaoMySQL implements UserDao {
             while (rs.next()) {
            
                 user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-                        rs.getString(6), rs.getDate(7));
+                        rs.getString(6), rs.getDate(7), rs.getBoolean(8), rs.getDouble(9));
                 users[i] = user;
                 i++;
             }

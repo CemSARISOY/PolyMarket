@@ -10,20 +10,16 @@ public class Order {
     private int userId;
     
      /** Indicate if the order has been paid */
-    private boolean isPaid;
-
-    /** seller id */
-    private int sellerId;
+    private boolean isPaid; 
      
      /**The order facade associated to the order
     */
     private OrderFacade orderFacade;
     
-    public Order(int id, int userId,boolean isPaid, int sellerId) { 
+    public Order(int id, int userId,boolean isPaid) { 
         this.id = id;
         this.userId = userId;
-        this.isPaid = isPaid;
-        this.sellerId = sellerId;
+        this.isPaid = isPaid; 
     }
   
     
@@ -39,14 +35,7 @@ public class Order {
      */
     public int getUserId() {
         return this.userId;
-    } 
-    
-    /** Get the id of the seller
-     * @return sellerId
-     */
-    public int getSellerId() {
-        return this.sellerId;
-    } 
+    }  
     
     /** Get a bool which represent if the order has been paid 
      * @return Boolean

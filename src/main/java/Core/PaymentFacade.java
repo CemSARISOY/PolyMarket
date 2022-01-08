@@ -11,21 +11,21 @@ public class PaymentFacade {
         //TODO
     }  
     
-    public void pay(Cart cart, boolean isPayed) {
+    public void pay(CartFacade cart, boolean isPayed) {
         // REMOVE PRODUCTS FROM AUTHOR AND ADD IT TO BUYER
 
         abstractFactoryDAO.createOrderDao().createOrder(cart, isPayed);
 
         // FONCTIONS NON DEFINIS MAIS CEST CENSE MARCHE
 
-        // User buyer = LoginFacade.getLoginFacade().getUser();
-        // buyer.setBalance(buyer.getBalance() - cart.getTotalPrice());
-        // abstractFactoryDAO.createUserDao().updateUser(buyer);
+        User b = LoginFacade.getLoginFacade().getUser();
+        b.setBalance(b.getBalance() - cart.getTotalPrice()); 
+        abstractFactoryDAO.createUserDao().modifyUser(b.getId(), b.getFirstname(), b.getLastname(), b.getNickname(), b.getEmail(), b.getPassword(), b.getDob());
 
-        // for(Product p : cart.getProducts()) { 
-        //     User seller = abstractFactoryDAO.createUserDao().getUserById(p.getAuthor());
-        //     seller.setBalance(seller.setBalance(seller.getBalance() + p.getPrice()));
-        //     abstractFactoryDAO.createUserDao().updateUser(seller);
-        // }
+        for(Product p : cart.getItemsInCart()) { 
+            User seller = p.getAuthor();
+            seller.setBalance(seller.setBalance(seller.getBalance() + p.getPrice()));
+            abstractFactoryDAO.createUserDao().modifyUser(seller.getId(), seller.getFirstname(), seller.getLastname(), seller.getNickname(), seller.getEmail(), seller.getPassword(), seller.getDob());
+        }
     }
 }

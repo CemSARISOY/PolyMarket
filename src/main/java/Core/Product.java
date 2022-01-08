@@ -18,9 +18,8 @@ public class Product {
     private User author;
     private double price;
     private Date startDate;
-    private boolean sold;
-
-
+    private boolean sold; 
+    
     public Product(int id, String name, String token, String content, ProductCategory category, String body, User author, double price, Date startDate, boolean sold) {
         this.id = id;
         this.name = name;
@@ -174,10 +173,6 @@ public class Product {
      */
     public Date getStartDate() {
         return this.startDate;
-    }
-    
-    public int getAuthor() {
-        return this.author;
     }
     
 

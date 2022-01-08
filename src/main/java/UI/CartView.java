@@ -1,12 +1,14 @@
 package UI;
 
 import Core.Product;
+import Core.ProductCategory;
 import Core.User;
 import Core.UserFacade;
 import Core.Wishlist;
 import Persist.AbstractFactoryDao;
 import UI.payment.PaymentView;
 import Core.CartFacade;
+import Core.LoginFacade;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -14,24 +16,24 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CartView extends JFrame implements ActionListener {
 
     //Core variables
-    private CartFacade cartFacade;
+    public CartFacade cartFacade;
     private ArrayList<Product> products;
     private User user; 
-
-
+ 
     //View variables
     public Container contentPane = getContentPane();
 
     public CartView(User u){
 
-        cartFacade = new CartFacade(u.getId(), "title");
+        cartFacade = CartFacade.getCartFacade();
         //GLOBAL VARIABLES INIT
         try { 
-            this.products = (ArrayList<Product>) cartFacade.getItemsInCart();
+            this.products = (ArrayList<Product>) cartFacade.getItemsInCart(); 
             this.user = u;
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
@@ -121,8 +123,7 @@ public class CartView extends JFrame implements ActionListener {
                         }
                     }
                 }
-            });
-            
+            }); 
 
             //Adding to right panel
             JPanel addPanel = new JPanel();
@@ -172,9 +173,8 @@ public class CartView extends JFrame implements ActionListener {
     
     public static void main(String[] args) {
     	UserFacade userFacade = new UserFacade(null,AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
-		User user = userFacade.getUserDao().getUserById(1);
-		//Product prod1 = new Product(1, "prod1", "dslfklfjfkf", 1, null, "je suis un prod de test", user, 15474.3, null, false);
-		CartFacade cart = new CartFacade(user.getId(),"CartTest");
+		User user = userFacade.getUserDao().getUserById(1); 
+		CartFacade cart = CartFacade.getCartFacade();
 		//System.out.println(prod1);
 		//cart.addProduct(prod1);
 		System.out.println(cart.getNbItems());

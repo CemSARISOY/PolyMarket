@@ -35,7 +35,7 @@ public class OrderFacade extends Observable {
         if (this.abstractFactoryDao == null)
             abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
         OrderDao orderDao = abstractFactoryDao.createOrderDao(); 
-        return orderDao.getOrdersPurchase(1); // METTRE LE VRAI ID !!!!!
+        return orderDao.getOrdersPurchase(LoginFacade.getLoginFacade().getUser().getId());
     } 
 
 

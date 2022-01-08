@@ -9,13 +9,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
+import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter; 
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import Core.LoginFacade;
 import Core.Product;
 import Core.ProductFacade;
+import UI.payment.UserViewPayment;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -59,9 +61,7 @@ public class ProductView extends JFrame implements ActionListener {
         Container c =  this.getContentPane();
         c.setLayout(new FlowLayout());
         c.add(button1);
-        c.add(button2);
-        // this.pack();
-        // setVisible(true);
+        c.add(button2); 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
@@ -239,9 +239,16 @@ public class ProductView extends JFrame implements ActionListener {
         jb2.addActionListener(this);
         JButtonProduct jb3 = new JButtonProduct("Like", p.getId());
         jb2.addActionListener(this);
+        
+        JButtonProduct jb4 = new JButtonProduct("Ajouter au panier", p.getId());
+        jb4.addActionListener(e -> {
+            productFacade.addToCart(p); 
+        });
+
         c.add(jb);
         c.add(jb2);
         c.add(jb3);
+        c.add(jb4);
 
         detailledProductView.pack();
         detailledProductView.setVisible(true);

@@ -11,7 +11,7 @@ public class User {
     private String password;
     private String email;
     private String nickname;
-    private java.sql.Date dob;
+    private Date dob;
     private ArrayList<Product> productsOwned;
     private boolean isAdmin;
     private double balance;
@@ -75,7 +75,7 @@ public class User {
 		this.email = email;
 	}
 
-	public java.sql.Date getDob() {
+	public Date getDob() {
 		return dob;
 	}
 

@@ -4,9 +4,15 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*; 
-import com.mysql.cj.conf.ConnectionUrlParser.Pair; 
+import com.mysql.cj.conf.ConnectionUrlParser.Pair;
+
+import Core.CartFacade;
+import Core.LoginFacade;
 import Core.PaymentFacade;
-import Persist.Cart;  
+import Core.Product;
+import Persist.Cart;
+import UI.DeliveredView;
+import UI.DeliveryView;  
 
 public class PaymentView extends JFrame {
 
@@ -121,8 +127,7 @@ public class PaymentView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Pair<Boolean, String> checks = checkCardFields(cardNumberInput.getText(), cardDateInput.getText(), cardCodeInput.getText());
                 if (checks.left) {
-                    // Cart cart = CartFacade.getCartFacade().getCart();
-                    Cart cart = new Cart();
+                    CartFacade cart = CartFacade.getCartFacade(); 
                     paymentFacade.pay(cart, true);
                     JOptionPane.showOptionDialog(null, "Félicitations !\nVous pouvez désormais accéder au récapitulatif\nde votre achat via la rubrique \"Mes Commandes\"", "Paiement accepté", JOptionPane.DEFAULT_OPTION,
                     JOptionPane.INFORMATION_MESSAGE, null, null, null);
@@ -130,10 +135,11 @@ public class PaymentView extends JFrame {
                 else {
                     JOptionPane.showOptionDialog(null, "Attention !\nVous devez renseigner correctiement l'entreé\nsuivante : " + checks.right, "Paiement refusé", JOptionPane.DEFAULT_OPTION,
                     JOptionPane.INFORMATION_MESSAGE, null, null, null);  
-                } 
-                JFrame topFrame = (JFrame)SwingUtilities.getWindowAncestor(this10);
-                
-                if (checks.left) topFrame.dispose();
+                }  
+                if (checks.left) this10.dispose();
+                for (Product p : CartFacade.getCartFacade().getItemsInCart()) {
+                    new DeliveryView(p.getAuthor(), LoginFacade.getLoginFacade().getUser(), p); 
+                }
             }
         });
         validate.add(button);

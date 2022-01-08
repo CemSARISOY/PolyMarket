@@ -123,8 +123,8 @@ public class ProductFacade {
     /** Add a product to the cart 
      * @param product product to add to the cart  
      */
-    public void addToCart(Product product) {
-        //TODO
+    public void addToCart(Product p) {
+        CartFacade.getCartFacade().addProduct(p);
     }
    
     

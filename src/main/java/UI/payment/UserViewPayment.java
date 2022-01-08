@@ -35,8 +35,7 @@ public class UserViewPayment extends JFrame {
         new JButton("Panier")
     };
     
-    // boolean isAdmin = loginFacade.getUser().getIsAdmin();
-    boolean isAdmin = false;
+    boolean isAdmin = loginFacade.getUser().getIsAdmin(); 
 
     public JPanel content = new JPanel(); 
     public UserProfileView profil = new UserProfileView(loginFacade.getUser(), loginFacade.getUser());
@@ -45,7 +44,8 @@ public class UserViewPayment extends JFrame {
     public OrdersPayment orders = new OrdersPayment();
     public UserViewCategory categories = new UserViewCategory();
     public Container abuses = (new AdminViewAbuse()).getList();
-    public Container cart = (new CartView(loginFacade.getUser())).contentPane;
+    public CartView cartView = (new CartView(loginFacade.getUser()));
+    public Container cart = cartView.contentPane;
 
     public UserViewPayment() {  
         for (var button : buttons) {
@@ -56,6 +56,12 @@ public class UserViewPayment extends JFrame {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    if (button.getText() == "Panier") {
+                        content.remove(cart); 
+                        cartView = new CartView(LoginFacade.getLoginFacade().getUser());
+                        cart = cartView.contentPane;
+                        content.add(cart);
+                    }
                     initTab(button.getText(), null);
                 }
             });
@@ -92,7 +98,7 @@ public class UserViewPayment extends JFrame {
 
         this.setVisible(true); 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.pack();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     public void initTab(String tab, ArrayList<JButton> selectedCategories) {
@@ -147,7 +153,7 @@ public class UserViewPayment extends JFrame {
     }
 
     public void pay() {
-        paymentFacade.pay();
+        paymentFacade.pay(cartView.cartFacade, true);
     } 
 }
 
