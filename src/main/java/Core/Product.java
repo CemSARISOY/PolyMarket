@@ -12,7 +12,7 @@ public class Product {
     private int id;
     private String name;
     private String token;
-    private int content;
+    private String content;
     private ProductCategory category;
     private String body;
     private User author;
@@ -21,7 +21,7 @@ public class Product {
     private boolean sold;
 
 
-    public Product(int id, String name, String token, int content, ProductCategory category, String body, User author, double price, Date startDate, boolean sold) {
+    public Product(int id, String name, String token, String content, ProductCategory category, String body, User author, double price, Date startDate, boolean sold) {
         this.id = id;
         this.name = name;
         this.token = token;
@@ -82,7 +82,7 @@ public class Product {
     /** Get the content of the product 
      * @return File
      */
-    public int getContent() {
+    public String getContent() {
         return this.content;
     }
     
@@ -91,7 +91,7 @@ public class Product {
     /** Set the content of the product
      * @param content
      */
-    public void setContent(int content) {
+    public void setContent(String content) {
         this.content = content;
     }
     
