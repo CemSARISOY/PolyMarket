@@ -44,7 +44,8 @@ public class DeliveredView extends JFrame implements ActionListener {
         backBtn.setBackground(Color.WHITE);
         backBtn.addActionListener(this);
         north.add(backBtn);
-        JLabel title = new JLabel("Delivery of Product : "+ product.getId());
+        JLabel title = new JLabel("\n" +
+                "Summary of your purchase");
         title.setBorder(BorderFactory.createEmptyBorder(0,515,0,0));
         north.add(title);
 
@@ -62,7 +63,9 @@ public class DeliveredView extends JFrame implements ActionListener {
         JLabel sellerIcon = new JLabel(finalSeller);
         firstGrid.add(sellerIcon);
         JLabel sellerDesc = new JLabel("<html>From Seller : <br> Seller ID : "
-                +seller.getId()+"</html>");
+                +seller.getId()+"<br>" +
+                "Seller nickname : "+ seller.getNickname()+
+                "</html>");
         sellerDesc.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
         firstGrid.add(sellerDesc);
         center.add(firstGrid);
@@ -84,8 +87,11 @@ public class DeliveredView extends JFrame implements ActionListener {
         ImageIcon finalProduct = new ImageIcon(newP);
         JLabel productIcon = new JLabel(finalProduct);
         secondGrid.add(productIcon);
-        JLabel productDesc = new JLabel("<html>Product Information : <br> Product ID : "
-                +product.getId()+"</html>");
+        JLabel productDesc = new JLabel("<html>Product information : <br> Product ID : "
+                +product.getId()+"<br>" +
+                "Product name : "+ product.getName()+
+                "<br>" + "Product price : "+ product.getPrice() +
+                "</html>");
         productDesc.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
         secondGrid.add(productDesc);
         center.add(secondGrid);
@@ -108,7 +114,9 @@ public class DeliveredView extends JFrame implements ActionListener {
         JLabel buyerIcon = new JLabel(finalBuyer);
         thirdGrid.add(buyerIcon);
         JLabel buyerDesc = new JLabel("<html>To Buyer : <br> Buyer ID : "
-                +buyer.getId()+"</html>");
+                +buyer.getId()+"<br>" +
+                "Buyer nickname : "+ buyer.getNickname()+
+                "</html>");
         buyerDesc.setBorder(BorderFactory.createEmptyBorder(0, 25, 0, 0));
         thirdGrid.add(buyerDesc);
         center.add(thirdGrid);
