@@ -7,6 +7,7 @@ import javax.swing.border.*;
 import java.awt.*;
 import Core.Category;
 import Core.CategoryFacade;
+import Core.LoginFacade;
 import UI.payment.UserViewPayment;
  
 public class UserViewCategory extends JPanel {                                 
@@ -19,8 +20,7 @@ public class UserViewCategory extends JPanel {
 
     public UserViewCategory() {  
  
-        //boolean isAdmin = LoginFacade.getLoginFacade().getUser().getIsAdmin();
-        boolean isAdmin = true;
+        boolean isAdmin = LoginFacade.getLoginFacade().getUser().getIsAdmin(); 
 
         JPanel labelContainer = new JPanel();
         JLabel topLabel = new JLabel("Voici la liste des catégories", SwingConstants.CENTER);
@@ -34,9 +34,9 @@ public class UserViewCategory extends JPanel {
         JPanel leftListe = new JPanel();
         leftListe.setLayout(new BoxLayout(leftListe, BoxLayout.Y_AXIS));
         JPanel rightListe = new JPanel();
+        rightListe.setLayout(new BoxLayout(rightListe, BoxLayout.Y_AXIS));
 
         ArrayList<Category> categories = categoryFacade.getCateogries();
-        rightListe.setLayout(new BoxLayout(rightListe, BoxLayout.Y_AXIS));
         for (Category category : categories) {
             JPanel cell = initCell(liste, category, isAdmin);
             liste.add(cell);

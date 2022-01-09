@@ -1,5 +1,7 @@
 package Core;
 
+import java.util.Date;
+
 public class Order {
     
     /** id of the order
@@ -11,15 +13,19 @@ public class Order {
     
      /** Indicate if the order has been paid */
     private boolean isPaid; 
+
+    /** date of order */
+    private Date date;
      
      /**The order facade associated to the order
     */
     private OrderFacade orderFacade;
     
-    public Order(int id, int userId,boolean isPaid) { 
+    public Order(int id, int userId,boolean isPaid, Date date) { 
         this.id = id;
         this.userId = userId;
         this.isPaid = isPaid; 
+        this.date = date;
     }
   
     
@@ -30,7 +36,7 @@ public class Order {
         return this.id;
     } 
     
-    /** Get the id of the user
+    /** Get the id of the order
      * @return userId
      */
     public int getUserId() {
@@ -44,6 +50,13 @@ public class Order {
         return this.isPaid;
     }
      
+    /** Get the date of the user
+     * @return Date
+     */
+    public Date getDate() {
+        return this.date;
+    }
+
     /** Set the isPaid attribute of the order
      * @param isPaid
      */

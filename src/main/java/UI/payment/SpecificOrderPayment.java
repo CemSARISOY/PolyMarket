@@ -2,16 +2,22 @@ package UI.payment;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.event.MouseInputAdapter;
+import javax.swing.event.MouseInputAdapter; 
+import Core.Order;
+import Core.Orders_Products;
+import Core.Product;
+import Persist.AbstractFactoryDao;
 
 public class SpecificOrderPayment extends JPanel {
 
-    public SpecificOrderPayment() { 
+    public SpecificOrderPayment(Order order) { 
         // top text
         JPanel labelContainer = new JPanel();
-        JLabel topLabel = new JLabel("Voici la liste de vos commandes", SwingConstants.CENTER);
+        JLabel topLabel = new JLabel("Voici la liste des produits  de la commande n°" + order.getId(), SwingConstants.CENTER);
         topLabel.setFont(new Font("Serif", Font.PLAIN, 20));
         labelContainer.add(topLabel);
  
@@ -21,7 +27,14 @@ public class SpecificOrderPayment extends JPanel {
         scroll.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
         scroll.setBounds(0, 0, 900, UNDEFINED_CONDITION);
         liste.setLayout(new BoxLayout(liste, BoxLayout.Y_AXIS));
-        for (int i = 1; i <= 2; i++) {   
+        var af = AbstractFactoryDao.getFactory("mysql");
+        var pdao = af.createProductDao();
+        var op = af.createOrders_ProductsDAO().getOrders_ProductsByOrderId(order.getId());
+        ArrayList<Product> products = new ArrayList<>();
+        for (var p : op) {
+            products.add(pdao.getProductById(p.getProductId()));
+        }
+        for (var p : products) {   
             JPanel cell = new JPanel();  
             cell.setBorder(new LineBorder(Color.BLACK)); 
             cell.setLayout(new BorderLayout());
@@ -46,12 +59,7 @@ public class SpecificOrderPayment extends JPanel {
             } catch (Exception e) {
                 e.printStackTrace();
                 product.add(new JLabel("Image not found")); 
-            }
-
-            // JLabel productName = new JLabel("Produit : " + i);
-            // productName.setFont(new Font("Serif", Font.PLAIN, 16));  
-            // product.add(productName); 
-            
+            }  
             cellLeft.add(product); 
 
             // center side             
@@ -59,15 +67,15 @@ public class SpecificOrderPayment extends JPanel {
             cellCenter.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
             cellCenter.setLayout(new BorderLayout());
             
-            JLabel productName = new JLabel("Nom du produit : " + i + " (#00" + i + ")");
+            JLabel productName = new JLabel("Nom du produit : " + p.getName() + " (" + p.getId() + ")");
             productName.setFont(new Font("Serif", Font.PLAIN, 16)); 
             cellCenter.add(productName, BorderLayout.NORTH);
                         
-            JLabel description = new JLabel("Description : " + i);
+            JLabel description = new JLabel("Description : " + p.getBody());
             description.setFont(new Font("Serif", Font.PLAIN, 16)); 
             cellCenter.add(description, BorderLayout.CENTER);
             
-            JLabel price = new JLabel("Prix : " + i);
+            JLabel price = new JLabel("Prix : " + p.getPrice());
             price.setFont(new Font("Serif", Font.PLAIN, 16)); 
             cellCenter.add(price, BorderLayout.SOUTH);
 
@@ -86,18 +94,7 @@ public class SpecificOrderPayment extends JPanel {
                 }
             });  
             cellRight.add(eyeImage, BorderLayout.NORTH);
-
-            JPanel status = new JPanel();
-            JLabel statusLabel = new JLabel("Statut : ");
-            statusLabel.setFont(new Font("Serif", Font.PLAIN, 16));
-            JPanel statusColor = new JPanel();
-            statusColor.setBorder(new RoundedBorder(3));
-            statusColor.setSize(2, 2);
-            statusColor.setForeground(Color.red); 
-            status.add(statusLabel);
-            status.add(statusColor);
-            cellRight.add(status, BorderLayout.SOUTH);
-
+ 
             // cell
             cell.add(cellLeft, BorderLayout.WEST); 
             cell.add(cellCenter, BorderLayout.CENTER); 

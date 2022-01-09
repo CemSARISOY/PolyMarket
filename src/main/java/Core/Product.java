@@ -13,14 +13,14 @@ public class Product {
     private String name;
     private String token;
     private String content;
-    private ProductCategory category;
+    private Category category;
     private String body;
     private User author;
     private double price;
     private Date startDate;
     private boolean sold; 
     
-    public Product(int id, String name, String token, String content, ProductCategory category, String body, User author, double price, Date startDate, boolean sold) {
+    public Product(int id, String name, String token, String content, Category category, String body, User author, double price, Date startDate, boolean sold) {
         this.id = id;
         this.name = name;
         this.token = token;
@@ -99,7 +99,7 @@ public class Product {
     /** get the category of the product
      * @return ProductCategory
      */
-    public ProductCategory getCategory() {
+    public Category getCategory() {
         return this.category;
     }
     
@@ -108,7 +108,7 @@ public class Product {
     /** Set the category of the product
      * @param category
      */
-    public void setCategory(ProductCategory category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
     

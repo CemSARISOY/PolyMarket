@@ -150,10 +150,10 @@ public class UserDaoMySQL implements UserDao {
     
 
     @Override
-    public User modifyUser(int id,String firstname, String lastname,String nickname, String email,String pw,Date dob) {
+    public User modifyUser(int id,String firstname, String lastname,String nickname, String email,String pw,Date dob, double balance) {
         String requete = " UPDATE users  SET firstname = \"" + firstname 
         		+ "\", lastname = \"" + lastname + "\", nickname = \"" + nickname 
-        		+ "\", email =\"" + email + "\",password = \"" + pw
+        		+ "\", email =\"" + email + "\",password = \"" + pw + "\",balance = \"" + balance
         		+"\", dob =\"" + dob + "\"  where id = " + id;
   
         Connection con = creator.getConnection();

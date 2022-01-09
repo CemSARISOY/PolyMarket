@@ -72,8 +72,19 @@ public class CategoryDaoMySQL implements CategoryDao {
     }
 
     @Override
-    public ProductCategory getCategoryById(int id) {
-        // TODO Auto-generated method stub
-        return null;
+    public Category getCategoryById(int id) {
+        String requete = "SELECT * from categories where id = " + id;
+        Connection con = creator.getConnection();
+        Category c = null;
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(requete);
+            while (rs.next()) {
+                c = new Category(rs.getInt(1), rs.getString(2));  
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return c;
     }  
 } 

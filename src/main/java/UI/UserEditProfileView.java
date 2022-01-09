@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 
 import javax.swing.JTextField;
 
+import Core.LoginFacade;
 import Core.User;
 import Core.UserFacade;
 import Persist.AbstractFactoryDao;
@@ -193,7 +194,7 @@ public class UserEditProfileView extends Observable implements ActionListener {
 	        
 
 	        try {
-	            this.userFacade.modifyUser(this.userFacade.getUser().getId(),firstname,lastname,nickname,email,pass,new Date(Integer.valueOf(year)-1900,Integer.valueOf(month)-1,Integer.valueOf(day)));
+	            this.userFacade.modifyUser(this.userFacade.getUser().getId(),firstname,lastname,nickname,email,pass,new Date(Integer.valueOf(year)-1900,Integer.valueOf(month)-1,Integer.valueOf(day)), LoginFacade.getLoginFacade().getUser().getBalance());
 	            frame.dispose();
 	            JOptionPane.showMessageDialog(null, "Profile Updated");
 	            userProfile.setEnabled(true);

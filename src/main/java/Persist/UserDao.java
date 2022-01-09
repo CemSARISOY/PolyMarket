@@ -71,6 +71,6 @@ public interface UserDao {
      * @return the {@code User} with the new attributes
      * 
      */
-    User modifyUser(int id,String firstname, String lastname,String nickname, String email,String pw, Date dob) ;
+    User modifyUser(int id,String firstname, String lastname,String nickname, String email,String pw, Date dob, double balance) ;
 
 }

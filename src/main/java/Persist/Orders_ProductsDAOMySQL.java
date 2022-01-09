@@ -2,6 +2,8 @@ package Persist;
 
 import java.util.ArrayList; 
 import Core.Order;
+import Core.Orders_Products;
+
 import java.sql.*; 
 
 public class Orders_ProductsDAOMySQL implements Orders_ProductsDAO{
@@ -25,21 +27,20 @@ public class Orders_ProductsDAOMySQL implements Orders_ProductsDAO{
     }
 
     @Override
-    public ArrayList<Order> getOrders_ProductsByOrderId(int orderId) {
+    public ArrayList<Orders_Products> getOrders_ProductsByOrderId(int orderId) {
         String requete = "SELECT * from orders_products where orderId = " + orderId;
         Connection con = creator.getConnection();
-        ArrayList<Order> orders = new ArrayList<Order>();
+        ArrayList<Orders_Products> orders = new ArrayList<Orders_Products>();
         try {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next()) {
-                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3));
-                System.out.println(order);
-                orders.add(order);
+                Orders_Products op = new Orders_Products(rs.getInt(1), rs.getInt(2), rs.getInt(3)); 
+                orders.add(op);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return orders;
-    }
+    } 
 }
