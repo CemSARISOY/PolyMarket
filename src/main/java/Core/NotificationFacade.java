@@ -46,8 +46,8 @@ public class NotificationFacade {
 		this.notificationDao.deleteNotification(id);
 	}
 	
-	public void createNotification(String type,String desc) {
-		this.notificationDao.createNotification(type, desc);
+	public Notification createNotification(String type,String desc) {
+		return this.notificationDao.createNotification(type, desc);
 	}
 	Notification getNotificationById(int id) {
 		return this.notificationDao.getNotificationById(id);

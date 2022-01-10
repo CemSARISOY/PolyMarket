@@ -156,6 +156,9 @@ public class CartView extends JFrame implements ActionListener {
         contentPane.add(north, BorderLayout.NORTH);
         contentPane.add(scroll, BorderLayout.CENTER);
         contentPane.add(south, BorderLayout.SOUTH); 
+        
+        JLabel lblNewLabel = new JLabel(cartFacade.getTotalPrice() + " €");
+        south.add(lblNewLabel);
     }
 
     @Override
