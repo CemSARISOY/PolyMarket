@@ -2,6 +2,8 @@ package UI.payment;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import javax.swing.border.*; 
 import com.mysql.cj.conf.ConnectionUrlParser.Pair;
@@ -140,6 +142,8 @@ public class PaymentView extends JFrame {
                 for (Product p : CartFacade.getCartFacade().getItemsInCart()) {
                     new DeliveryView(p.getAuthor(), LoginFacade.getLoginFacade().getUser(), p); 
                 }
+                CartFacade.getCartFacade().setItemsInCart(new ArrayList<Product>()); 
+                UserViewPayment.getUserViewPayment().buttons[6].setText(("Panier (0)"));
             }
         });
         validate.add(button);

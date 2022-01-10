@@ -4,7 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 import Persist.AbstractFactoryDao;
 import Persist.Cart;
-import Persist.UserDao; 
+import Persist.UserDao;
+import UI.payment.UserViewPayment; 
 
 public class PaymentFacade {
      
@@ -31,6 +32,5 @@ public class PaymentFacade {
             s.setBalance(s.getBalance() + p.getPrice()); 
             abstractFactoryDAO.createUserDao().modifyUser(s.getId(), s.getFirstname(), s.getLastname(), s.getNickname(), s.getEmail(), s.getPassword(), s.getDob(), s.getBalance());
         } 
-        cart.setItemsInCart(new ArrayList<Product>());
     }
 }
