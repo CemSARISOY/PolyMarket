@@ -1,7 +1,8 @@
 package Core;
 
 import Persist.AbstractFactoryDao;
-import Persist.Cart; 
+import Persist.Cart;
+import Persist.UserDao; 
 
 public class PaymentFacade {
      
@@ -18,14 +19,16 @@ public class PaymentFacade {
 
         // FONCTIONS NON DEFINIS MAIS CEST CENSE MARCHE
 
-        User b = LoginFacade.getLoginFacade().getUser();
+        //User b = LoginFacade.getLoginFacade().getUser();
+        User b = abstractFactoryDAO.createUserDao().getUserById(1);
         b.setBalance(b.getBalance() - cart.getTotalPrice()); 
-        abstractFactoryDAO.createUserDao().modifyUser(b.getId(), b.getFirstname(), b.getLastname(), b.getNickname(), b.getEmail(), b.getPassword(), b.getDob());
+        var u = abstractFactoryDAO.createUserDao();
+        u.modifyUser(b.getId(), b.getFirstname(), b.getLastname(), b.getNickname(), b.getEmail(), b.getPassword(), b.getDob(), b.getBalance());
 
         for(Product p : cart.getItemsInCart()) { 
-            User seller = p.getAuthor();
-            seller.setBalance(seller.setBalance(seller.getBalance() + p.getPrice()));
-            abstractFactoryDAO.createUserDao().modifyUser(seller.getId(), seller.getFirstname(), seller.getLastname(), seller.getNickname(), seller.getEmail(), seller.getPassword(), seller.getDob());
+            User s = u.getUserById(p.getAuthor().getId());
+            s.setBalance(s.getBalance() + p.getPrice()); 
+            abstractFactoryDAO.createUserDao().modifyUser(s.getId(), s.getFirstname(), s.getLastname(), s.getNickname(), s.getEmail(), s.getPassword(), s.getDob(), s.getBalance());
         }
     }
 }

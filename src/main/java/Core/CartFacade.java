@@ -5,7 +5,7 @@ import UI.payment.PaymentView;
 
 public class CartFacade extends AbstractProdcutList{
  
-    private static CartFacade cartFacade = new CartFacade(LoginFacade.getLoginFacade().getUser().getId(), "titre");
+    private static CartFacade cartFacade;
      
     // Operations                                  
     
@@ -14,7 +14,9 @@ public class CartFacade extends AbstractProdcutList{
 	}
 
     public static CartFacade getCartFacade() {
-        return cartFacade;
+        if (cartFacade != null) return cartFacade;
+        if (LoginFacade.getLoginFacade().getUser() != null) return new CartFacade(LoginFacade.getLoginFacade().getUser().getId(), "title");
+        return new CartFacade(1, "title");
     }
 
 	/**

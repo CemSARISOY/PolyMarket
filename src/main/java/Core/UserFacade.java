@@ -106,8 +106,8 @@ public class UserFacade {
 		return this.userDao.deleteUser(id);
 	}
 	
-	public User modifyUser(int id,String firstname, String lastname,String nickname, String email,String pw,Date dob) {
-		return this.userDao.modifyUser(id,firstname,lastname,nickname,email,pw,dob);
+	public User modifyUser(int id,String firstname, String lastname,String nickname, String email,String pw,Date dob, double balance) {
+		return this.userDao.modifyUser(id,firstname,lastname,nickname,email,pw,dob, balance);
 	}
 	
 	public List<Product> getProductByUser(User user ){

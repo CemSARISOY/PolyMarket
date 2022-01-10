@@ -1,29 +1,15 @@
 package UI;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
+import Core.LoginFacade;
 import Core.User;
 import Core.UserFacade;
-import Persist.AbstractFactoryDao;
-import Persist.ProductDaoMySQL;
-import Persist.UserDaoMySQL;
-
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
-import javax.swing.JTabbedPane;
-import javax.swing.border.BevelBorder; 
-import java.awt.Dimension; 
-import javax.swing.JScrollPane; 
-import javax.swing.ImageIcon; 
-import java.awt.Panel;
-import java.awt.Point;
-import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,20 +19,13 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Color;
 import java.awt.Container;
-
-import javax.swing.JSplitPane;
 import javax.swing.BoxLayout;
 import javax.swing.border.LineBorder;
-import javax.transaction.UserTransaction;
-import javax.swing.JSeparator;
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.CardLayout;
 
 public class UserProfileView extends JPanel {
 	UserFacade userFacade;
+	LoginFacade loginFacade;
 	 public ProductView2 productView;
 	 public Container products;
 	 //public Container productsActiveSales;
@@ -77,6 +56,7 @@ public class UserProfileView extends JPanel {
 	//	this.productsPreviousSales.setVisible(false);
 		
 		this.userFacade = new UserFacade(user);
+		this.loginFacade = LoginFacade.getLoginFacade();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{168, 95, 0};
 		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0};
@@ -179,6 +159,16 @@ public class UserProfileView extends JPanel {
 			boutonPanel.add(btnSendTicket);
 			btnSendTicket.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					new SupportTicketView(loginFacade.getUser());
+				}
+			});
+
+			JButton wishBtn = new JButton("Your wishlists");
+			wishBtn.setBackground(Color.LIGHT_GRAY);
+			boutonPanel.add(wishBtn);
+			wishBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new ListWishlistsView(loginFacade.getUser());
 				}
 			});
 			
@@ -208,6 +198,7 @@ public class UserProfileView extends JPanel {
 			btnAllTickets.setForeground(Color.BLACK);
 			btnAllTickets.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					new TicketListView();
 				}
 			});
 			

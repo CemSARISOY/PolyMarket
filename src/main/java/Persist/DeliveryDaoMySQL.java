@@ -70,6 +70,26 @@ public class DeliveryDaoMySQL implements DeliveryDao {
         return deliveries;
     }
 
+    @Override
+    public ArrayList<Delivery> getDeliveriesByBuyerId(int buyerId) {
+        String requete = "SELECT * from deliveries where buyerId = " + buyerId;
+        ArrayList<Delivery> deliveries = new ArrayList<Delivery>();
+        Delivery delivery = null;
+        try {
+            Statement stmt = this.con.createStatement();
+            ResultSet rs = stmt.executeQuery(requete);
+            while (rs.next()){
+                delivery = new Delivery(rs.getInt(1), rs.getInt(2),
+                        rs.getInt(3), rs.getInt(4),
+                        rs.getBoolean(5));
+            }
+                deliveries.add(delivery);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return deliveries;
+    }
+
     public Delivery addDelivery(Delivery d) {
         String requete = "INSERT INTO deliveries VALUES (?, ?, ?, ?, ?)";
         Delivery delivery = null;

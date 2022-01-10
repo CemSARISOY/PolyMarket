@@ -7,8 +7,13 @@ import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.MouseInputAdapter;
 
+import Core.Delivery;
 import Core.Order;
-import Core.OrderFacade; 
+import Core.OrderFacade;
+import Core.Orders_Products;
+import Core.ProductFacade;
+import Persist.AbstractFactoryDao;
+import Persist.Orders_ProductsDAO; 
 public class OrdersPayment extends JPanel {
 
     private OrderFacade orderFacade = new OrderFacade();
@@ -65,18 +70,32 @@ public class OrdersPayment extends JPanel {
             cellCenter.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
             cellCenter.setLayout(new BorderLayout());
             
-            JLabel date = new JLabel("Date : " + order.getId());
+            JLabel date = new JLabel("Date : " + order.getDate());
             date.setFont(new Font("Serif", Font.PLAIN, 16)); 
             cellCenter.add(date, BorderLayout.NORTH);
                         
-            JLabel nbProducts = new JLabel("Nombre de produits : " + order.getId());
+            var af = AbstractFactoryDao.getFactory("mysql"); 
+            ArrayList<Orders_Products> ops = af.createOrders_ProductsDAO().getOrders_ProductsByOrderId(order.getId()); 
+            JLabel nbProducts = new JLabel("Nombre de produits : " + ops.size());
             nbProducts.setFont(new Font("Serif", Font.PLAIN, 16)); 
             cellCenter.add(nbProducts, BorderLayout.CENTER);
+             
+            var pdao = af.createProductDao();
+            var totalPrice = 0;  
+            var ddao = af.createDeliveryDao();
+            var statusChecked = true;   
+            for (Orders_Products op : ops) {     
+                totalPrice += pdao.getProductById(op.getProductId()).getPrice();  
+            }  
+            var deliveries = ddao.getDeliveriesByBuyerId(order.getUserId());
+            for (Delivery d : deliveries) {     
+                if (d.getIsDelivered() == false) statusChecked = false;  
+            }
             
-            JLabel price = new JLabel("Prix total : " + order.getId());
-            price.setFont(new Font("Serif", Font.PLAIN, 16)); 
+            JLabel price = new JLabel("Prix total : " + totalPrice); 
+            price.setFont(new Font("Serif", Font.PLAIN, 16));  
             cellCenter.add(price, BorderLayout.SOUTH);
-
+ 
             // right side
             JPanel cellRight = new JPanel();
             cellRight.setLayout(new BorderLayout());
@@ -89,20 +108,21 @@ public class OrdersPayment extends JPanel {
                 public void mouseClicked(MouseEvent e) { 
                     super.mouseClicked(e);
                     var t = new JFrame();
-                    t.add(new SpecificOrderPayment());
+                    t.add(new SpecificOrderPayment(order));
                     t.setVisible(true);
-                    t.pack();
+                    t.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 }
             }); 
             cellRight.add(eyeImage, BorderLayout.NORTH); 
-
+ 
             JPanel status = new JPanel();
             JLabel statusLabel = new JLabel("Statut : ");
             statusLabel.setFont(new Font("Serif", Font.PLAIN, 16));
             JPanel statusColor = new JPanel();
             statusColor.setBorder(new RoundedBorder(3));
             statusColor.setSize(2, 2);
-            statusColor.setForeground(Color.red); 
+            if (statusChecked) statusColor.setForeground(Color.green); 
+            else statusColor.setForeground(Color.red); 
             status.add(statusLabel);
             status.add(statusColor);
             cellRight.add(status, BorderLayout.SOUTH);
