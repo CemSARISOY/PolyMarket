@@ -17,6 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.Border;
 import javax.swing.table.AbstractTableModel;
+
+import Core.LoginFacade;
 import Core.User;
 import Core.UserFacade;
 import Persist.AbstractFactoryDao;
@@ -150,7 +152,7 @@ public class UserListView extends AbstractTableModel
         else if(4 == columnIndex) {
         	 row.setPassword((String) aValue);
         }
-        userFacade.modifyUser(row.getId(), row.getFirstname(), row.getLastname(),row.getNickname(),row.getEmail(), row.getPassword(), new Date(row.getDob().getTime()));
+        userFacade.modifyUser(row.getId(), row.getFirstname(), row.getLastname(),row.getNickname(),row.getEmail(), row.getPassword(), new Date(row.getDob().getTime()), LoginFacade.getLoginFacade().getUser().getBalance());
   
     }
     

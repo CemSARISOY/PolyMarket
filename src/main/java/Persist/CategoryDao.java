@@ -31,7 +31,7 @@ public interface CategoryDao {
      */
     public void updateCategory(Category c);
 
-    public ProductCategory getCategoryById(int id);
+    public Category getCategoryById(int id);
 
 
     

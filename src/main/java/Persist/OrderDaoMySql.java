@@ -21,7 +21,7 @@ public class OrderDaoMySql implements OrderDao {
     @Override
     public void createOrder(CartFacade cart, boolean isPayed) {
         var isPayedNewFormat = isPayed ? 1 : 0;
-        String requete = "INSERT INTO orders (id, userId, isPayed) VALUES (NULL, " + LoginFacade.getLoginFacade().getUser().getId() + ", " + isPayedNewFormat + ")";
+        String requete = "INSERT INTO orders (id, userId, isPayed) VALUES (NULL, " + 1 + ", " + isPayedNewFormat + ")";
         Connection con = creator.getConnection(); 
         int insertedId = -1;
         try {
@@ -36,10 +36,8 @@ public class OrderDaoMySql implements OrderDao {
                 }
         
                 if (insertedId != -1) {
-                    Orders_ProductsDAOMySQL orders_ProductsDAOMySQL = new Orders_ProductsDAOMySQL(creator);
-                    // for(Product p : cart.getProducts()) {
-                    Product[] cart2 = { new Product(1, "name", "token", "image", new ProductCategory(), "body", LoginFacade.getLoginFacade().getUser(), 50d, new Date(), true) };
-                    for(Product p : cart2) {
+                    Orders_ProductsDAOMySQL orders_ProductsDAOMySQL = new Orders_ProductsDAOMySQL(creator); 
+                    for(Product p : cart.getItemsInCart()) {
                         orders_ProductsDAOMySQL.createOrder_Product(insertedId, p.getId());
                     }
                 } 
@@ -58,8 +56,7 @@ public class OrderDaoMySql implements OrderDao {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next()) {
-                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3));
-                System.out.println(order);
+                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3), rs.getDate(4)); 
                 orders.add(order);
             }
         } catch (SQLException e) {
@@ -77,8 +74,7 @@ public class OrderDaoMySql implements OrderDao {
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery(requete);
             while (rs.next()) {
-                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3));
-                System.out.println(order);
+                Order order = new Order(rs.getInt(1), rs.getInt(2), rs.getBoolean(3), rs.getDate(4)); 
                 orders.add(order);
             }
         } catch (SQLException e) {

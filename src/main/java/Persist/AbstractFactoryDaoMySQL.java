@@ -1,8 +1,7 @@
 package Persist;
 
 import java.sql.*;
-import java.sql.Connection;
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.DriverManager;
 
 public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
@@ -37,6 +36,10 @@ public class AbstractFactoryDaoMySQL extends AbstractFactoryDao {
   
     public OrderDao createOrderDao() {
         return new OrderDaoMySql(this);
+    }
+
+    public Orders_ProductsDAO createOrders_ProductsDAO() {
+        return new Orders_ProductsDAOMySQL(this);
     }
 
     public CategoryDao createCategoryDao() {

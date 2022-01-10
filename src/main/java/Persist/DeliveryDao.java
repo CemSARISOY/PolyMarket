@@ -15,5 +15,7 @@ public interface DeliveryDao {
 
     ArrayList<Delivery> getDeliveries();
 
+    ArrayList<Delivery> getDeliveriesByBuyerId(int buyerId);
+
     Delivery addDelivery(Delivery d);
 }

@@ -56,6 +56,7 @@ public abstract class AbstractFactoryDao {
 
     public abstract AuctionDao createAuctionDao();
 
+    public abstract Orders_ProductsDAO createOrders_ProductsDAO();
 
 
     /**

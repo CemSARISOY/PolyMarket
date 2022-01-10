@@ -26,8 +26,7 @@ public class AuctionFacade {
     private AbstractFactoryDao abstractFactoryDao ;
     
     private AuctionView auctionView ;
-    
-   
+     
     private AuctionDao auctionDao ;
     
     
