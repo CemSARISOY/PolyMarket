@@ -172,7 +172,7 @@ public class CartView extends JFrame implements ActionListener {
     }
     
     public static void main(String[] args) {
-    	UserFacade userFacade = new UserFacade(null,AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
+    	UserFacade userFacade = new UserFacade(null);
 		User user = userFacade.getUserDao().getUserById(1); 
 		CartFacade cart = CartFacade.getCartFacade();
 		//System.out.println(prod1);
