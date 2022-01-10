@@ -3,6 +3,8 @@ package Persist;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
+
+import Core.Ticket;
 import Persist.AbstractFactoryDao;
 import Core.Notification;
 import Core.User;
@@ -168,6 +170,37 @@ public class UserDaoMySQL implements UserDao {
         }
      
         
+    }
+
+    @Override
+    public void addPossess(int userId, int productId) throws Exception {
+        String requete = "INSERT INTO possess VALUES (?, ?, ?)";
+        try{
+            Statement stmt = this.con.createStatement();
+            PreparedStatement possessStatement = con.prepareStatement(requete);
+            possessStatement.setNull(1, 1);
+            possessStatement.setInt(2, userId);
+            possessStatement.setInt(3, productId);
+            possessStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error while adding the possess");
+        }
+    }
+
+    @Override
+    public void updatePossess(int buyerId, int productId) throws Exception{
+        String requete = "UPDATE possess SET idUser =\"" +buyerId+ "\"WHERE idProduct = "+productId;
+        try{
+            Statement stmt = this.con.createStatement();
+            PreparedStatement updateStatement = con.prepareStatement(requete);
+            updateStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+            throw new Exception("Error while updating the possess");
+        }
     }
 
     public static void main(String args[]) { 

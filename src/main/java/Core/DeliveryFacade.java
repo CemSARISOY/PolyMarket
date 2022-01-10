@@ -79,20 +79,8 @@ public class DeliveryFacade {
         userDao = abstractFactoryDao.createUserDao();
         deliveryDao = abstractFactoryDao.createDeliveryDao();
 
-        //UPDATING OWNER PRODUCTS
-        ArrayList<Product> pown = buyer.getProducts();
-        pown.add(product);
-        buyer.setProducts(pown);
-        //TODO
-        //userDao.updateUser(buyer);
-
-        //UPDATING SELLER PRODUCTS
-        ArrayList<Product> psell = seller.getProducts();
-        int indexofProdSell = psell.indexOf(product);
-        psell.remove(indexofProdSell);
-        seller.setProducts(psell);
-        //TODO
-        //userDao.updateUser(seller);
+        //UPDATING THE OWNER OF THE PRODUCT
+        userDao.updatePossess(buyer.getId(), product.getId());
 
         //CREATING THE DELIVERY ASSOCIATED
         this.delivery = new Delivery(seller.getId(),buyer.getId(),product.getId(),true);

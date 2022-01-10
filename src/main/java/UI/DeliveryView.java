@@ -78,7 +78,9 @@ public class DeliveryView extends JFrame implements ActionListener {
             dispose();
             new DeliveredView(this.delivery);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
+            JOptionPane.showOptionDialog(null, "Error while delivering the product", "Information", JOptionPane.DEFAULT_OPTION,
+                    JOptionPane.INFORMATION_MESSAGE, null, null, null);
+            e.printStackTrace();
         }
     }
 

@@ -73,4 +73,8 @@ public interface UserDao {
      */
     User modifyUser(int id,String firstname, String lastname,String nickname, String email,String pw, Date dob) ;
 
+    void updatePossess(int buyerId, int productId) throws Exception;
+
+    void addPossess(int userId, int productId) throws Exception;
+
 }
