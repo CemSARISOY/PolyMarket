@@ -11,4 +11,6 @@ Run the main method of LoginView.java
 2 options are possible :
 - Sign up and get your own account
 - Sign in with the following credentials : username : "test" and password "test"
-To have an adminstrator account, please contact us.
+
+## Specific request
+If you need an adminstrator account, please contact us.
