@@ -157,12 +157,16 @@ public class CartView extends JFrame implements ActionListener {
         contentPane.add(scroll, BorderLayout.CENTER);
         contentPane.add(south, BorderLayout.SOUTH); 
         
-        JLabel lblNewLabel = new JLabel(cartFacade.getTotalPrice() + " Ä");
+        JLabel lblNewLabel = new JLabel(cartFacade.getTotalPrice() + " ÔøΩ");
         south.add(lblNewLabel);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if(CartFacade.getCartFacade().getTotalPrice() > LoginFacade.getLoginFacade().getUser().getBalance()) {
+            JOptionPane.showConfirmDialog(null, "Vous n'avez pas assez d'argent pour acheter la totalit√© des items de ce panier", "Attention !", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         int input = JOptionPane.showConfirmDialog(null,
                 "Do you want to purchase the products in your cart ?",
                 "Select an option",

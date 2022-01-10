@@ -47,7 +47,7 @@ public interface UserDao {
      * @param dob User's date of birth
      * 
      * */
-    void signUp(String firstname, String lastname,String nickname, String email,String pw, Date dob);
+    void signUp(String firstname, String lastname,String nickname, String email,String pw, Date dob, double balance);
 
     /**
      * Delete a user in the database based of an ID

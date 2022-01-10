@@ -108,9 +108,9 @@ public class UserDaoMySQL implements UserDao {
     }
 
     @Override
-    public void signUp(String firstname, String lastname,String nickname, String email,String pw, Date dob) {
+    public void signUp(String firstname, String lastname,String nickname, String email,String pw, Date dob, double balance) {
         String requete = 
-        		"INSERT INTO users (firstname, lastname, nickname, email,password,dob) VALUES  (\"" + firstname + "\" , \"" + lastname + "\",\"" + nickname + "\",\"" + email + "\",\"" + pw + "\",\"" + dob + "\");";
+        		"INSERT INTO users (firstname, lastname, nickname, email,password,dob,balance) VALUES  (\"" + firstname + "\" , \"" + lastname + "\",\"" + nickname + "\",\"" + email + "\",\"" + pw + "\",\"" + dob + "\",\"" + balance + "\");";
         Connection con = creator.getConnection();
         try {
             Statement stmt = con.createStatement();
@@ -206,7 +206,7 @@ public class UserDaoMySQL implements UserDao {
     public static void main(String args[]) { 
     	AbstractFactoryDao abstractFactoryDao = AbstractFactoryDao.getFactory("mysql");
     	UserDaoMySQL userDaoMySql = new UserDaoMySQL(abstractFactoryDao);
-    	userDaoMySql.signUp("axel", "laget", "axe25", "UserProfileView@gmail.com","1234",new java.sql.Date(25, 05, 2000));
+    	userDaoMySql.signUp("axel", "laget", "axe25", "UserProfileView@gmail.com","1234",new java.sql.Date(25, 05, 2000), 500);
     	//userDaoMySql.modifyUser(3, "axel", "prosper", "null", "null", "ofdofj@gmail;com", new java.sql.Date(25, 05, 2000));
     	//userDaoMySql.deleteUser(3);
     	User[] test_users = userDaoMySql.getAllUser();
