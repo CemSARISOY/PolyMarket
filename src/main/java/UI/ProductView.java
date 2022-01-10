@@ -17,6 +17,7 @@ import java.io.File;
 import Core.LoginFacade;
 import Core.Product;
 import Core.ProductFacade;
+import Core.User;
 import UI.payment.UserViewPayment;
 
 import java.awt.*;
@@ -65,34 +66,8 @@ public class ProductView extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public Container createListView(){
-        this.productList = new JFrame("Product - list");
-
-
-        List<Product> products = productFacade.getProducts();
-        List<Product> sortedProducts = new ArrayList<>();
-        if(!search.getText().equals("")){
-            for(Product p : products){
-                if(p.getName().contains(search.getText())) sortedProducts.add(p);
-            }
-        }else{
-            sortedProducts = products;
-        }
-
-        Container c = productList.getContentPane();
-        Container cbis = new Container();
-        
-        cbis.setLayout(new BorderLayout());
-        Container header = new Container();
-        header.setLayout(new FlowLayout());
-        header.add(search);
-        JButton searchButton = new JButton("Search");
-        searchButton.addActionListener(this);
-        header.add(searchButton);
-        cbis.add(header, BorderLayout.NORTH);
-
+    private Container createCenterPanel(List<Product> sortedProducts){
         Container center = new Container();
-        cbis.add(center, BorderLayout.CENTER);
         center.setLayout(new WrapLayout());
         for(Product p : sortedProducts){
 
@@ -102,16 +77,74 @@ public class ProductView extends JFrame implements ActionListener {
             JButtonProduct details = new JButtonProduct("Voir les détails", p.getId());
             details.addActionListener(this); 
             card.add(details, BorderLayout.SOUTH);
-            BufferedImage picture;
             try {
-                picture = ImageIO.read(new File("src/main/java/UI/product.png"));
-                JLabel picLabel = new JLabel(new ImageIcon(picture));
+                File f = new File("./assets/"+p.getContent());
+                if(!f.exists()){
+                    f = new File("./src/main/java/UI/product.png");
+                }
+                ImageIcon path = new ImageIcon(f.getAbsolutePath());
+                Image img = path.getImage();
+                Image newImg = img.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+                ImageIcon image = new ImageIcon(newImg);
+                JLabel picLabel = new JLabel(image);
                 card.add(picLabel, BorderLayout.CENTER);
                 center.add(card);
             } catch (Exception e) {
                 e.printStackTrace(); 
             } 
         }
+        return center;
+    }
+
+    public Container createListView(){
+        this.productList = new JFrame("Product - list");
+
+
+        List<Product> products = productFacade.getProducts();
+        
+
+        Container c = productList.getContentPane();
+        Container cbis = new Container();
+        
+        cbis.setLayout(new BorderLayout());
+        Container header = new Container();
+        header.setLayout(new FlowLayout());
+        JButton create = new JButton("Add product");
+        create.addActionListener(e -> {
+            createProduct();
+        });
+        header.add(create);
+        header.add(search);
+        JButton searchButton = new JButton("Search");
+        
+        searchButton.addActionListener(this);
+        header.add(searchButton);
+        cbis.add(header, BorderLayout.NORTH);
+        Container center = createCenterPanel(products);
+        cbis.add(center, BorderLayout.CENTER);
+        searchButton.addActionListener(e -> {
+            cbis.removeAll();
+            List<Product> sortedProducts = new ArrayList<>();
+            if(!search.getText().equals("")){
+                for(Product p : products){
+                    if(p.getName().contains(search.getText())) sortedProducts.add(p);
+                }
+            }else{
+                sortedProducts = products;
+            }
+            search.setSize(new Dimension(100,30));
+            header.remove(search);
+            header.add(search);
+            cbis.add(header, BorderLayout.NORTH);
+            cbis.add(createCenterPanel(sortedProducts), BorderLayout.CENTER);
+            JScrollPane js = new JScrollPane(cbis);
+            js.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            js.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            c.removeAll();
+            c.add(js);
+            c.revalidate();
+        });
+        
 
         JScrollPane js = new JScrollPane(cbis);
         js.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
@@ -229,10 +262,11 @@ public class ProductView extends JFrame implements ActionListener {
         Product p = productFacade.getProductById(id);
         detailledProductView.setContentPane(new Container());
         detailledProductView.setTitle("Product - Détails de " + p.getName());
-        Container c = detailledProductView.getContentPane();
+        Container main = detailledProductView.getContentPane();
+        main.setLayout(new BorderLayout());
+        Container c = new Container();
         c.setLayout(new FlowLayout());
 
-        c.add(new JLabel(p.getName()));
         JButtonProduct jb = new JButtonProduct("Supprimer", p.getId());
         jb.addActionListener(this);
         JButtonProduct jb2 = new JButtonProduct("Modifier", p.getId());
@@ -244,11 +278,34 @@ public class ProductView extends JFrame implements ActionListener {
         jb4.addActionListener(e -> {
             productFacade.addToCart(p); 
         });
+        User u = LoginFacade.getLoginFacade().getUser();
+        if(u.getId() == p.getAuthor().getId()){
 
-        c.add(jb);
-        c.add(jb2);
+            c.add(jb);
+            c.add(jb2);
+        }
         c.add(jb3);
         c.add(jb4);
+
+        main.add(c, BorderLayout.NORTH);
+        Container product = new Container();
+        product.setLayout(new FlowLayout());
+        try {
+            File f = new File("./assets/"+p.getContent());
+            if(!f.exists()){
+                f = new File("./src/main/java/UI/product.png");
+            }
+            ImageIcon path = new ImageIcon(f.getAbsolutePath());
+            Image img = path.getImage();
+            Image newImg = img.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+            ImageIcon image = new ImageIcon(newImg);
+            JLabel picLabel = new JLabel(image);
+            product.add(picLabel, BorderLayout.CENTER);
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        } 
+        product.add(new JLabel(p.getName() + " de prix " + p.getPrice()));
+        main.add(product, BorderLayout.CENTER);
 
         detailledProductView.pack();
         detailledProductView.setVisible(true);
@@ -441,7 +498,4 @@ public class ProductView extends JFrame implements ActionListener {
         public int getId(){ return id; }
     }
 
-    public static void main(String[] args) {
-        new ProductView();
-    }
 }

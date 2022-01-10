@@ -178,7 +178,7 @@ public class CartView extends JFrame implements ActionListener {
 		//System.out.println(prod1);
 		//cart.addProduct(prod1);
 		System.out.println(cart.getNbItems());
-		new CartView(user);
+		//new CartView(user);
 	}
 
 }
