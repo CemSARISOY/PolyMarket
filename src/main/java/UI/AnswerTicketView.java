@@ -33,7 +33,6 @@ public class AnswerTicketView extends JFrame implements ActionListener {
         //FRAME INIT
         this.setTitle("Answer to a ticket");
         setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel north = new JPanel();
         north.setLayout(new FlowLayout(SwingConstants.NORTH_WEST));

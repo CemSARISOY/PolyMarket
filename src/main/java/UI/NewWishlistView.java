@@ -27,7 +27,6 @@ public class NewWishlistView extends JFrame implements ActionListener {
         //INIT
         this.setTitle("Create a new Wishlist");
         setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //NORTH CONTENT
         JPanel north = new JPanel();
