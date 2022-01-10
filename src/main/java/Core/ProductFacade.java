@@ -1,8 +1,11 @@
 package Core;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import Persist.AbstractFactoryDao;
 import Persist.ProductDao;
@@ -83,10 +86,14 @@ public class ProductFacade {
     public int createProduct(String title, double price, String nft, String body, File f) {
         LoginFacade loginFacade = LoginFacade.getLoginFacade();
         User author = loginFacade.getUser();
-        System.out.println(f.getName());
         try {
-            return productDao.createProduct(title, nft, f.getName(), 1, body, 1, price, new java.sql.Date(new Date().getTime()));
+            BufferedImage in = ImageIO.read(f);
+            File outputFile = new File("./assets/"+f.getName());
+            outputFile.createNewFile();
+            ImageIO.write(in, "png", outputFile);
+            return productDao.createProduct(title, nft, f.getName(), 1, body, author.getId(), price, new java.sql.Date(new Date().getTime()));
         } catch (Exception e) {
+            e.printStackTrace();
             //TODO: handle exception
             return -1;
         }
