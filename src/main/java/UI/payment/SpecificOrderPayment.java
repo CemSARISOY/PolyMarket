@@ -11,6 +11,7 @@ import Core.Order;
 import Core.Orders_Products;
 import Core.Product;
 import Persist.AbstractFactoryDao;
+import UI.ProductView;
 
 public class SpecificOrderPayment extends JPanel {
 
@@ -90,7 +91,7 @@ public class SpecificOrderPayment extends JPanel {
                 @Override
                 public void mouseClicked(MouseEvent e) { 
                     super.mouseClicked(e);
-                    // GO TO PRODUCT PAGE
+                    new ProductView().viewDetails(p.getId());
                 }
             });  
             cellRight.add(eyeImage, BorderLayout.NORTH);

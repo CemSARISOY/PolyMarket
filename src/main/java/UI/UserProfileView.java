@@ -189,7 +189,9 @@ public class UserProfileView extends JPanel {
 			JButton btnAllUsers = new JButton("All Users");
 			boutonPanel.add(btnAllUsers);
 			btnAllUsers.setBackground(Color.ORANGE);
-			UserListView userListView = new UserListView();
+			btnAllUsers.addActionListener(e -> {
+				UserListView userListView = new UserListView();
+			});
 			
 		}
 		

@@ -21,7 +21,7 @@ public class OrderDaoMySql implements OrderDao {
     @Override
     public void createOrder(CartFacade cart, boolean isPayed) {
         var isPayedNewFormat = isPayed ? 1 : 0;
-        String requete = "INSERT INTO orders (id, userId, isPayed) VALUES (NULL, " + 1 + ", " + isPayedNewFormat + ")";
+        String requete = "INSERT INTO orders (id, userId, isPayed) VALUES (NULL, " + LoginFacade.getLoginFacade().getUser().getId() + ", " + isPayedNewFormat + ")";
         Connection con = creator.getConnection(); 
         int insertedId = -1;
         try {

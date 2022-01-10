@@ -1,11 +1,10 @@
 package Core;
-
-import Core.LoginFacade;
+ 
 import UI.payment.PaymentView; 
 
 public class CartFacade extends AbstractProdcutList{
  
-    private static CartFacade cartFacade;
+    private static CartFacade cartFacade = new CartFacade(LoginFacade.getLoginFacade().getUser().getId(), "title");
      
     // Operations                                  
     
@@ -13,10 +12,8 @@ public class CartFacade extends AbstractProdcutList{
 		super(userId, title); 
 	}
 
-    public static CartFacade getCartFacade() {
-        if (cartFacade != null) return cartFacade;
-        if (LoginFacade.getLoginFacade().getUser() != null) return new CartFacade(LoginFacade.getLoginFacade().getUser().getId(), "title");
-        return new CartFacade(1, "title");
+    public static CartFacade getCartFacade() { 
+        return cartFacade;
     }
 
 	/**
