@@ -39,7 +39,7 @@ public class UserEditProfileView extends Observable implements ActionListener {
 	    UserFacade userFacade; 
 	    UserProfileView userProfile;
 	    public UserEditProfileView(User user,UserProfileView userProfile) {
-	    	this.userFacade = new UserFacade(user,AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
+	    	this.userFacade = new UserFacade(user);
 	    	this.userProfile = userProfile;
 	    	 // JFrame class
 	        frame = new JFrame();
@@ -157,7 +157,7 @@ public class UserEditProfileView extends Observable implements ActionListener {
 	        cancel.addActionListener(new ActionListener() {
 	           public void actionPerformed(ActionEvent ae) {
 	        	   frame.dispose();
-	        	   userProfile.setEnabled(true);
+	        	 //  userProfile.setEnabled(true);
 	        	   userProfile.toFront();
 	           }
 	        });
@@ -175,7 +175,7 @@ public class UserEditProfileView extends Observable implements ActionListener {
 	    }
 	    
 		private int onClose() {
-			 userProfile.setEnabled(true);
+			 //userProfile.setEnabled(true);
 			return JFrame.EXIT_ON_CLOSE;
 		}
 
@@ -196,12 +196,13 @@ public class UserEditProfileView extends Observable implements ActionListener {
 	            this.userFacade.modifyUser(this.userFacade.getUser().getId(),firstname,lastname,nickname,email,pass,new Date(Integer.valueOf(year)-1900,Integer.valueOf(month)-1,Integer.valueOf(day)));
 	            frame.dispose();
 	            JOptionPane.showMessageDialog(null, "Profile Updated");
-	            userProfile.setEnabled(true);
+	        //    userProfile.setEnabled(true);
 	            userProfile.update();
 	            userProfile.toFront();
 	            
 	            
 	        } catch (Exception e1) { 
+	        	e1.printStackTrace();
 	            JOptionPane.showMessageDialog(null, e1.getMessage());
 	        }
 	     
@@ -211,7 +212,7 @@ public class UserEditProfileView extends Observable implements ActionListener {
 
 
 	public static void main(String[] args) {
-		UserFacade userFacade = new UserFacade(null,AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
+		UserFacade userFacade = new UserFacade(null);
 		User user = userFacade.getUserDao().getUserById(1);
 		//UserEditProfileView view = new UserEditProfileView(user);
 	}

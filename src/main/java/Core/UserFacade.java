@@ -2,9 +2,14 @@ package Core;
 
 import java.sql.Date
 ;
+import java.util.List;
 
+import Persist.AbstractFactoryDao;
+import Persist.AbstractFactoryDaoMySQL;
 import Persist.ProductDao;
+import Persist.ProductDaoMySQL;
 import Persist.UserDao;
+import Persist.UserDaoMySQL;
 
 public class UserFacade {
 	private User user;
@@ -12,10 +17,10 @@ public class UserFacade {
 	private ProductDao productDao;
 	
 	
-	public  UserFacade(User user, UserDao userDao, ProductDao productDao) {
-		this.productDao = productDao;
+	public  UserFacade(User user) {
+		this.productDao = ProductDaoMySQL.getProductDaoMySQL(AbstractFactoryDaoMySQL.getAbstractFactoryDaoMySQL());
 		this.user = user;
-		this.userDao = userDao;
+		this.userDao = UserDaoMySQL.getUserDaoMySQL(AbstractFactoryDaoMySQL.getAbstractFactoryDaoMySQL());
 	}
     
 	/**
@@ -97,10 +102,21 @@ public class UserFacade {
      * @return the {@code User} that has been deleted
      */
 	public User deletUser(int id) {
+	
 		return this.userDao.deleteUser(id);
 	}
 	
 	public User modifyUser(int id,String firstname, String lastname,String nickname, String email,String pw,Date dob) {
 		return this.userDao.modifyUser(id,firstname,lastname,nickname,email,pw,dob);
 	}
+	
+	public List<Product> getProductByUser(User user ){
+		return this.productDao.getProductByUser(user);
+	}
+	
+	public List<Product> getProductsByAuthor(User user){
+		return this.productDao.getProductByAuthor(user);
+			
+	}
+
 }

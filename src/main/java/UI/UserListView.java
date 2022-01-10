@@ -25,7 +25,7 @@ import Persist.UserDaoMySQL;
 public class UserListView extends AbstractTableModel
 {
     private static  List<User> userList;
-    UserFacade userFacade = new UserFacade(null, AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
+    UserFacade userFacade = new UserFacade(null);
      
     private final String[] columnNames = new String[] {
             "Firstname", "Lastname", "Nickname","Email","Password","Date of birth"

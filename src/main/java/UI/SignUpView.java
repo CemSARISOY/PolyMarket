@@ -22,17 +22,17 @@ import Core.UserFacade;
 import Persist.AbstractFactoryDao; 
 
 public class SignUpView implements ActionListener {
-	
-	 private static JLabel password, label, emailLabel,firstnameLabel,lastnameLabel,dateLabel;
+		private static JFrame frame;
+	 	private static JLabel password, label, emailLabel,firstnameLabel,lastnameLabel,dateLabel;
 	    private static JTextField username,emailField, firstnameField, lastnameField,dateDayField, dateMonthField, dateYearField;
 	    private static JButton button;
 	    private static JPasswordField passwordField;
 
-	    UserFacade userFacade = new UserFacade(null, AbstractFactoryDao.getFactory("mysql").createUserDao(), null);
+	    UserFacade userFacade = new UserFacade(null);
 	    
 	    public SignUpView() {
 	        // JFrame class
-	        JFrame frame = new JFrame();
+	        frame = new JFrame();
 	        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	        Integer realWidth = (int) Math.round(0.5 * screenSize.getWidth());
 	        Integer realHeight = (int) Math.round(0.5 * screenSize.getHeight());
@@ -164,6 +164,7 @@ public class SignUpView implements ActionListener {
 	        try {
 	            this.userFacade.signUp(firstname,lastname,nickname,email,pass,Integer.valueOf(day),Integer.valueOf(month),Integer.valueOf(year));
 	            JOptionPane.showMessageDialog(null, "Successfully Signed up");
+				frame.dispose();
 	        } catch (Exception e1) { 
 	            JOptionPane.showMessageDialog(null, e1.getMessage());
 	        }
