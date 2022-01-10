@@ -67,7 +67,7 @@ public class SpecificOrderPayment extends JPanel {
             cellCenter.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
             cellCenter.setLayout(new BorderLayout());
             
-            JLabel productName = new JLabel("Nom du produit : " + p.getName() + " (" + p.getId() + ")");
+            JLabel productName = new JLabel("Nom du produit : " + p.getName() + " (#" + p.getId() + ")");
             productName.setFont(new Font("Serif", Font.PLAIN, 16)); 
             cellCenter.add(productName, BorderLayout.NORTH);
                         
