@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Core.LoginFacade;
 import Core.User;
 import Core.UserFacade;
 import Persist.AbstractFactoryDao;
@@ -28,10 +29,6 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.SwingConstants;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.layout.FormSpecs;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -51,6 +48,7 @@ import java.awt.CardLayout;
 
 public class UserProfileView extends JPanel {
 	UserFacade userFacade;
+	LoginFacade loginFacade;
 	 public ProductView2 productView;
 	 public Container products;
 	 //public Container productsActiveSales;
@@ -81,6 +79,7 @@ public class UserProfileView extends JPanel {
 	//	this.productsPreviousSales.setVisible(false);
 		
 		this.userFacade = new UserFacade(user);
+		this.loginFacade = LoginFacade.getLoginFacade();
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{168, 95, 0};
 		gridBagLayout.rowHeights = new int[]{23, 0, 0, 0, 0, 0, 0};
@@ -183,6 +182,16 @@ public class UserProfileView extends JPanel {
 			boutonPanel.add(btnSendTicket);
 			btnSendTicket.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					new SupportTicketView(loginFacade.getUser());
+				}
+			});
+
+			JButton wishBtn = new JButton("Your wishlists");
+			wishBtn.setBackground(Color.LIGHT_GRAY);
+			boutonPanel.add(wishBtn);
+			wishBtn.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					new ListWishlistsView(loginFacade.getUser());
 				}
 			});
 			
@@ -212,6 +221,7 @@ public class UserProfileView extends JPanel {
 			btnAllTickets.setForeground(Color.BLACK);
 			btnAllTickets.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					new TicketListView();
 				}
 			});
 			
