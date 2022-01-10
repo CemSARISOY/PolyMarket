@@ -60,7 +60,7 @@ public class UserViewPayment extends JFrame {
         for (var button : buttons) {
             button.setMargin(new Insets(10,20,10,20));
             button.setBackground(Color.WHITE);
-            button.setPreferredSize(new Dimension(200, 40));
+            button.setPreferredSize(new Dimension(160, 40));
             button.addActionListener(new ActionListener() {
 
                 @Override
@@ -94,7 +94,8 @@ public class UserViewPayment extends JFrame {
         if (isAdmin) topButtons.add(buttons[5]);
         topButtons.add(buttons[6]);
   
-        header.add(topButtons);
+        header.add(topButtons); 
+        header.add(new JLabel("Solde : " + LoginFacade.getLoginFacade().getUser().getBalance()));
 
         initTab(buttons[0].getText(), null);
 

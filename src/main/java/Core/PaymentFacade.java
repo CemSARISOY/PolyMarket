@@ -1,5 +1,7 @@
 package Core;
 
+import java.util.List;
+import java.util.ArrayList;
 import Persist.AbstractFactoryDao;
 import Persist.Cart;
 import Persist.UserDao; 
@@ -18,8 +20,7 @@ public class PaymentFacade {
         abstractFactoryDAO.createOrderDao().createOrder(cart, isPayed);
 
         // FONCTIONS NON DEFINIS MAIS CEST CENSE MARCHE
-
-        //User b = LoginFacade.getLoginFacade().getUser();
+ 
         User b = abstractFactoryDAO.createUserDao().getUserById(1);
         b.setBalance(b.getBalance() - cart.getTotalPrice()); 
         var u = abstractFactoryDAO.createUserDao();
@@ -29,6 +30,7 @@ public class PaymentFacade {
             User s = u.getUserById(p.getAuthor().getId());
             s.setBalance(s.getBalance() + p.getPrice()); 
             abstractFactoryDAO.createUserDao().modifyUser(s.getId(), s.getFirstname(), s.getLastname(), s.getNickname(), s.getEmail(), s.getPassword(), s.getDob(), s.getBalance());
-        }
+        } 
+        cart.setItemsInCart(new ArrayList<Product>());
     }
 }

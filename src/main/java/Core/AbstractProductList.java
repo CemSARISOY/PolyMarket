@@ -125,12 +125,18 @@ abstract class AbstractProdcutList {
      * 
      * @return a {@code List} of the products in the cart
      */
-    public List<Product> getItemsInCart() {
-        
+    public List<Product> getItemsInCart() { 
         return this.products;
     }
 
     
-    
-
+    /**
+     * gets all the products in the cart
+     * 
+     * @return a {@code List} of the products in the cart
+     */
+    public List<Product> setItemsInCart(List<Product> products) { 
+        this.products = products; 
+        return this.products;
+    } 
 }
