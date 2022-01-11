@@ -114,5 +114,4 @@ public class LoginView implements ActionListener {
     public static void main(String[] args) {
         LoginView login = new LoginView();
     }
-
 }
