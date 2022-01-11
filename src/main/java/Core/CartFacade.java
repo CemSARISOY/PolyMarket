@@ -20,7 +20,7 @@ public class CartFacade extends AbstractProdcutList{
     }
 
     public static CartFacade getCartFacade() { 
-        if(cartFacade == null) new CartFacade(LoginFacade.getLoginFacade().getUser().getId(), "title");
+        if(cartFacade == null) cartFacade = new CartFacade(LoginFacade.getLoginFacade().getUser().getId(), "title");
         return cartFacade;
     }
 
