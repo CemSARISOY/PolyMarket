@@ -55,35 +55,9 @@ public class AuctionView extends JFrame implements ActionListener {
         c.add(button2);  
     }
 
-    public Container createListView(){
-        auctionsView = new JFrame("Auctions - list");
-
-        List<Auction> auctions = auctionFacade.getAllAuctions();
-        List<Auction> sortedAuctions = new ArrayList<>();
-        if(!search.getText().equals("")){
-            for(Auction a : auctions){
-                if(a.getProduct().getName().contains(search.getText())) sortedAuctions.add(a);
-            }
-        }else{
-            sortedAuctions = auctions;
-        }
-
-
-        Container c = auctionsView.getContentPane();
-        Container cbis = new Container();
-        
-        cbis.setLayout(new BorderLayout());
-        Container header = new Container();
-        header.setLayout(new FlowLayout());
-        header.add(search);
-        JButton searchButton = new JButton("Search");
-        searchButton.addActionListener(this);
-        header.add(searchButton);
-        cbis.add(header, BorderLayout.NORTH);
-
+    private Container createCenterPanel(List<Auction> sortedAuctions){
         Container center = new Container();
-        cbis.add(center, BorderLayout.CENTER);
-        center.setLayout(new WrapLayout());
+        
         for(Auction a : sortedAuctions){
 
             Container card = new Container();
@@ -92,10 +66,16 @@ public class AuctionView extends JFrame implements ActionListener {
             JButtonAuction details = new JButtonAuction("See details", a.getId());
             details.addActionListener(this); 
             card.add(details, BorderLayout.SOUTH);
-            BufferedImage picture;
             try {
-                picture = ImageIO.read(new File("src/main/java/UI/product.png"));
-                JLabel picLabel = new JLabel(new ImageIcon(picture));
+                File f = new File("./assets/"+a.getProduct().getContent());
+                if(!f.exists()){
+                    f = new File("./src/main/java/UI/product.png");
+                }
+                ImageIcon path = new ImageIcon(f.getAbsolutePath());
+                Image img = path.getImage();
+                Image newImg = img.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+                ImageIcon image = new ImageIcon(newImg);
+                JLabel picLabel = new JLabel(image);
                 card.add(picLabel, BorderLayout.CENTER);
                 center.add(card);
             } catch (Exception e) {
@@ -104,6 +84,57 @@ public class AuctionView extends JFrame implements ActionListener {
             } 
         }
 
+        return center;
+
+    }
+
+    public Container createListView(){
+        auctionsView = new JFrame("Auctions - list");
+
+        List<Auction> auctions = auctionFacade.getAllAuctions();
+        
+
+
+        Container c = auctionsView.getContentPane();
+        Container cbis = new Container();
+        
+        cbis.setLayout(new BorderLayout());
+        Container header = new Container();
+        header.setLayout(new FlowLayout());
+        JButton create = new JButton("Add auction");
+        create.addActionListener(e -> {
+            createAuction();
+        });
+        header.add(search);
+        JButton searchButton = new JButton("Search");
+        header.add(searchButton);
+        cbis.add(header, BorderLayout.NORTH);
+
+        Container center = createCenterPanel(auctions);
+        cbis.add(center, BorderLayout.CENTER);
+        center.setLayout(new WrapLayout());
+        searchButton.addActionListener(e -> {
+            List<Auction> sortedAuctions = new ArrayList<>();
+            if(!search.getText().equals("")){
+                for(Auction a : auctions){
+                    if(a.getProduct().getName().contains(search.getText())) sortedAuctions.add(a);
+                }
+            }else{
+                sortedAuctions = auctions;
+            }
+            search.setSize(new Dimension(100,30));
+            header.remove(search);
+            header.add(search);
+            cbis.add(header, BorderLayout.NORTH);
+            cbis.add(createCenterPanel(sortedAuctions), BorderLayout.CENTER);
+            JScrollPane js = new JScrollPane(cbis);
+            js.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            js.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            c.removeAll();
+            c.add(js);
+            c.revalidate();
+        });
+        
         JScrollPane js = new JScrollPane(cbis);
         js.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         js.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -229,10 +260,10 @@ public class AuctionView extends JFrame implements ActionListener {
         Auction a = auctionFacade.getAuctionById(id);
         detailledAuctionView.setContentPane(new Container());
         detailledAuctionView.setTitle("Auctions - details of " + a.getProduct().getName());
-        Container c = detailledAuctionView.getContentPane();
+        Container main = detailledAuctionView.getContentPane();
+        main.setLayout(new BorderLayout());
+        Container c = new Container();
         c.setLayout(new FlowLayout());
-
-        c.add(new JLabel(a.getProduct().getName()));
 
 
         JTextField textField_1 = new JTextField();
@@ -244,6 +275,26 @@ public class AuctionView extends JFrame implements ActionListener {
             if(!textField_1.getText().isEmpty()) auctionFacade.participate(Double.parseDouble(textField_1.getText()));
         });
         c.add(jb);
+
+        main.add(c, BorderLayout.NORTH);
+        Container auction = new Container();
+        auction.setLayout(new FlowLayout());
+        try {
+            File f = new File("./assets/"+a.getProduct().getContent());
+            if(!f.exists()){
+                f = new File("./src/main/java/UI/product.png");
+            }
+            ImageIcon path = new ImageIcon(f.getAbsolutePath());
+            Image img = path.getImage();
+            Image newImg = img.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+            ImageIcon image = new ImageIcon(newImg);
+            JLabel picLabel = new JLabel(image);
+            auction.add(picLabel, BorderLayout.CENTER);
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        } 
+        auction.add(new JLabel(a.getProduct().getName() + " de prix de base " + a.getAmount() + " et d'offre la plus haute : " + a.getHighestOffer()));
+        main.add(auction, BorderLayout.CENTER);
 
         detailledAuctionView.pack();
         detailledAuctionView.setVisible(true);

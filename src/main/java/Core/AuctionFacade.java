@@ -115,6 +115,7 @@ public class AuctionFacade {
      */
     public void participate(double offer) {
         User u = LoginFacade.getLoginFacade().getUser();
+        
     }
     
 }

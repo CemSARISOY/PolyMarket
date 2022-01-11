@@ -18,6 +18,8 @@ import Core.LoginFacade;
 import Core.Product;
 import Core.ProductFacade;
 import Core.User;
+import Core.Wishlist;
+import Core.WishlistFacade;
 import UI.payment.UserViewPayment;
 
 import java.awt.*;
@@ -278,6 +280,29 @@ public class ProductView extends JFrame implements ActionListener {
         jb4.addActionListener(e -> {
             productFacade.addToCart(p); 
         });
+        JButtonProduct jb5 = new JButtonProduct("Ajouter a une wishlist", p.getId());
+        jb5.addActionListener(e -> {
+            try {
+                List<Wishlist> wish =  WishlistFacade.getWishlistFacade().getWishlistsFromUser(LoginFacade.getLoginFacade().getUser().getId());
+                System.out.println(wish);
+                JFrame frame = new JFrame();
+                Container contai = frame.getContentPane();
+                contai.setLayout(new FlowLayout());
+                for(Wishlist w : wish){
+                    JButton butt = new JButton(w.getTitle());
+                    butt.addActionListener(t -> {
+                        
+                        System.out.println("Appuyé sur :" + w.getTitle());
+                        frame.dispose();
+                    });
+                    contai.add(butt);
+                }
+                frame.pack();
+                frame.setVisible(true);
+            } catch (Exception f) {
+                //TODO: handle exception
+            }
+        });
         User u = LoginFacade.getLoginFacade().getUser();
         if(u.getId() == p.getAuthor().getId()){
 
@@ -286,6 +311,7 @@ public class ProductView extends JFrame implements ActionListener {
         }
         c.add(jb3);
         c.add(jb4);
+        c.add(jb5);
 
         main.add(c, BorderLayout.NORTH);
         Container product = new Container();

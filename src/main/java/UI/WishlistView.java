@@ -37,7 +37,6 @@ public class WishlistView extends JFrame implements ActionListener {
         //FRAME INIT
         this.setTitle("Your Wishlist");
         setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //NORTH CONTENT
         JPanel north = new JPanel();
