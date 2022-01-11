@@ -89,7 +89,7 @@ public class DeliveryFacade {
         //SENDING THE DELIVERY TO THE DB
         this.delivery = deliveryDao.addDelivery(this.delivery);
         if(this.delivery != null) {
-        	//SEND NOTIFFICATIONS
+        	//SEND NOTIFICATIONS
         	NotificationFacade notificationFacade = new NotificationFacade(abstractFactoryDao.createNotificationDao());
         	Notification notifToSendBuyer =  notificationFacade.createNotification("Delivery", "Your command has been delivered ! Thank you for your purchase ;)");
         	notificationFacade.sendNotifications(notifToSendBuyer, buyer);
