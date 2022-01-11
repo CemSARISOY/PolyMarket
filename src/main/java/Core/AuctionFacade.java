@@ -25,8 +25,6 @@ public class AuctionFacade {
    
     private AbstractFactoryDao abstractFactoryDao ;
     
-    private AuctionView auctionView ;
-     
     private AuctionDao auctionDao ;
     
     
@@ -56,7 +54,7 @@ public class AuctionFacade {
         int id = productFacade.createProduct(title, price, nft, body, f);
         Product p = productFacade.getProductById(id);
         Date endDate = Calendar.getInstance().getTime();
-        endDate.setDate(endDate.getDate() + 16);
+        endDate.setDate(endDate.getDate() + (int)duration);
         try {
             return auctionDao.createAuction(price, new java.sql.Date(endDate.getTime()), p);
         } catch (Exception e) {
@@ -113,8 +111,13 @@ public class AuctionFacade {
       * @param user the user whi participate
       * @param offer the offer tha propose the user ( the offer has to be uppper than the highest offer of the auction)
      */
-    public void participate(double offer) {
+    public void participate(double offer, Auction a) throws Exception{
         User u = LoginFacade.getLoginFacade().getUser();
+        if(offer <= a.getHighestOffer()){
+            throw new Exception("You cannot bid less than the highest amount already bid");
+        }else{
+            auctionDao.participate(a, u, offer);
+        }   
         
     }
     

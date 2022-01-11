@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import Core.Ticket;
 import Persist.TicketDao;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import Persist.AbstractFactoryDao;
 

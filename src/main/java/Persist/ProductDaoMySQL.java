@@ -62,7 +62,7 @@ public class ProductDaoMySQL implements ProductDao {
         Connection con = creator.getConnection();
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(requete);
+            int rows = stmt.executeUpdate(requete);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -70,9 +70,32 @@ public class ProductDaoMySQL implements ProductDao {
     }
 
     @Override
-    public void like(Product product) {
-        // TODO Auto-generated method stub
+    public void like(Product product, User u) throws Exception {
+        String requete = "INSERT INTO likeProduct(idProduct,idUser) VALUES ("+product.getId()+","+u.getId()+")";
+        Connection con = creator.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            int rows = stmt.executeUpdate(requete);
+        } catch (Exception e) {
+            throw new Exception("Already liked");
+            //TODO: handle exception
+        }
         
+    }
+
+    public int getLikes(Product p){
+        String requete = "SELECT COUNT(*) FROM likeProduct WHERE idProduct = "+p.getId();
+        Connection con = creator.getConnection();
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(requete);
+            while (rs.next())
+                return rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            //TODO: handle exception
+        }
+        return -1;
     }
 
     private List<Product> getter(String query){

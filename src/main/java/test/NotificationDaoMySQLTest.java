@@ -2,7 +2,7 @@ package test;
 
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import Core.Notification;
 import Persist.AbstractFactoryDaoMySQL;
@@ -10,7 +10,7 @@ import Persist.NotificationDao;
 import Persist.NotificationDaoMySQL;
 
 public class NotificationDaoMySQLTest {
-	  @Test
+	  	@Test
 	    void markAsReadTest() {
 	       NotificationDao notificationDao =  new NotificationDaoMySQL(AbstractFactoryDaoMySQL.getAbstractFactoryDaoMySQL());
 	       Notification notification = notificationDao.createNotification("junit", "test");

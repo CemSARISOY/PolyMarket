@@ -2,6 +2,7 @@ package test;
 
 import org.junit.jupiter.api.Test; 
 import Core.CartFacade;
+import Core.LoginFacade;
 import Core.PaymentFacade;
 import Core.Product; 
 import Core.User;
@@ -21,7 +22,7 @@ public class PaymentTest {
             ProductDao pdao = af.createProductDao(); 
             User u = udao.getUserByNickname("cemsarisoy");
             Product p = pdao.getProductById(3); // if 1, assertion = false bc buyer = seller
-            CartFacade cart = CartFacade.getCartFacade();
+            CartFacade cart = new CartFacade();
             cart.addProduct(p); 
             new PaymentFacade().pay(cart, true);
             User newU = udao.getUserByNickname("cemsarisoy"); 

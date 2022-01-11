@@ -10,7 +10,8 @@ import java.util.List;
 public interface ProductDao{
     public int createProduct(String name, String token, String content, int idCategory, String body, int idUser, double price, Date startDate) throws Exception;
     public void updateProduct(Product product);
-    public void like(Product product);
+    public void like(Product product, User u) throws Exception;
+    public int getLikes(Product product);
     public List<Product> getProducts();
     public List<Product> getProductByUser(User user);
     public List<Product> getProductbyCategory(ProductCategory category);

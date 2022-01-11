@@ -38,12 +38,12 @@ public class AbuseDAOMySQL implements AbuseDAO {
 
     @Override
     public void addAbuse(String title, String description, int u1, int u2) {
-        String requete = "INSERT INTO abuse VALUES(\'"+title+"\',\'"+description+"\',"+u1+","+u2+")";
+        String requete = "INSERT INTO abuse(title,description,idUser,idUserTarget) VALUES(\'"+title+"\',\'"+description+"\',"+u1+","+u2+")";
         Connection con = creator.getConnection();
 
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(requete);
+            stmt.execute(requete);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -56,7 +56,7 @@ public class AbuseDAOMySQL implements AbuseDAO {
         Connection con = creator.getConnection();
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(requete);
+            stmt.execute(requete);
         } catch (SQLException e) {
             e.printStackTrace();
         }

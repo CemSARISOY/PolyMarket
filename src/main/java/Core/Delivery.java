@@ -63,4 +63,19 @@ public class Delivery {
     public void setIsDelivered(Boolean isDelivered) {
         this.isDelivered = isDelivered;
     } 
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Delivery))
+            return false;
+        Delivery d2 = (Delivery) obj;
+        if (this.id != d2.id || this.isDelivered != d2.isDelivered || this.sellerId != d2.sellerId
+                || this.buyerId != d2.buyerId || this.productId != d2.productId)
+            return false;
+        return true;
+    }
+
 }

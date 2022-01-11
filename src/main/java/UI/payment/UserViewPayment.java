@@ -77,6 +77,11 @@ public class UserViewPayment extends JFrame {
                         products = (new ProductView()).createListView();
                         content.add(products);
                     }
+                    if (button.getText() == "Auctions"){
+                        content.remove(auctions);
+                        auctions = (new AuctionView()).createListView();
+                        content.add(auctions);
+                    }
                     initTab(button.getText(), null);
                 }
             });

@@ -275,7 +275,13 @@ public class ProductView extends JFrame implements ActionListener {
         JButtonProduct jb2 = new JButtonProduct("Modifier", p.getId());
         jb2.addActionListener(this);
         JButtonProduct jb3 = new JButtonProduct("Like", p.getId());
-        jb2.addActionListener(this);
+        jb3.addActionListener(e -> {
+            try{
+                productFacade.like(p);
+            }catch(Exception exc){
+                JOptionPane.showMessageDialog(null, "You can not like twice");
+            }
+        });
         
         JButtonProduct jb4 = new JButtonProduct("Ajouter au panier", p.getId());
         jb4.addActionListener(e -> {
@@ -293,7 +299,6 @@ public class ProductView extends JFrame implements ActionListener {
                 for(Wishlist w : wish){
                     JButton butt = new JButton(w.getTitle());
                     butt.addActionListener(t -> {
-                        
                         System.out.println("Appuyé sur :" + w.getTitle());
                         frame.dispose();
                     });
@@ -333,6 +338,7 @@ public class ProductView extends JFrame implements ActionListener {
             e.printStackTrace(); 
         } 
         product.add(new JLabel(p.getName() + " de prix " + p.getPrice()));
+        product.add(new JLabel(" Nombre de likes : " + productFacade.getLikes(p)));
         main.add(product, BorderLayout.CENTER);
 
         detailledProductView.pack();

@@ -32,12 +32,14 @@ public class AuctionDaoMySql implements AuctionDao {
     public void participate(Auction auc, User user, double offer) {
         java.util.Date utilDate = new java.util.Date();
         java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
-        String requete = "INSERT INTO bid VALUES ("+false+","+auc.getId()+","+user.getId()+","+offer+","+sqlDate+")";
+        String requete = "INSERT INTO bid(isPaid,idAuction,idBidder,amount,date) VALUES ("+false+","+auc.getId()+","+user.getId()+","+offer+",\'"+sqlDate+"\')";
+        auc.setHighestOffer(offer);
+        updateAuction(auc);
         Connection con = creator.getConnection();
         Auction auction = null;
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(requete);
+            stmt.execute(requete);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -98,11 +100,11 @@ public class AuctionDaoMySql implements AuctionDao {
 
     @Override
     public void updateAuction(Auction auction) {
-        String requete = "UPDATE auction SET amount = "+auction.getAmount()+", endDate = "+ auction.getEndDate()+", idProduct = "+ auction.getProduct().getId()+" WHERE id = "+auction.getId();
+        String requete = "UPDATE auction SET highestOffer = "+auction.getHighestOffer()+", endDate = \'"+ new java.sql.Date(auction.getEndDate().getTime())+"\', idProduct = "+ auction.getProduct().getId()+" WHERE id = "+auction.getId();
         Connection con = creator.getConnection();
         try {
             Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(requete);
+            int rows = stmt.executeUpdate(requete);
         } catch (SQLException e) {
             e.printStackTrace();
         }

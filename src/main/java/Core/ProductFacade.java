@@ -165,8 +165,12 @@ public class ProductFacade {
      /** Like a product
      * @param product the product to like 
      */
-    public void like(Product product) {
-        //TODO
+    public void like(Product product) throws Exception {
+        productDao.like(product, LoginFacade.getLoginFacade().getUser());
+    }
+
+    public int getLikes(Product product){
+        return productDao.getLikes(product);
     }
 
     public void deleteProduct(int id){

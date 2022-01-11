@@ -23,4 +23,16 @@ public class Wishlist extends AbstractProdcutList {
         //TODO
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Wishlist))
+            return false;
+        Wishlist w2 = (Wishlist) obj;
+        if (this.getId() != w2.getId() || !this.getTitle().equals(w2.getTitle()) || this.getUserId() != w2.getUserId() )
+            return false;
+        return true;
+    }
+
 }

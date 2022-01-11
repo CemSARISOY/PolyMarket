@@ -127,7 +127,7 @@ public class User {
             return false;
         User u2 = (User) obj;
         if (this.id != u2.id || !this.lastname.equals(u2.lastname) || !this.firstname.equals(firstname)
-                || !this.nickname.equals(u2.nickname) || !this.email.equals(u2.email) || !this.dob.equals(u2.dob))
+                || !this.nickname.equals(u2.nickname) || !this.email.equals(u2.email))
             return false;
         return true;
     }

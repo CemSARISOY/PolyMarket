@@ -133,7 +133,7 @@ public class Auction {
     /** Set the highest offer of the auction
      * @param highestOffer
      */
-    public void setHighestOffer(Integer highestOffer) {
+    public void setHighestOffer(double highestOffer) {
         this.highestOffer = highestOffer;
     }
     

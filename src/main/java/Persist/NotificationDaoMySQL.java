@@ -155,7 +155,7 @@ public class NotificationDaoMySQL implements NotificationDao{
 		@Override
 		public Notification createNotification(String type, String desc) {
 		      String requete = 
-		        		"INSERT INTO notifications (type, description) VALUES  (NULL, \"" + type + "\" , \"" + desc + "\");";
+		        		"INSERT INTO notifications (type, description) VALUES  (\"" + type + "\" , \"" + desc + "\");";
 		        Connection con = creator.getConnection();
 		        try {
 		            Statement stmt = con.createStatement();
@@ -164,7 +164,7 @@ public class NotificationDaoMySQL implements NotificationDao{
 		            e.printStackTrace();
 		        }
 		        
-		        String requete2 = "SELECT * from notifications where type  = " +type+ " AND description = " +desc;
+		        String requete2 = "SELECT * from notifications where type  = \'" +type+ "\' AND description = \'" +desc+"\'";
 		        Notification notif = null;
 		        try {
 		            Statement stmt = con.createStatement();

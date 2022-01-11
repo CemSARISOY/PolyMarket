@@ -9,6 +9,20 @@ public class Ticket {
     private int userId;
     private boolean isAnswered;
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Ticket))
+            return false;
+        Ticket t2 = (Ticket) obj;
+        if (this.id != t2.id || !this.title.equals(t2.title) || !this.body.equals(t2.body)
+                || this.categoryId != t2.categoryId || this.userId != t2.userId || this.isAnswered != t2.isAnswered)
+            return false;
+        return true;
+    }
+
     /**
      * Constructor of Ticket when id is know (received from DB)
      * @param id

@@ -17,6 +17,7 @@ import java.io.File;
 
 import Core.Auction;
 import Core.AuctionFacade;
+import Core.LoginFacade;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -272,7 +273,15 @@ public class AuctionView extends JFrame implements ActionListener {
 
         JButton jb = new JButton("Bid");
         jb.addActionListener( e -> {
-            if(!textField_1.getText().isEmpty()) auctionFacade.participate(Double.parseDouble(textField_1.getText()));
+            if(!textField_1.getText().isEmpty()) 
+            {
+                try {
+                    auctionFacade.participate(Double.parseDouble(textField_1.getText()), a);
+                } catch (Exception ex) {
+                    Frame f = new Frame();
+                    JOptionPane.showMessageDialog(f, "You must bid higher than the highest bid");
+                }
+            }
         });
         c.add(jb);
 
