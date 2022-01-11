@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import Core.CartFacade;
 import Core.LoginFacade;
 import Core.PaymentFacade;
 import UI.AdminViewAbuse;
@@ -20,6 +21,8 @@ import UI.category.UserViewCategory;
 */
 public class UserViewPayment extends JFrame {                                
     
+    private static UserViewPayment userViewPayment;
+
     private PaymentFacade paymentFacade = new PaymentFacade();
     private Container contentPane = this.getContentPane();
     private LoginFacade loginFacade = LoginFacade.getLoginFacade();
@@ -32,7 +35,7 @@ public class UserViewPayment extends JFrame {
         new JButton("Commandes"),
         new JButton("Catégories"),
         new JButton("Abus"),
-        new JButton("Panier")
+        new JButton("Panier (" + CartFacade.getCartFacade().getItemsInCart().size() + ")")
     };
     
     boolean isAdmin = loginFacade.getUser().getIsAdmin(); 
@@ -47,16 +50,23 @@ public class UserViewPayment extends JFrame {
     public CartView cartView = (new CartView(loginFacade.getUser()));
     public Container cart = cartView.contentPane;
 
-    public UserViewPayment() {  
+    public static UserViewPayment getUserViewPayment() {
+        if (userViewPayment != null) return userViewPayment;
+        else userViewPayment = new UserViewPayment();
+        return userViewPayment;
+    }
+
+    private UserViewPayment() {  
         for (var button : buttons) {
             button.setMargin(new Insets(10,20,10,20));
             button.setBackground(Color.WHITE);
-            button.setPreferredSize(new Dimension(200, 40));
+            button.setPreferredSize(new Dimension(160, 40));
             button.addActionListener(new ActionListener() {
 
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if (button.getText() == "Panier") {
+                    if (button.getText().contains("Panier")) {
+                        System.out.println("test");
                         content.remove(cart); 
                         cartView = new CartView(LoginFacade.getLoginFacade().getUser());
                         cart = cartView.contentPane;
@@ -84,7 +94,8 @@ public class UserViewPayment extends JFrame {
         if (isAdmin) topButtons.add(buttons[5]);
         topButtons.add(buttons[6]);
   
-        header.add(topButtons);
+        header.add(topButtons); 
+        header.add(new JLabel("Solde : " + LoginFacade.getLoginFacade().getUser().getBalance()));
 
         initTab(buttons[0].getText(), null);
 

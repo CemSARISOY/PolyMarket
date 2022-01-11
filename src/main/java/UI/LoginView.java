@@ -105,7 +105,7 @@ public class LoginView implements ActionListener {
         try {
             User u = this.loginFacade.login(user,pass);
             frame.dispose();
-            new UserViewPayment();
+            UserViewPayment.getUserViewPayment();
         } catch (Exception e1) { 
             JOptionPane.showMessageDialog(null, e1.getMessage());
         }

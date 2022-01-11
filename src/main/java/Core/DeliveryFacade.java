@@ -1,6 +1,7 @@
 package Core;
 
 import Persist.AbstractFactoryDao;
+import Persist.AbstractFactoryDaoMySQL;
 import Persist.DeliveryDao;
 import Persist.ProductDao;
 import Persist.UserDao;
@@ -88,6 +89,12 @@ public class DeliveryFacade {
         //SENDING THE DELIVERY TO THE DB
         this.delivery = deliveryDao.addDelivery(this.delivery);
         if(this.delivery != null) {
+        	//SEND NOTIFICATIONS
+        	NotificationFacade notificationFacade = new NotificationFacade(abstractFactoryDao.createNotificationDao());
+        	Notification notifToSendBuyer =  notificationFacade.createNotification("Delivery", "Your command has been delivered ! Thank you for your purchase ;)");
+        	notificationFacade.sendNotifications(notifToSendBuyer, buyer);
+        	Notification notifToSendSeller =  notificationFacade.createNotification("Sold", "Your product "+product.getName()+" has been sold ! Congratulations !");
+        	notificationFacade.sendNotifications(notifToSendSeller, seller);
             return this.delivery;
         }
         else{

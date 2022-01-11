@@ -52,7 +52,7 @@ public class UserFacade {
 			throw new Exception("Year field is incorret");
 		}
 		else {
-		this.userDao.signUp(firstname,lastname,nickname,email,pw,new Date(year-1900, month-1, day));
+		this.userDao.signUp(firstname,lastname,nickname,email,pw,new Date(year-1900, month-1, day), 500);
 		}
 	}
 	

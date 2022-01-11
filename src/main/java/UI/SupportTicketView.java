@@ -35,7 +35,6 @@ public class SupportTicketView extends JFrame implements ActionListener {
         //INIT
         this.setTitle("Send a ticket");
         setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //NORTH CONTENT
         JPanel north = new JPanel();

@@ -14,6 +14,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import Core.CartFacade;
 import Core.LoginFacade;
 import Core.Product;
 import Core.ProductFacade;
@@ -260,7 +261,7 @@ public class ProductView extends JFrame implements ActionListener {
         return image;
     }
 
-    private void viewDetails(int id){
+    public void viewDetails(int id){
         Product p = productFacade.getProductById(id);
         detailledProductView.setContentPane(new Container());
         detailledProductView.setTitle("Product - Détails de " + p.getName());
@@ -279,6 +280,7 @@ public class ProductView extends JFrame implements ActionListener {
         JButtonProduct jb4 = new JButtonProduct("Ajouter au panier", p.getId());
         jb4.addActionListener(e -> {
             productFacade.addToCart(p); 
+            UserViewPayment.getUserViewPayment().buttons[6].setText(("Panier (" + CartFacade.getCartFacade().getItemsInCart().size() + ")"));
         });
         JButtonProduct jb5 = new JButtonProduct("Ajouter a une wishlist", p.getId());
         jb5.addActionListener(e -> {

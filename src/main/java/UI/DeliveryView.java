@@ -30,7 +30,6 @@ public class DeliveryView extends JFrame implements ActionListener {
         //INIT
         this.setTitle("Delivering your product(s)...");
         setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Grid
         GridLayout grid = new GridLayout(3,1, 0, 0);

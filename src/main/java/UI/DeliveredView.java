@@ -32,7 +32,6 @@ public class DeliveredView extends JFrame implements ActionListener {
         //INIT
         this.setTitle("Your delivery");
         setVisible(true);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //NORTH CONTENT
         JPanel north = new JPanel();

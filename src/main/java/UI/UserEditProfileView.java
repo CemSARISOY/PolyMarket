@@ -19,16 +19,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
-import javax.swing.JTextField;
-
+import javax.swing.JPanel; 
+import javax.swing.JTextField; 
 import Core.LoginFacade;
 import Core.User;
-import Core.UserFacade;
-import Persist.AbstractFactoryDao;
-
-import Persist.UserDaoMySQL;
+import Core.UserFacade; 
 
 public class UserEditProfileView extends Observable implements ActionListener {
 		private static JFrame frame;
@@ -52,7 +47,7 @@ public class UserEditProfileView extends Observable implements ActionListener {
 	        frame.setLocation(new Point(realWidth - 200, realHeight - 100));
 	        frame.setSize(new Dimension(400, 400));
 	        frame.setResizable(false);
-	        frame.setDefaultCloseOperation(onClose());
+	        //frame.setDefaultCloseOperation(onClose());
 	        frame.setIconImage(new ImageIcon("draw.png").getImage());
 
 
@@ -175,10 +170,10 @@ public class UserEditProfileView extends Observable implements ActionListener {
 	        
 	    }
 	    
-		private int onClose() {
-			 //userProfile.setEnabled(true);
-			return JFrame.EXIT_ON_CLOSE;
-		}
+		// private int onClose() {
+		// 	 //userProfile.setEnabled(true);
+		// 	//return JFrame.EXIT_ON_CLOSE;
+		// }
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
